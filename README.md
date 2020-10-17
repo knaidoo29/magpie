@@ -1,2 +1,2 @@
-# MAGPIE: Monte Carlo weiGhted PIxel rEmapping
+# MAGPIE: Monte cArlo weiGhted PIxel rEmapping
 
