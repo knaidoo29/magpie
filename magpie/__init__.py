@@ -6,4 +6,6 @@ from .coordinates import polar2cart
 
 from .progress import progress_bar
 
-from .randoms import get_random_ring_segment
+from .randoms import get_randoms_ring_segment
+from .randoms import get_randoms_sky_segment
+from .randoms import get_randoms_sphere_segment

@@ -177,7 +177,7 @@ class Box2Ring:
             for j in range(0, len(self.r2d[0])):
                 rmin, rmax = self.redges[j], self.redges[j+1]
                 pmin, pmax = self.pedges[i], self.pedges[i+1]
-                rrand, prand = randoms.get_random_ring_segment(rmin, rmax, pmin, pmax, mc_size)
+                rrand, prand = randoms.get_randoms_ring_segment(rmin, rmax, pmin, pmax, mc_size)
                 xrand, yrand = coordinates.polar2cart(rrand, prand, center=self.center)
                 H, _ = np.histogramdd((xrand, yrand), bins=[len(self.xedges)-1, len(self.yedges)-1],
                                       range=[[self.xedges[0], self.xedges[-1]],[self.yedges[0], self.yedges[-1]]])
