@@ -7,7 +7,7 @@ from .. import utils
 
 
 class Cube2Shell:
-    """ Remaps pixels given on 3D grid to spherical polar grid on a set of HEALPix
+    """Remaps pixels given on 3D grid to spherical polar grid on a set of HEALPix
     maps.
     """
 

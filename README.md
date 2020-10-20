@@ -31,6 +31,22 @@ Remapping schemes:
   with a specified center. Each shell is placed onto a healpix map.
 
 * Dense grid remapping:
+  - `Box2Ring` : Remaps data on a 2D cartesian grid to a polar coordinate grid with
+  a specified center.
+  - `Cube2Shell` : Remaps data on 3D cartesian grid to spherical polar coordinates
+  with a specified center. Each shell is placed onto a healpix map. Easy to add periodic
+  boxes.
+
+Things to consider:
+
+- The Monte-Carlo weighted remapping is more accurate than the dense grid remapping
+  however this accuracy comes with a much longer run time. This however is limited
+  to the initial weight calculation. For 2D remapping you could choose to use either
+  method however for the 3D case for very large cartesian and spherical polar coordinates
+  grids you should use the dense grid approach.
+- Boundaries are handled differently. For the Monte-Carlo weighted remapping we assign
+  nan's to values outside the boundaries, for the dense grid this is just set to
+  0. This is because of how the different methods are implemented.
 
 ### Auxillary Functions
 
@@ -80,6 +96,8 @@ python setup.py install
 ```
 
 ## Usage
+
+Examples are provided as jupyter notebooks in the tutorial folder.
 
 ## Citing
 

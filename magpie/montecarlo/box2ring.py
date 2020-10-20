@@ -6,7 +6,7 @@ from .. import utils
 
 
 class Box2Ring:
-    """ Remaps pixels given on 2D grid to polar grid.
+    """Remaps pixels given on 2D grid to polar grid.
 
     Note
     ----
