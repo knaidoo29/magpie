@@ -25,15 +25,15 @@ Remapping schemes:
 ### Main Remapping Classes
 
 * Monte-carlo weighted pixel remapping:
-  - `Box2Ring` : Remaps data on a 2D cartesian grid to a polar coordinate grid with
+  - `mc.Box2Ring` : Remaps data on a 2D cartesian grid to a polar coordinate grid with
   a specified center.
-  - `Cube2Shell` : Remaps data on 3D cartesian grid to spherical polar coordinates
+  - `mc.Cube2Shell` : Remaps data on 3D cartesian grid to spherical polar coordinates
   with a specified center. Each shell is placed onto a healpix map.
 
 * Dense grid remapping:
-  - `Box2Ring` : Remaps data on a 2D cartesian grid to a polar coordinate grid with
+  - `dg.Box2Ring` : Remaps data on a 2D cartesian grid to a polar coordinate grid with
   a specified center.
-  - `Cube2Shell` : Remaps data on 3D cartesian grid to spherical polar coordinates
+  - `dg.Cube2Shell` : Remaps data on 3D cartesian grid to spherical polar coordinates
   with a specified center. Each shell is placed onto a healpix map. Easy to add periodic
   boxes.
 
