@@ -51,26 +51,29 @@ Things to consider:
 ### Auxillary Functions
 
 * Coordinate transformations and utilities:
-  - `cart2polar` : 2D cartesian to polar coordinates.
-  - `polar2cart` : 2D polar to cartesian coordinates.
-  - `cart2sphere` : 3D cartesian to spherical polar coordinates.
-  - `sphere2cart` : 3D spherical polar to cartesian coordinates.
-  - `sky_area` : calculates the area of a 'square' patch of sky in steradians.
+  - `coords.cart2polar` : 2D cartesian to polar coordinates.
+  - `coords.polar2cart` : 2D polar to cartesian coordinates.
+  - `coords.cart2sphere` : 3D cartesian to spherical polar coordinates.
+  - `coords.sphere2cart` : 3D spherical polar to cartesian coordinates.
+  - `coords.sky_area` : calculates the area of a 'square' patch of sky in steradians.
 
 * Random point generators:
-  - `randoms_polar` : randoms in polar coordinates. Default settings will generate
+  - `randoms.randoms_polar` : randoms in polar coordinates. Default settings will generate
     randoms inside a unit circle but you can specify the inner and outer radii and
     the angular limits.
-  - `randoms_sky` : randoms on the surface of a unit sphere. Default will generate
+  - `randoms.randoms_sky` : randoms on the surface of a unit sphere. Default will generate
     randoms on the full sky, however you can limit the latitudinal and longitudinal
     angles to a 'square' patch.
-  - `randoms_healpix_pixel` : randoms inside a healpix pixel.
-  - `randoms_sphere_r` : the radial coordinates for randoms in a sphere or shell.
-  - `randoms_sphere` : randoms in spherical polar coordinates. Default will generate
+  - `randoms.randoms_healpix_pixel` : randoms inside a healpix pixel.
+  - `randoms.randoms_sphere_r` : the radial coordinates for randoms in a sphere or shell.
+  - `randoms.randoms_sphere` : randoms in spherical polar coordinates. Default will generate
     randoms inside a unit sphere. Can be isolated to a shell and restricted to
     certain angles on the sky.
 
-* `progress_bar` : progress_bar for for-loop progress.
+* Rotation functions:
+  - `rotate.rotate_polar` : rotates data on a polar coordinate grid.
+
+* `utils.progress_bar` : progress_bar for for-loop progress.
 
 ## Installation
 

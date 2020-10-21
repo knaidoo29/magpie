@@ -2,6 +2,7 @@ import numpy as np
 
 from .. import coords
 from .. import randoms
+from .. import rotate
 from .. import utils
 
 
@@ -148,6 +149,25 @@ class Box2Ring:
         rbin_weights_2d = np.mean(rbin_weights_2d.reshape(len(self.r2d), len(self.r2d[0]), self.rebin_p), axis=2)
         f_polar /= rbin_weights_2d
         return f_polar
+
+
+    def rotate_polar(self, f_polar, phi_shift):
+        """Rotates polar coordinate grid by phi_shift.
+
+        Parameters
+        ----------
+        f_polar : 2darray
+            Polar coordinate gridded data.
+        phi_shift : float
+            Rotation to be applied, given in radians within a range of 0 and 2pi.
+
+        Returns
+        -------
+        f_polar_rot : 2darray
+            Rotated polar coordinate data.
+        """
+        assert np.shape(f_polar) == np.shape(self.p2d), "Shape of f_polar does not match stored polar coordinate grid."
+        return rotate.rotate_polar(self.pedges, f_polar, phi_shift)
 
 
     def clean(self):

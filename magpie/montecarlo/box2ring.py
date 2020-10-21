@@ -2,6 +2,7 @@ import numpy as np
 
 from .. import coords
 from .. import randoms
+from .. import rotate
 from .. import utils
 
 
@@ -60,6 +61,7 @@ class Box2Ring:
         self.r2d = None
         self.p2d = None
         self.center = None
+        self.phi_shift = None
         self.ind_xs = None
         self.ind_ys = None
         self.ind_ws = None
@@ -94,7 +96,8 @@ class Box2Ring:
         self.x2d, self.y2d = np.meshgrid(self.xmid, self.ymid)
 
 
-    def setup_polar_lin(self, rmin, rmax, numr, nump, pmin=0., pmax=2.*np.pi, center=[0., 0.]):
+    def setup_polar_lin(self, rmin, rmax, numr, nump, pmin=0., pmax=2.*np.pi,
+                        center=[0., 0.], phi_shift=0.):
         """Setups the polar grid.
 
         Parameters
@@ -113,6 +116,9 @@ class Box2Ring:
             Maximum phi (default=2pi).
         center : list
             Center point of polar coordinate grid.
+        phi_shift : float
+            Rotation to the polar coordinate grid, given in radians within a range
+            of 0 and 2pi.
         """
         assert rmin >= 0., "rmin must be greater or equal to zero."
         assert rmin < rmax, "rmin must be smaller than rmax."
@@ -132,9 +138,11 @@ class Box2Ring:
         self.dp = self.pmid[1] - self.pmid[0]
         self.r2d, self.p2d = np.meshgrid(self.rmid, self.pmid)
         self.center = center
+        self.phi_shift = phi_shift
 
 
-    def setup_polar_log(self, rmin, rmax, numr, nump, pmin=0., pmax=2.*np.pi, center=[0., 0.], addzero=True):
+    def setup_polar_log(self, rmin, rmax, numr, nump, pmin=0., pmax=2.*np.pi,
+                        center=[0., 0.], phi_shift=0., addzero=True):
         """Setups the polar grid with logarithmic radial bins.
 
         Parameters
@@ -153,6 +161,9 @@ class Box2Ring:
             Maximum phi (default=2pi).
         center : list
             Center point of polar coordinate grid.
+        phi_shift : float
+            Rotation to the polar coordinate grid, given in radians within a range
+            of 0 and 2pi.
         addzero : bool
             Adds r=0 to the radial edges.
         """
@@ -178,6 +189,7 @@ class Box2Ring:
         self.dp = self.pmid[1] - self.pmid[0]
         self.r2d, self.p2d = np.meshgrid(self.rmid, self.pmid)
         self.center = center
+        self.phi_shift = phi_shift
 
 
     def get_weights(self, mc_size=10000, verbose=True):
@@ -192,6 +204,7 @@ class Box2Ring:
         verbose : bool
             If true will output a progress bar.
         """
+        assert mc_size > 1, "mc_size must be greater than 1, ideally greater than 100."
         ind_xs = []
         ind_ys = []
         ind_ws = []
@@ -203,6 +216,12 @@ class Box2Ring:
                 rmin, rmax = self.redges[j], self.redges[j+1]
                 pmin, pmax = self.pedges[i], self.pedges[i+1]
                 rrand, prand = randoms.randoms_polar(mc_size, rmin, rmax, pmin, pmax)
+                if self.phi_shift != 0.:
+                    prand += self.phi_shift
+                    condition = np.where(prand > 2.*np.pi)
+                    prand[condition] -= 2.*np.pi
+                    condition = np.where(prand < 0.)
+                    prand[condition] += 2.*np.pi
                 xrand, yrand = coords.polar2cart(rrand, prand, center=self.center)
                 H, _ = np.histogramdd((xrand, yrand), bins=[len(self.xedges)-1, len(self.yedges)-1],
                                       range=[[self.xedges[0], self.xedges[-1]],[self.yedges[0], self.yedges[-1]]])
@@ -240,6 +259,9 @@ class Box2Ring:
         f_polar : 2darray
             Remapped 2d data onto polar coordinate grid.
         """
+        assert np.shape(f) == np.shape(self.x2d), "Shape of f does not match stored cartesian grid."
+        if w is not None:
+            assert np.shape(w) == np.shape(self.x2d), "Shape of w does not match stored cartesian grid."
         f_polar = np.zeros(np.shape(self.r2d))
         for i in range(0, len(self.r2d)):
             for j in range(0, len(self.r2d[0])):
@@ -258,6 +280,25 @@ class Box2Ring:
             if verbose == True:
                 utils.progress_bar(i, len(self.r2d), explanation='Remapping')
         return f_polar
+
+
+    def rotate_polar(self, f_polar, phi_shift):
+        """Rotates polar coordinate grid by phi_shift.
+
+        Parameters
+        ----------
+        f_polar : 2darray
+            Polar coordinate gridded data.
+        phi_shift : float
+            Rotation to be applied, given in radians within a range of 0 and 2pi.
+
+        Returns
+        -------
+        f_polar_rot : 2darray
+            Rotated polar coordinate data.
+        """
+        assert np.shape(f_polar) == np.shape(self.p2d), "Shape of f_polar does not match stored polar coordinate grid."
+        return rotate.rotate_polar(self.pedges, f_polar, phi_shift)
 
 
     def clean(self):
