@@ -110,9 +110,9 @@ class Cube2Shell:
         for i in range(periodicx[0], periodicx[1]+1):
             for j in range(periodicy[0], periodicy[1]+1):
                 for k in range(periodicz[0], periodicz[1]+1):
-                    centers.append([center[0]+periodicx[i]*(self.xedges[-1]-self.xedges[0]),
-                                    center[1]+periodicy[j]*(self.yedges[-1]-self.yedges[0]),
-                                    center[2]+periodicz[k]*(self.zedges[-1]-self.zedges[0])])
+                    centers.append([center[0] + i*(self.xedges[-1]-self.xedges[0]),
+                                    center[1] + j*(self.yedges[-1]-self.yedges[0]),
+                                    center[2] + k*(self.zedges[-1]-self.zedges[0])])
         self.centers = centers
         self.rebin_redges = np.linspace(self.redges[0], self.redges[-1], self.rebin_r*len(self.rmid) + 1)
         self.rebin_rmid = 0.5*(self.rebin_redges[1:] + self.rebin_redges[:-1])
