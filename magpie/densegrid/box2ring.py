@@ -154,7 +154,7 @@ class Box2Ring:
         return f_polar
 
 
-    def remap(self, f, w=None):
+    def remap(self, f, w=None, verbose=True):
         """Remaps 2d grid data f onto polar coordinate grid.
 
         Parameters
@@ -163,6 +163,9 @@ class Box2Ring:
             2d pixel data.
         w : 2darray
             2d pixel weights.
+        verbose : bool
+            This does nothing. This is here simply so that no errors occur when
+            switching from Monte Carlo weighted remapping to the dense grid remapping.
 
         Returns
         -------
