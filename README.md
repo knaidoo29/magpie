@@ -65,11 +65,14 @@ Things to consider:
   - `coords.sphere2cart`: 3D spherical polar to cartesian coordinates.
   - `coords.sky_area`: calculates the area of a 'square' patch of sky in steradians.
 
+* Remapping 1D data:
+  - `one_d.rebin_1d`: 1D rebinning, bin edges can be arbitrarily defined.
+
 * Polar coordinate grid to 1D radial profiles:
   - `polar.get_polar_area2d`: Returns the area of each pixel in the polar coordinate grid.
   - `polar.get_pixarea`: Returns the area of each pixel in the cartesian grid.
   - `polar.polar2radial`: Converts a 2D polar coordinate grid to its 1D radial profile.
-  
+
 * Random point generators:
   - `randoms.randoms_polar`: randoms in polar coordinates. Default settings will generate
     randoms inside a unit circle but you can specify the inner and outer radii and
