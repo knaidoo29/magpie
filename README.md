@@ -144,7 +144,7 @@ In LaTeX, you could state something like the following:
 
 ```
 MAGPIE\footnote{https://github.com/knaidoo29/magpie/} was used
-for remapping  procedures in the analysis.
+for remapping  procedures in this analysis.
 ```
 
 ## Support
