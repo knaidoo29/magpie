@@ -35,13 +35,13 @@ in coordinate system ![X](https://latex.codecogs.com/svg.latex?\large&space;X)
 to ![d(Y)](https://latex.codecogs.com/svg.latex?\large&space;d_{Y})
 in coordinate system ![Y](https://latex.codecogs.com/svg.latex?\large&space;Y),
 
-![\large d(Y_{j})=\frac{\sum_{i=1}^{N}w_{Y_{j}}(X_{i})d(X_{i})}{\sum_{i=1}^{N}w_{Y_{j}}}](https://latex.codecogs.com/svg.latex?\large&space;d_{Y_{j}}=\frac{\sum_{i=1}^{N}w_{Y_{j} X_{i}}d_{X_{i}}}{\sum_{i=1}^{N}w_{Y_{j}, X_{i}}})
+![\large d(Y_{j})=\frac{\sum_{i=1}^{N}w_{Y_{j}}(X_{i})d(X_{i})}{\sum_{i=1}^{N}w_{Y_{j}}}](https://latex.codecogs.com/svg.latex?\large&space;d_{Y_{j}}=\frac{\sum_{i=1}^{N}w_{Y_{j}X_{i}}d_{X_{i}}}{\sum_{i=1}^{N}w_{Y_{j}X_{i}}})
 
 where the weights ![w_{YX}](https://latex.codecogs.com/svg.latex?\large&space;w_{YX}) are calculated by MAGPIE.
 
 For errors we use simple uncertainty propagation, but unlike the mean, the variance is dependent on the bin size ![A_{X}](https://latex.codecogs.com/svg.latex?\large&space;A_{X}) and the overlapping bin length/area  ![A_{XY}](https://latex.codecogs.com/svg.latex?\large&space;A_{XY}). The calculation of errors is then computed using:
 
-![\large \sigma(Y_{j})=\sqrt{\frac{\sum_{i=1}^{N}w_{Y_{j}X_{i}}d_{X_{i}}}{\sum_{i=1}^{N}w_{Y_{j},X_{i}}}}](https://latex.codecogs.com/svg.latex?\large&space;\sigma_{Y_{j}}=\sqrt{\frac{\sum_{i=1}^{N}\left[\frac{A_{X_{i}}}{A_{Y_{j}X_{i}}}\right]w^{2}_{Y_{j} X_{i}}\sigma^{2}_{X_{i}}}{\left[\sum_{i=1}^{N}w_{Y_{j}, X_{i}}\right]^{2}}})
+![\large \sigma(Y_{j})=\sqrt{\frac{\sum_{i=1}^{N}w_{Y_{j}X_{i}}d_{X_{i}}}{\sum_{i=1}^{N}w_{Y_{j}X_{i}}}}](https://latex.codecogs.com/svg.latex?\large&space;\sigma_{Y_{j}}=\sqrt{\frac{\sum_{i=1}^{N}\left[\frac{A_{X_{i}}}{A_{Y_{j}X_{i}}}\right]w^{2}_{Y_{j} X_{i}}\sigma^{2}_{X_{i}}}{\left[\sum_{i=1}^{N}w_{Y_{j}X_{i}}\right]^{2}}})
 
 Of course this assumes each component of  ![d(X)](https://latex.codecogs.com/svg.latex?\large&space;d_{X}) is independent, which may not be the case. To account for this you would need to generate mocks of  ![d(X)](https://latex.codecogs.com/svg.latex?\large&space;d_{X}), remap them and compute the covariance in the remapped coordinate system.
 
