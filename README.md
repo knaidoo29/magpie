@@ -5,27 +5,45 @@ Version:        1.0.0
 Homepage:       https://github.com/knaidoo29/magpie    
 Documentation:  n/a
 
-MAGPIE is a python module for remapping pixels (in 2D) and cells (in 3D) into different
+MAGPIE is a python module for remapping bins (in 1D), pixels (in 2D) and cells (in 3D) into different
 coordinate systems. The package will enable data to be remapped from cartesian to
 polar coordinates, cartesian to spherical polar coordinates and will enable rotations
 of these systems.
 
 When carrying out coordinate transformations we typically take the center of the
 pixel or cell and apply the transform without considering the surface area of the
-pixel (or volume of the cell). In magpie this is taken into account by applying two
+pixel (or volume of the cell). In MAGPIE this is taken into account by applying two
 remapping schemes. The first weights pixels to a new coordinate grid using monte-carlo
 integration. The second uses a dense grid (denser than the new coordinate grid) which
 is rebinned to the target coordinate grid. In both cases we sample the surface area
 or volume of the new coordinate pixels to accurately remap the data. The monte-carlo
 method is more accurate but scales poorly to 3D. For 2D this scheme will work very
 well even for moderately large datasets. The dense grid method, while less accurate,
-is very fast and should be used for large data sets and all 3D transformations.
+is very fast and should be used for large data sets and all 3D transformations. In 1D these are computed exactly without requiring the approximate schemes above.
 
 ## Dependencies
 
 * `Python 3`
 * `numpy`
 * `healpy`
+
+
+## Theory
+
+MAGPIE uses the following principle for remapping data ![d(X)](https://latex.codecogs.com/svg.latex?\large&space;d_{X})
+in coordinate system ![X](https://latex.codecogs.com/svg.latex?\large&space;X)
+to ![d(Y)](https://latex.codecogs.com/svg.latex?\large&space;d_{Y})
+in coordinate system ![Y](https://latex.codecogs.com/svg.latex?\large&space;Y),
+
+![\large d(Y_{j})=\frac{\sum_{i=1}^{N}w_{Y_{j}}(X_{i})d(X_{i})}{\sum_{i=1}^{N}w_{Y_{j}}}](https://latex.codecogs.com/svg.latex?\large&space;d_{Y_{j}}=\frac{\sum_{i=1}^{N}w_{Y_{j} X_{i}}d_{X_{i}}}{\sum_{i=1}^{N}w_{Y_{j}, X_{i}}})
+
+where the weights ![w_{YX}](https://latex.codecogs.com/svg.latex?\large&space;w_{YX}) are calculated by MAGPIE.
+
+For errors we use simple uncertainty propagation, but unlike the mean, the variance is dependent on the bin size ![A_{X}](https://latex.codecogs.com/svg.latex?\large&space;A_{X}) and the overlapping bin length/area  ![A_{XY}](https://latex.codecogs.com/svg.latex?\large&space;A_{XY}). The calculation of errors is then computed using:
+
+![\large \sigma(Y_{j})=\sqrt{\frac{\sum_{i=1}^{N}w_{Y_{j}X_{i}}d_{X_{i}}}{\sum_{i=1}^{N}w_{Y_{j},X_{i}}}}](https://latex.codecogs.com/svg.latex?\large&space;\sigma_{Y_{j}}=\sqrt{\frac{\sum_{i=1}^{N}\left[\frac{A_{X_{i}}}{A_{Y_{j}X_{i}}}\right]w^{2}_{Y_{j} X_{i}}\sigma^{2}_{X_{i}}}{\left[\sum_{i=1}^{N}w_{Y_{j}, X_{i}}\right]^{2}}})
+
+Of course this assumes each component of  ![d(X)](https://latex.codecogs.com/svg.latex?\large&space;d_{X}) is independent, which may not be the case. To account for this you would need to generate mocks of  ![d(X)](https://latex.codecogs.com/svg.latex?\large&space;d_{X}), remap them and compute the covariance in the remapped coordinate system.
 
 ## Functions
 
@@ -121,7 +139,13 @@ Examples are provided as jupyter notebooks in the tutorial folder.
 
 ## Citing
 
-Please provide a link to the github repository.
+Please cite MAGPIE if you use it in a study by providing a link to the github repository.
+In LaTeX, you could state something like the following:
+
+```
+MAGPIE\footnote{https://github.com/knaidoo29/magpie/} was used
+for remapping  procedures in the analysis.
+```
 
 ## Support
 
