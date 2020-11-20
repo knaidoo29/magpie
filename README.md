@@ -90,6 +90,7 @@ Things to consider:
   - `polar.get_polar_area2d`: Returns the area of each pixel in the polar coordinate grid.
   - `polar.get_pixarea`: Returns the area of each pixel in the cartesian grid.
   - `polar.polar2radial`: Converts a 2D polar coordinate grid to its 1D radial profile.
+  - `polar.cumulative_radial`: Coverts radial profile to the cumulative radial profile.
 
 * Random point generators:
   - `randoms.randoms_polar`: randoms in polar coordinates. Default settings will generate
