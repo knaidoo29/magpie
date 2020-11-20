@@ -40,6 +40,7 @@ class Box2Ring:
         self.rebin_p2d = None
         self.area2d = None
         self.pixarea = None
+        self.mask_in_bound = None
 
 
     def setup_box(self, xmin, xmax, numx, ymin, ymax, numy):
@@ -179,6 +180,26 @@ class Box2Ring:
         return f_polar
 
 
+    def get_mask_in_bound(self, verbose=True):
+        """Returns a mask showing whether the polar grid remains inside the boundaries
+        of the initial cartesian grid.
+
+        Parameters
+        ----------
+        verbose : bool
+            If true will print progress, etc.
+        """
+        assert self.x2d is not None, "Cartesian grid is not defined."
+        assert self.r2d is not None, "Polar grid is not defined."
+        if verbose == True:
+            print("Construct mask_in_bound...")
+        mask = np.ones(np.shape(self.x2d))
+        mask_in_bound = self.remap(mask, verbose=verbose)
+        condition = np.where(np.isfinite(mask_in_bound) == False)
+        mask_in_bound[condition] = 0.
+        self.mask_in_bound = mask_in_bound
+
+
     def rotate_polar(self, f_polar, phi_shift):
         """Rotates polar coordinate grid by phi_shift.
 
@@ -198,7 +219,7 @@ class Box2Ring:
         return rotate.rotate_polar(self.pedges, f_polar, phi_shift)
 
 
-    def polar2radial(self, f_polar, sigma=None, w=None):
+    def polar2radial(self, f_polar, sigma=None, w=None, verbose=False):
         """Calculates the radial mean of data provided in a polar coordinate grid
         which originates from a 2D cartesian grid.
 
@@ -211,6 +232,8 @@ class Box2Ring:
         w : ndarray
             2D array containing weights for each pixel in polar grid, ideal for adding
             a binary mask.
+        verbose : bool
+            If true will print progress, etc.
 
         Returns
         -------
@@ -224,6 +247,19 @@ class Box2Ring:
         if self.pixarea is None:
             self.pixarea = polar.get_pixarea(self.xedges, self.yedges)
         assert np.shape(f_polar) == np.shape(self.p2d), "Shape of f_polar does not match stored polar coordinate grid."
+        if self.mask_in_bound is None:
+            self.get_mask_in_bound(verbose=verbose)
+        if self.mask_in_bound.all() != 1.:
+            condition = np.where(self.mask_in_bound != 1.)
+            f_polar = np.copy(f_polar)
+            f_polar[condition] = 0.
+            if sigma is not None:
+                sigma = np.copy(sigma)
+                sigma[condition] = 0.
+            if w is not None:
+                w *= self.mask_in_bound
+            else:
+                w = self.mask_in_bound
         if sigma is None:
             f_radial = polar.polar2radial(f_polar, self.area2d, self.pixarea, sigma=sigma, w=w)
             return f_radial
