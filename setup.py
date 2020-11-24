@@ -8,7 +8,7 @@ with open(path.join(this_directory, 'README.md')) as f:
     long_description = f.read()
 
 setup(name = 'magpie',
-      version = '1.0.0',
+      version = '0.1.0',
       description       = "Monte cArlo weiGhted PIxel rEmapping",
       long_description  = long_description,
       long_description_content_type = 'text/markdown',

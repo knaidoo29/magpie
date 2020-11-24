@@ -58,7 +58,7 @@ def sky_rotate(phi, theta, phi_end, theta_end, phi_start=0., theta_start=0.):
     if np.isscalar(phi) == True:
         r = 1.
     else:
-        r = np.ones(len(phi))
+        r = np.ones(np.shape(phi))
     # convert points on the sphere to cartesian coordinates
     x, y, z = coords.sphere2cart(r, phi, theta)
     pos = np.array([x, y, z]).T

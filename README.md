@@ -1,7 +1,7 @@
 # MAGPIE: Monte cArlo weiGhted PIxel rEmapping
 
 Author:         Krishna Naidoo                          
-Version:        1.0.0                               
+Version:        0.1.0                               
 Homepage:       https://github.com/knaidoo29/magpie    
 Documentation:  n/a
 
@@ -19,11 +19,12 @@ is rebinned to the target coordinate grid. In both cases we sample the surface a
 or volume of the new coordinate pixels to accurately remap the data. The monte-carlo
 method is more accurate but scales poorly to 3D. For 2D this scheme will work very
 well even for moderately large datasets. The dense grid method, while less accurate,
-is very fast and should be used for large data sets and all 3D transformations. In 1D these are computed exactly without requiring the approximate schemes above.
+is very fast and should be used for large data sets and all 3D transformations.
+In 1D these are computed exactly without requiring the approximate schemes above.
 
 ## Dependencies
 
-* `Python 3`
+* Python 3
 * `numpy`
 * `healpy`
 
@@ -54,6 +55,8 @@ Of course this assumes each component of  ![d(X)](https://latex.codecogs.com/svg
   a specified center.
   - `mc.Cube2Shell`: Remaps data on 3D cartesian grid to spherical polar coordinates
   with a specified center. Each shell is placed onto a healpix map.
+  - `mc.Heal2Ring`: Remaps a HEALPix map on to a pseudo polar coordinate grid (more precisely
+    a polar-cap coordinate grid).
 
 * Dense grid remapping:
   - `dg.Box2Ring`: Remaps data on a 2D cartesian grid to a polar coordinate grid with
@@ -61,6 +64,8 @@ Of course this assumes each component of  ![d(X)](https://latex.codecogs.com/svg
   - `dg.Cube2Shell`: Remaps data on 3D cartesian grid to spherical polar coordinates
   with a specified center. Each shell is placed onto a healpix map. Easy to add periodic
   boxes.
+  - `mc.Heal2Ring`: Remaps a HEALPix map on to a pseudo polar coordinate grid (more precisely
+    a polar-cap coordinate grid).
 
 Things to consider:
 
