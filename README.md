@@ -82,10 +82,6 @@ Things to consider:
   - `coords.cart2sphere`: 3D cartesian to spherical polar coordinates.
   - `coords.sphere2cart`: 3D spherical polar to cartesian coordinates.
   - `coords.sky_area`: calculates the area of a 'square' patch of sky in steradians.
-  - `coords.sky_rotate`: rotate sky coordinates from one point along the shortest path.
-  - `coords.sky_phi_shift`: shift longitudinal coordinates.
-  - `coords.sky_shift`: shift logitudinal and latitudinal coordinates.
-  - `coords.sky_spin`: spin coordinates about a point on the sphere.
 
 * Remapping 1D data:
   - `one_d.rebin_1d`: 1D rebinning, bin edges can be arbitrarily defined.
@@ -111,6 +107,10 @@ Things to consider:
 
 * Rotation functions:
   - `rotate.rotate_polar`: rotates data on a polar coordinate grid.
+  - `rotate.sky_rotate`: rotate sky coordinates from one point along the shortest path.
+  - `rotate.sky_phi_shift`: shift longitudinal coordinates.
+  - `rotate.sky_shift`: shift logitudinal and latitudinal coordinates.
+  - `rotate.sky_spin`: spin coordinates about a point on the sphere.
 
 * Utility functions:
   - `utils.progress_bar`: progress_bar for for-loop progress.
