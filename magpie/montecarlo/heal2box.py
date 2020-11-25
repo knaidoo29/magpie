@@ -109,9 +109,9 @@ class Heal2Box:
             _ind_ws = []
             for j in range(0, len(self.x2d[0])):
                 x_min, x_max = self.xedges[j], self.xedges[j+1]
-                y_min, y_max = self.yedges[i], self.yedges[i+1]
-                y_min += np.pi/2.
-                y_max += np.pi/2.
+                y_max, y_min = self.yedges[i], self.yedges[i+1]
+                y_min = np.pi/2. - y_min
+                y_max = np.pi/2. - y_max
                 x_rand, y_rand = randoms.randoms_sky(mc_size, phi_min=x_min, phi_max=x_max, theta_min=y_min, theta_max=y_max)
                 if self.alpha != 0.:
                     x_rand, y_rand = rotate.sky_spin(x_rand, y_rand, 0., np.pi/2., self.alpha)

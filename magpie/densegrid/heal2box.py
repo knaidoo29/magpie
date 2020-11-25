@@ -115,7 +115,7 @@ class Heal2Box:
         self.rebin_yind = self.rebin_yind.flatten()
         xx = self.rebin_x2d.flatten()
         yy = self.rebin_y2d.flatten()
-        yy += np.pi/2.
+        yy = np.pi/2. - yy
         if self.alpha != 0.:
             xx, yy = rotate.sky_spin(xx, yy, 0., np.pi/2., self.alpha)
         xx, yy = rotate.sky_shift(xx, yy, 0., np.pi/2., self.center[0], self.center[1])
@@ -174,7 +174,7 @@ class Heal2Box:
             f_box = self._remap(f*w)/self._remap(w)
         return f_box
 
-    
+
     def clean(self):
         """Cleans by reinitialising the class."""
         self.__init__()
