@@ -95,6 +95,10 @@ class Box2Ring:
         phi_shift : float
             Rotation to the polar coordinate grid, given in radians within a range
             of 0 and 2pi.
+        rebin_r : int
+            Rebin factor in the r-axis.
+        rebin_p : int
+            Rebin factor in the phi-axis.
         """
         assert rmin >= 0., "rmin must be greater or equal to zero."
         assert rmin < rmax, "rmin must be smaller than rmax."

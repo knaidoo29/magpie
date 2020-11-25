@@ -127,8 +127,6 @@ class Heal2Ring:
         ----------
         f : array
             HEALPix input map
-        w : array
-            HEALPix weight map.
 
         Returns
         -------

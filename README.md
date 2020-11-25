@@ -57,6 +57,7 @@ Of course this assumes each component of  ![d(X)](https://latex.codecogs.com/svg
   with a specified center. Each shell is placed onto a healpix map.
   - `mc.Heal2Ring`: Remaps a HEALPix map on to a pseudo polar coordinate grid (more precisely
     a polar-cap coordinate grid).
+  - `mc.Heal2Box`: Remaps a HEALPix map to a Mercator projection with a defined center.
 
 * Dense grid remapping:
   - `dg.Box2Ring`: Remaps data on a 2D cartesian grid to a polar coordinate grid with
@@ -66,6 +67,7 @@ Of course this assumes each component of  ![d(X)](https://latex.codecogs.com/svg
   boxes.
   - `dg.Heal2Ring`: Remaps a HEALPix map on to a pseudo polar coordinate grid (more precisely
     a polar-cap coordinate grid).
+  - `dg.Heal2Box`: Remaps a HEALPix map to a Mercator projection with a defined center.
 
 Things to consider:
 
