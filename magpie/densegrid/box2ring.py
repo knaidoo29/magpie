@@ -30,6 +30,7 @@ class Box2Ring:
         self.r2d = None
         self.p2d = None
         self.center = None
+        self.phi_shift = None
         self.rebin_p = None
         self.rebin_r = None
         self.rebin_redges = None
@@ -72,7 +73,7 @@ class Box2Ring:
         self.x2d, self.y2d = np.meshgrid(self.xmid, self.ymid)
 
 
-    def setup_polar(self, rmin, rmax, numr, nump, pmin=0., pmax=2.*np.pi, center=[0., 0.], rebin_r=2, rebin_p=2):
+    def setup_polar(self, rmin, rmax, numr, nump, pmin=0., pmax=2.*np.pi, center=[0., 0.], rebin_r=2, rebin_p=2, phi_shift=0.):
         """Setups the polar grid.
 
         Parameters
@@ -91,6 +92,9 @@ class Box2Ring:
             Maximum phi (default=2pi).
         center : list
             Center point of polar coordinate grid.
+        phi_shift : float
+            Rotation to the polar coordinate grid, given in radians within a range
+            of 0 and 2pi.
         """
         assert rmin >= 0., "rmin must be greater or equal to zero."
         assert rmin < rmax, "rmin must be smaller than rmax."
@@ -110,6 +114,7 @@ class Box2Ring:
         self.dp = self.pmid[1] - self.pmid[0]
         self.r2d, self.p2d = np.meshgrid(self.rmid, self.pmid)
         self.center = center
+        self.phi_shift = phi_shift
         self.rebin_r = rebin_r
         self.rebin_p = rebin_p
         self.rebin_redges = np.linspace(self.redges[0], self.redges[-1], self.rebin_r*len(self.rmid) + 1)
@@ -117,7 +122,12 @@ class Box2Ring:
         self.rebin_pedges = np.linspace(self.pedges[0], self.pedges[-1], self.rebin_p*len(self.pmid) + 1)
         self.rebin_pmid = 0.5*(self.rebin_pedges[1:] + self.rebin_pedges[:-1])
         self.rebin_r2d, self.rebin_p2d = np.meshgrid(self.rebin_rmid, self.rebin_pmid)
-
+        if self.phi_shift != 0.:
+            self.rebin_p2d += self.phi_shift
+            condition = np.where(self.rebin_p2d > 2.*np.pi)
+            self.rebin_p2d[condition] -= 2.*np.pi
+            condition = np.where(self.rebin_p2d < 0.)
+            self.rebin_p2d[condition] += 2.*np.pi
 
     def _remap(self, f):
         """Remaps 2d grid data f onto polar coordinate grid.

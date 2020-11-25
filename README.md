@@ -64,7 +64,7 @@ Of course this assumes each component of  ![d(X)](https://latex.codecogs.com/svg
   - `dg.Cube2Shell`: Remaps data on 3D cartesian grid to spherical polar coordinates
   with a specified center. Each shell is placed onto a healpix map. Easy to add periodic
   boxes.
-  - `mc.Heal2Ring`: Remaps a HEALPix map on to a pseudo polar coordinate grid (more precisely
+  - `dg.Heal2Ring`: Remaps a HEALPix map on to a pseudo polar coordinate grid (more precisely
     a polar-cap coordinate grid).
 
 Things to consider:
