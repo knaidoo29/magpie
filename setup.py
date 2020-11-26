@@ -30,4 +30,7 @@ setup(name = 'magpie',
         'Topic :: Scientific/Engineering',
         'Topic :: Scientific/Engineering :: Astronomy',
         'Topic :: Scientific/Engineering :: Mathematics',
-      ],)
+      ],
+      test_suite='nose.collector',
+      tests_require=['nose'],
+      )

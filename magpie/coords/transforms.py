@@ -22,8 +22,12 @@ def cart2polar(x, y, center=[0., 0.]):
     """
     r = np.sqrt((x-center[0])**2. + (y-center[1])**2.)
     p = np.arctan2(y-center[1], x-center[0])
-    condition = np.where(p < 0.)
-    p[condition] += 2.*np.pi
+    if np.isscalar(p) == True:
+        if p < 0.:
+            p += 2.*np.pi
+    else:
+        condition = np.where(p < 0.)
+        p[condition] += 2.*np.pi
     return r, p
 
 
