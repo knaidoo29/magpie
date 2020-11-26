@@ -78,9 +78,19 @@ def cart2sphere(x, y, z, center=[0., 0., 0.]):
     """
     r = np.sqrt((x-center[0])**2. + (y-center[1])**2. + (z-center[2])**2.)
     phi = np.arctan2(y-center[1], x-center[0])
-    condition = np.where(phi < 0.)
-    phi[condition] += 2.*np.pi
-    theta = np.arccos((z-center[2])/r)
+    if np.isscalar(phi) == True:
+        if phi < 0.:
+            phi += 2.*np.pi
+        if r != 0.:
+            theta = np.arccos((z-center[2])/r)
+        else:
+            theta = 0.
+    else:
+        condition = np.where(phi < 0.)
+        phi[condition] += 2.*np.pi
+        theta = np.zeros(len(phi))
+        condition = np.where(r != 0.)[0]
+        theta[condition] = np.arccos((z[condition]-center[2])/r[condition])
     return r, phi, theta
 
 

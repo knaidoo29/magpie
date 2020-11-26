@@ -28,6 +28,10 @@ In 1D these are computed exactly without requiring the approximate schemes above
 * `numpy`
 * `healpy`
 
+For testing:
+
+* nose
+* pytest 
 
 ## Theory
 
@@ -137,6 +141,12 @@ cd magpie
 pip install -e . [--user]
 ```
 
+and test using `pytest`:
+
+```
+py.test magpie
+```
+
 or use setup:
 
 ```
@@ -144,6 +154,20 @@ cd magpie
 python setup.py build
 python setup.py install
 ```
+
+From the MAGPIE directory you can then test the install using nose:
+
+```
+python setup.py test
+```
+
+or using pytest:
+
+```
+python -m pytest
+```
+
+*unittest routines are being developed so the above does not test all functions*.
 
 ## Usage
 
