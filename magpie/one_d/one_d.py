@@ -3,6 +3,58 @@ import numpy as np
 from .. import utils
 
 
+def rebin_1d_single_bin_weights(bin_edges, bin_min, bin_max):
+    """Gets weights.
+
+    Parameters
+    ----------
+    bin_edges : array
+        Edges of the bins.
+    bin_min : float
+        Minimum edge for the new bin.
+    bin_max : float
+        Maximum edge for the new bin.
+    """
+    weights = np.zeros(len(bin_edges)-1)
+    condition = np.where((bin_edges >= bin_min) & (bin_edges <= bin_max))[0]
+    if len(condition) == 0:
+        condition1 = np.where((bin_edges >= bin_min))[0]
+        if len(condition1) != 0 and len(condition1) != len(bin_edges):
+            weights[condition1[0]-1] = 1.
+        else:
+            # If we can't find any bins then we return a NaN
+            return np.nan
+    elif len(condition) == 1:
+        # To ensure we are not looking at the edges
+        if condition[0] > 0 and condition[0] < len(bin_edges)-1:
+            weights[condition[0]] = (bin_edges[condition[0]] - bin_min)/(bin_edges[condition[0]] - bin_edges[condition[0]-1])
+            weights[condition[0]+1] = (bin_max - bin_edges[condition[0]])/(bin_edges[condition[0]+1] - bin_edges[condition[0]])
+        # To deal with edges
+        elif condition[0] == 0:
+            weights[condition[0]] = 1.
+        elif condition[0] == len(bin_edges)-1:
+            weights[condition[0]] = 1.
+    else:
+        # General case
+        # Create weights equal to one
+        w = np.ones(len(condition) + 1)
+        index = np.array(np.ndarray.tolist(condition-1) + [condition[-1]])
+        if condition[-1] == len(bin_edges)-1:
+            w = w[:-1]
+            index = index[:-1]
+        elif condition[0] == 0:
+            w = w[1:]
+            index = index[1:]
+        if condition[0] != 0:
+            # Alter first weight to account for the fact that the new bin intersects the first bin.
+            w[0] = (bin_edges[condition[0]] - bin_min)/(bin_edges[condition[0]] - bin_edges[condition[0]-1])
+        if condition[-1] != len(bin_edges)-1:
+            # Alter last weight to account for the fact that the new bin intesrsects the last bin.
+            w[-1] = (bin_max - bin_edges[condition[-1]])/(bin_edges[condition[-1]] - bin_edges[condition[-1]-1])
+        weights[index] = w
+    return weights
+
+
 def _rebin_1d_single_bin(bin_edges, data, bin_min, bin_max):
     """Rebins to a single bin.
 

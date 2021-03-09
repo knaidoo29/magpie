@@ -8,9 +8,8 @@ from .. import rotate
 from .. import utils
 
 
-class Heal2Box:
-    """Remaps pixels given on 2D grid to polar grid."""
-
+class Heal2Polar:
+    """Remaps healpix pixels to a 2D polar grid."""
 
     def __init__(self):
         """Initialises the class."""

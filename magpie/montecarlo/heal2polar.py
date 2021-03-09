@@ -8,7 +8,7 @@ from .. import rotate
 from .. import utils
 
 
-class Heal2Box:
+class Heal2Polar:
     """Remaps pixels given a HEALPix map to a polar cap grid."""
 
 

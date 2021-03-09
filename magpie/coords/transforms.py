@@ -122,3 +122,29 @@ def sphere2cart(r, phi, theta, center=[0., 0., 0.]):
     y += center[1]
     z += center[2]
     return x, y, z
+
+
+def ortho2cart(x, y, r=1., fill_value=np.nan):
+    """Orthographic projection to cartesian coordinates.
+
+    Parameters
+    ----------
+    x : array
+        X value in the orthographic projection.
+    y : array
+        Y value in the orthographic projection.
+    r : float
+        Radius of the sphere.
+    fill_value : float
+        Fill values outside the sphere with this value.
+
+    Returns
+    -------
+    z : array
+        Returns the z value of the cartesian coordinates.
+    """
+    xy = x**2. + y**2.
+    z = np.ones(np.shape(x)) * fill_value
+    condition = np.where(xy < r**2.)
+    z[condition] = np.sqrt(r**2. - xy[condition])
+    return z
