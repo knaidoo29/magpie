@@ -186,8 +186,8 @@ class Heal2Ortho:
             r = 1.
         else:
             r = np.ones(len(phi))
-        phi, theta = magpie.rotate.sky_shift(phi, theta, self.center[0], self.center[1], self.end_center[0], self.end_center[1])
-        x, y, z = magpie.coords.sphere2cart(r, phi, theta)
+        phi, theta = rotate.sky_shift(phi, theta, self.center[0], self.center[1], self.end_center[0], self.end_center[1])
+        x, y, z = coords.sphere2cart(r, phi, theta)
         if np.isscalar(phi) == True:
             if z < 0.:
                 x = np.nan
