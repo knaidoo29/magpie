@@ -6,4 +6,5 @@ from . import one_d
 from . import polar
 from . import randoms
 from . import rotate
+from . import shapes
 from . import utils
