@@ -92,7 +92,8 @@ def sky_phi_shift(phi, dphi):
     # sanity checks
     assert dphi > -2.*np.pi and dphi < 2.*np.pi, "dphi must be within the range [-2pi, 2pi]."
     # shift phi
-    phi_new = np.copy(phi)
+    #phi_new = np.copy(phi)
+    phi_new = phi
     phi_new += dphi
     if np.isscalar(phi_new) == False:
         condition = np.where(phi_new > 2.*np.pi)[0]
@@ -140,8 +141,10 @@ def sky_shift(phi, theta, phi_start, theta_start, phi_end, theta_end):
     assert theta_start >= 0. and theta_start <= np.pi, "theta_start must lie within [0, pi]."
     assert theta_end >= 0. and theta_end <= np.pi, "theta_end must lie within [0, pi]."
     # apply shift
-    new_phi = np.copy(phi)
-    new_theta = np.copy(theta)
+    #new_phi = np.copy(phi)
+    #new_theta = np.copy(theta)
+    new_phi = phi
+    new_theta = theta
     new_phi = sky_phi_shift(new_phi, phi_end - phi_start)
     if theta_start != theta_end:
         new_phi, new_theta = sky_rotate(new_phi, new_theta, phi_end, theta_end, phi_start=phi_end, theta_start=theta_start)
