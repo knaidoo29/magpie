@@ -19,7 +19,7 @@ class PlotOrtho:
         self.heal2ortho = heal2ortho
 
 
-    def imshow(self, dmap, cmap=plt.cm.viridis, ax=None):
+    def imshow(self, dmap, cmap=plt.cm.viridis, ax=None, returncb=False):
         """
 
         Parameters
@@ -30,13 +30,17 @@ class PlotOrtho:
             Colormap.
         ax : class, optional
             Axis to plot on.
+        returncb : bool, optional
+            Return imshow for colorbar plots.
         """
         if ax is None:
-            plt.imshow(dmap, origin='lower', extent=[self.heal2ortho.xedges[0], self.heal2ortho.xedges[-1],
-                       self.heal2ortho.yedges[0], self.heal2ortho.yedges[-1]], cmap=cmap)
+            cb = plt.imshow(dmap, origin='lower', extent=[self.heal2ortho.xedges[0], self.heal2ortho.xedges[-1],
+                           self.heal2ortho.yedges[0], self.heal2ortho.yedges[-1]], cmap=cmap)
         else:
-            ax.imshow(dmap, origin='lower', extent=[self.heal2ortho.xedges[0], self.heal2ortho.xedges[-1],
-                      self.heal2ortho.yedges[0], self.heal2ortho.yedges[-1]], cmap=cmap)
+            cb = ax.imshow(dmap, origin='lower', extent=[self.heal2ortho.xedges[0], self.heal2ortho.xedges[-1],
+                           self.heal2ortho.yedges[0], self.heal2ortho.yedges[-1]], cmap=cmap)
+        if returncb == True:
+            return cb
 
 
     def plot_grid(self, dtheta=15., dphi=None, zeropoint=[0., np.pi/2.],

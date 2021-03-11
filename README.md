@@ -99,6 +99,11 @@ Things to consider:
   - `one_d.rebin_1d`: 1D rebinning, bin edges can be arbitrarily defined.
   - `one_d.rebin_1d_single_bin_weights`: 1D rebinning weights.
 
+* Plotting routines:
+  - `plots.PlotOrtho`: For plotting orthographic projections.
+  - `plots.plot_box`: Plots a box.
+  - `plots.plot_circle`: Plots a circle.
+
 * Polar coordinate grid to 1D radial profiles:
   - `polar.get_polar_area2d`: Returns the area of each pixel in the polar coordinate grid.
   - `polar.get_pixarea`: Returns the area of each pixel in the cartesian grid.
