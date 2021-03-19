@@ -19,7 +19,7 @@ class PlotOrtho:
         self.heal2ortho = heal2ortho
 
 
-    def imshow(self, dmap, cmap=plt.cm.viridis, ax=None, returncb=False):
+    def imshow(self, dmap, cmap=plt.cm.viridis, ax=None, returncb=False, **kwargs):
         """
 
         Parameters
@@ -35,10 +35,10 @@ class PlotOrtho:
         """
         if ax is None:
             cb = plt.imshow(dmap, origin='lower', extent=[self.heal2ortho.xedges[0], self.heal2ortho.xedges[-1],
-                           self.heal2ortho.yedges[0], self.heal2ortho.yedges[-1]], cmap=cmap)
+                           self.heal2ortho.yedges[0], self.heal2ortho.yedges[-1]], cmap=cmap, **kwargs)
         else:
             cb = ax.imshow(dmap, origin='lower', extent=[self.heal2ortho.xedges[0], self.heal2ortho.xedges[-1],
-                           self.heal2ortho.yedges[0], self.heal2ortho.yedges[-1]], cmap=cmap)
+                           self.heal2ortho.yedges[0], self.heal2ortho.yedges[-1]], cmap=cmap, **kwargs)
         if returncb == True:
             return cb
 
@@ -93,7 +93,9 @@ class PlotOrtho:
 
 
     def plot_labels(self, dtheta=15., dphi=None, decimals=0, lonlat=False, zeropoint=[0., np.pi/2.],
-                    shift=[1.5, 2.], ax=None, **kwargs):
+                    #shiftphi=2., shiftfractionphi=[-0.01, -0.02], shiftfractiontheta=[0.01, 0.02],
+                    shift=[0., 0.], ax=None,
+                    userotation=False, ha='left', va='top', **kwargs):
         """Plots labels on the orthographic grid.
 
         Parameters
@@ -114,6 +116,12 @@ class PlotOrtho:
             Shift in degrees to place on the coordinates.
         ax : class, optional
             Axis to plot on.
+        userotation : bool, optional
+            Rotates labels automatically.
+        ha : str, optional
+            Horizontal alignment
+        va : str, optional
+            Vertical alignment
         """
         if dphi is None:
             dphi = dtheta
@@ -121,17 +129,27 @@ class PlotOrtho:
         phi_grid = np.linspace(0., 2.*np.pi, nlines + 1)[:-1]
         nlines = int(180/dtheta)
         theta_grid = np.linspace(0., np.pi, nlines + 1)[1:-1]
+        xc, yc = self.heal2ortho.transform(0., 0.)
         for ii in range(0, len(phi_grid)):
             phi_val = phi_grid[ii]
             phi_str = r'$ %s ^{\circ}$' % str(np.round(np.rad2deg(phi_val), decimals=decimals))[:-2]
             theta_val = zeropoint[1]
-            theta_val += np.deg2rad(shift[0])
+            phi_val -= np.deg2rad(shift[0])
             x, y = self.heal2ortho.transform(phi_val, theta_val)
+            rotation_angle = 270. - np.rad2deg(np.arctan2((y-yc), (x-xc)))
+            #x += shiftfractionphi[0]*(self.heal2ortho.xedges[-1] - self.heal2ortho.xedges[0])
+            #y += shiftfractionphi[1]*(self.heal2ortho.yedges[-1] - self.heal2ortho.yedges[0])
             if x >= self.heal2ortho.xedges[0] and x <= self.heal2ortho.xedges[-1] and y >= self.heal2ortho.yedges[0] and y <= self.heal2ortho.yedges[-1]:
                 if ax is None:
-                    plt.text(x, y, phi_str, **kwargs)
+                    if userotation == True:
+                        plt.text(x, y, phi_str, rotation=rotation_angle, ha=ha, va=va, **kwargs)
+                    else:
+                        plt.text(x, y, phi_str, ha=ha, va=va, **kwargs)
                 else:
-                    ax.text(x, y, phi_str, **kwargs)
+                    if userotation == True:
+                        ax.text(x, y, phi_str, rotation=rotation_angle, ha=ha, va=va, **kwargs)
+                    else:
+                        ax.text(x, y, phi_str, ha=ha, va=va, **kwargs)
 
         for ii in range(0, len(theta_grid)):
             theta_val = theta_grid[ii]
@@ -140,17 +158,27 @@ class PlotOrtho:
             theta_str = r'$ %s ^{\circ}$' % str(np.round(np.rad2deg(theta_val), decimals=decimals))[:-2]
             theta_val = theta_grid[ii]
             phi_val = zeropoint[0]
-            phi_val -= np.deg2rad(2.)
+            theta_val -= np.deg2rad(shift[1])
             if phi_val < 0.:
                 phi_val += 2.*np.pi
             elif phi_val >= 2.*np.pi:
                 phi_val -= 2.*np.pi
             x, y = self.heal2ortho.transform(phi_val, theta_val)
+            rotation_angle = 270. - np.rad2deg(np.arctan2((y-yc), (x-xc)))
+            #x += shiftfractiontheta[0]*(self.heal2ortho.xedges[-1] - self.heal2ortho.xedges[0])
+            #y += shiftfractiontheta[1]*(self.heal2ortho.yedges[-1] - self.heal2ortho.yedges[0])
             if x >= self.heal2ortho.xedges[0] and x <= self.heal2ortho.xedges[-1] and y >= self.heal2ortho.yedges[0] and y <= self.heal2ortho.yedges[-1]:
                 if ax is None:
-                    plt.text(x, y, theta_str, **kwargs)
+                    if userotation == True:
+                        plt.text(x, y, theta_str, rotation=rotation_angle, ha=ha, va=va, **kwargs)
+                    else:
+                        plt.text(x, y, theta_str, ha=ha, va=va, **kwargs)
                 else:
-                    ax.text(x, y, theta_str, **kwargs)
+                    if userotation == True:
+                        ax.text(x, y, theta_str, rotation=rotation_angle, ha=ha, va=va, **kwargs)
+                    else:
+                        ax.text(x, y, theta_str, ha=ha, va=va, **kwargs)
+
 
     def plot_polar_box(self, phi_min, phi_max, theta_min, theta_max, lonlat=False,
                  ax=None, divisions=100, **kwargs):

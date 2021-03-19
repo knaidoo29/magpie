@@ -31,3 +31,28 @@ def sky_area(phi_min, phi_max, theta_min, theta_max):
     # calculate area
     area = (phi_max - phi_min)*(np.cos(theta_min)-np.cos(theta_max))
     return area
+
+
+def polar2lonlat(theta):
+    """Converts polar coordinates to the longitude and latitude convention where
+    latitude goes from (where theta lies [-pi/2., pi/2.].
+
+    Parameters
+    ----------
+    theta : array
+        Latitude given in [0., pi].
+    """
+    return np.pi/2. - theta
+
+
+
+def lonlat2polar(theta):
+    """Converts polar coordinates to the longitude and latitude convention where
+    latitude goes from (where theta lies [-pi/2., pi/2.].
+
+    Parameters
+    ----------
+    theta : array
+        Latitude given in [0., pi].
+    """
+    return np.pi/2. - theta

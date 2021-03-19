@@ -94,6 +94,8 @@ Things to consider:
   - `coords.cart2sphere`: 3D cartesian to spherical polar coordinates.
   - `coords.sphere2cart`: 3D spherical polar to cartesian coordinates.
   - `coords.sky_area`: calculates the area of a 'square' patch of sky in steradians.
+  - `coords.polar2lonlat`: Convert from latitude [0., pi] to [-pi/2., pi/2.] convention.
+  - `coords.lonlat2polar`: Convert from latitude [-pi/2., pi/2.] to [0., pi] convention.
 
 * Remapping 1D data:
   - `one_d.rebin_1d`: 1D rebinning, bin edges can be arbitrarily defined.
