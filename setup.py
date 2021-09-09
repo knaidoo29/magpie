@@ -7,8 +7,14 @@ this_directory = path.abspath(path.dirname(__file__))
 with open(path.join(this_directory, 'README.md')) as f:
     long_description = f.read()
 
+ext1 = Extension(name='magpie.src.utils', sources=['magpie/src/utils.f90'])
+ext2 = Extension(name='magpie.src.remap_2d_gridtogrid', sources=['magpie/src/remap_2d_gridtogrid.f90'])
+ext3 = Extension(name='magpie.src.remap_3d_gridtogrid', sources=['magpie/src/remap_3d_gridtogrid.f90'])
+
+exts = [ext1, ext2, ext3]
+
 setup(name = 'magpie',
-      version = '0.1.0',
+      version = '0.2.0',
       description       = "Monte cArlo weiGhted PIxel rEmapping",
       long_description  = long_description,
       long_description_content_type = 'text/markdown',
@@ -18,7 +24,7 @@ setup(name = 'magpie',
       license='MIT',
       packages=setuptools.find_packages(),
       install_requires=['numpy', 'matplotlib', 'healpy'],
-      ext_modules = [],
+      ext_modules = exts,
       python_requires = '>=3',
       classifiers=[
         'Development Status :: 5 - Production/Stable',

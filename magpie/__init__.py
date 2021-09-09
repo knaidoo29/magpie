@@ -6,6 +6,8 @@ from . import one_d
 from . import plots
 from . import polar
 from . import randoms
+from . import remap
 from . import rotate
 from . import shapes
+from . import src
 from . import utils

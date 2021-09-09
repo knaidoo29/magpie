@@ -1,7 +1,7 @@
 # MAGPIE: Monte cArlo weiGhted PIxel rEmapping
 
 Author:         Krishna Naidoo                          
-Version:        0.1.0                               
+Version:        0.2.0                               
 Homepage:       https://github.com/knaidoo29/magpie    
 Documentation:  n/a
 
@@ -21,6 +21,13 @@ method is more accurate but scales poorly to 3D. For 2D this scheme will work ve
 well even for moderately large datasets. The dense grid method, while less accurate,
 is very fast and should be used for large data sets and all 3D transformations.
 In 1D these are computed exactly without requiring the approximate schemes above.
+
+## Warning
+
+MAGPIE is in development so functions and tools may disappear without warning. We
+are currently porting over the remapping functions and classes into a more generalised
+setup which will be housed in the folder `remap` and will in future superseed the
+classes written in the folder `densegrid` and `montecarlo`.
 
 ## Dependencies
 
