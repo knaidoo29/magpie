@@ -8,10 +8,14 @@ with open(path.join(this_directory, 'README.md')) as f:
     long_description = f.read()
 
 ext1 = Extension(name='magpie.src.utils', sources=['magpie/src/utils.f90'])
-ext2 = Extension(name='magpie.src.remap_2d_gridtogrid', sources=['magpie/src/remap_2d_gridtogrid.f90'])
-ext3 = Extension(name='magpie.src.remap_3d_gridtogrid', sources=['magpie/src/remap_3d_gridtogrid.f90'])
+ext2 = Extension(name='magpie.src.remap_utils', sources=['magpie/src/remap_utils.f90'])
+ext3 = Extension(name='magpie.src.remap_1d_grid2grid', sources=['magpie/src/remap_1d_grid2grid.f90'])
+ext4 = Extension(name='magpie.src.remap_2d_grid2grid', sources=['magpie/src/remap_2d_grid2grid.f90'])
+ext5 = Extension(name='magpie.src.remap_3d_grid2grid', sources=['magpie/src/remap_3d_grid2grid.f90'])
+ext6 = Extension(name='magpie.src.remap_3d_gridtogrid', sources=['magpie/src/remap_3d_gridtogrid.f90'])
+ext7 = Extension(name='magpie.src.remap_3d_gridtogrid', sources=['magpie/src/remap_3d_gridtogrid.f90'])
 
-exts = [ext1, ext2, ext3]
+exts = [ext1, ext2, ext3, ext4, ext5, ext6, ext7]
 
 setup(name = 'magpie',
       version = '0.2.0',
