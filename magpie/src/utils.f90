@@ -37,6 +37,7 @@ subroutine linspace(xmin, xmax, n, x)
 
 end subroutine linspace
 
+
 subroutine midpoint(x, n, xmid)
   ! Outputs the midpoints of array x
   !

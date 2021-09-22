@@ -1,7 +1,7 @@
 # MAGPIE: Monte cArlo weiGhted PIxel rEmapping
 
 Author:         Krishna Naidoo                          
-Version:        0.2.0                               
+Version:        0.2.1                               
 Homepage:       https://github.com/knaidoo29/magpie    
 Documentation:  n/a
 

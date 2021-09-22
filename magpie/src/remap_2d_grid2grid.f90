@@ -1,8 +1,8 @@
 include "remap_1d_grid2grid.f90"
 
 
-subroutine remap_2d_grid2grid(x1min, x1max, xgrid1, y1min, y1max, ygrid1 &
-  , x2min, x2max, xgrid2, y2min, y2max, ygrid2, xpixlen, ypixlen, f1, f2)
+subroutine remap_2d_grid2grid(x1min, x1max, x1grid, y1min, y1max, y1grid &
+  , x2min, x2max, x2grid, y2min, y2max, y2grid, xpixlen, ypixlen, f1, f2)
 
   ! Remaps field 1 onto field 2 using exact weights.
   !
@@ -12,25 +12,25 @@ subroutine remap_2d_grid2grid(x1min, x1max, xgrid1, y1min, y1max, ygrid1 &
   !   Minimum x in grid 1.
   ! x1max : float
   !   Maximum x in grid 1.
-  ! xgrid1 : int
+  ! x1grid : int
   !   Number of grid points in grid 1 along x.
   ! y1min : float
   !   Minimum y in grid 1.
   ! y1max : float
   !   Maximum y in grid 1.
-  ! ygrid1 : int
+  ! y1grid : int
   !   Number of grid points in grid 1 along y.
   ! x2min : float
   !   Minimum x in grid 2.
   ! x2max : float
   !   Maximum x in grid 2.
-  ! xgrid2 : int
+  ! x2grid : int
   !   Number of grid points in grid 2 along x.
   ! y2min : float
   !   Minimum y in grid 2.
   ! y2max : float
   !   Maximum y in grid 2.
-  ! ygrid2 : int
+  ! y2grid : int
   !   Number of grid points in grid 2 along y.
   ! xpixlen : int
   !   Length of pixel mapping indices and weights along x.
@@ -50,29 +50,29 @@ subroutine remap_2d_grid2grid(x1min, x1max, xgrid1, y1min, y1max, ygrid1 &
 
   integer, parameter :: dp = kind(1.d0)
 
-  integer, intent(in) :: xgrid1, ygrid1, xgrid2, ygrid2, xpixlen, ypixlen
+  integer, intent(in) :: x1grid, y1grid, x2grid, y2grid, xpixlen, ypixlen
   real(kind=dp), intent(in) :: x1min, x1max, x2min, x2max
   real(kind=dp), intent(in) :: y1min, y1max, y2min, y2max
-  real(kind=dp), intent(in) :: f1(xgrid1*ygrid1)
-  real(kind=dp), intent(out) :: f2(xgrid2*ygrid2)
+  real(kind=dp), intent(in) :: f1(x1grid*y1grid)
+  real(kind=dp), intent(out) :: f2(x2grid*y2grid)
   real(kind=dp) :: xweights(xpixlen), yweights(ypixlen)
   integer :: xpix(xpixlen), ypix(ypixlen), pix(xpixlen*ypixlen), i, j, xwhich2pix, ywhich2pix, ii, jj, i1, j1
 
   ! Function
 
-  do i = 1, xgrid2
+  do i = 1, x2grid
 
     xwhich2pix = i-1
-    call remap_1d_grid2grid_pixel(x1min, x1max, xgrid1, x2min, x2max, xgrid2, xwhich2pix, xpixlen, xpix, xweights)
+    call remap_1d_grid2grid_pixel(x1min, x1max, x1grid, x2min, x2max, x2grid, xwhich2pix, xpixlen, xpix, xweights)
 
-    do j = 1, ygrid2
+    do j = 1, y2grid
 
       ywhich2pix = j-1
-      call remap_1d_grid2grid_pixel(y1min, y1max, ygrid1, y2min, y2max, ygrid2, ywhich2pix, ypixlen, ypix, yweights)
+      call remap_1d_grid2grid_pixel(y1min, y1max, y1grid, y2min, y2max, y2grid, ywhich2pix, ypixlen, ypix, yweights)
 
-      call pix1dto2d(xpix, ypix, xpixlen, ypixlen, ygrid1, pix)
+      call pix1dto2d(xpix, ypix, xpixlen, ypixlen, y1grid, pix)
 
-      ii = ywhich2pix + ygrid2*xwhich2pix + 1
+      ii = ywhich2pix + y2grid*xwhich2pix + 1
       f2(ii) = 0.
 
       jj = 1

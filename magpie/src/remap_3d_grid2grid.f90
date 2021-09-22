@@ -1,8 +1,8 @@
 include "remap_1d_grid2grid.f90"
 
 
-subroutine remap_3d_grid2grid(x1min, x1max, xgrid1, y1min, y1max, ygrid1, z1min, z1max, zgrid1 &
-  , x2min, x2max, xgrid2, y2min, y2max, ygrid2, z2min, z2max, zgrid2, xpixlen, ypixlen, zpixlen, f1, f2)
+subroutine remap_3d_grid2grid(x1min, x1max, x1grid, y1min, y1max, y1grid, z1min, z1max, z1grid &
+  , x2min, x2max, x2grid, y2min, y2max, y2grid, z2min, z2max, z2grid, xpixlen, ypixlen, zpixlen, f1, f2)
 
   ! Remaps field 1 onto field 2 using exact weights.
   !
@@ -12,37 +12,37 @@ subroutine remap_3d_grid2grid(x1min, x1max, xgrid1, y1min, y1max, ygrid1, z1min,
   !   Minimum x in grid 1.
   ! x1max : float
   !   Maximum x in grid 1.
-  ! xgrid1 : int
+  ! x1grid : int
   !   Number of grid points in grid 1 along x.
   ! y1min : float
   !   Minimum y in grid 1.
   ! y1max : float
   !   Maximum y in grid 1.
-  ! ygrid1 : int
+  ! y1grid : int
   !   Number of grid points in grid 1 along y.
   ! z1min : float
   !   Minimum z in grid 1.
   ! z1max : float
   !   Maximum z in grid 1.
-  ! zgrid1 : int
+  ! z1grid : int
   !   Number of grid points in grid 1 along z.
   ! x2min : float
   !   Minimum x in grid 2.
   ! x2max : float
   !   Maximum x in grid 2.
-  ! xgrid2 : int
+  ! x2grid : int
   !   Number of grid points in grid 2 along x.
   ! y2min : float
   !   Minimum y in grid 2.
   ! y2max : float
   !   Maximum y in grid 2.
-  ! ygrid2 : int
+  ! y2grid : int
   !   Number of grid points in grid 2 along y.
   ! z2min : float
   !   Minimum z in grid 2.
   ! z2max : float
   !   Maximum z in grid 2.
-  ! zgrid2 : int
+  ! z2grid : int
   !   Number of grid points in grid 2 along z.
   ! xpixlen : int
   !   Length of pixel mapping indices and weights along x.
@@ -64,36 +64,36 @@ subroutine remap_3d_grid2grid(x1min, x1max, xgrid1, y1min, y1max, ygrid1, z1min,
 
   integer, parameter :: dp = kind(1.d0)
 
-  integer, intent(in) :: xgrid1, ygrid1, zgrid1, xgrid2, ygrid2, zgrid2, xpixlen, ypixlen, zpixlen
+  integer, intent(in) :: x1grid, y1grid, z1grid, x2grid, y2grid, z2grid, xpixlen, ypixlen, zpixlen
   real(kind=dp), intent(in) :: x1min, x1max, x2min, x2max
   real(kind=dp), intent(in) :: y1min, y1max, y2min, y2max
   real(kind=dp), intent(in) :: z1min, z1max, z2min, z2max
-  real(kind=dp), intent(in) :: f1(xgrid1*ygrid1*zgrid1)
-  real(kind=dp), intent(out) :: f2(xgrid2*ygrid2*zgrid2)
+  real(kind=dp), intent(in) :: f1(x1grid*y1grid*z1grid)
+  real(kind=dp), intent(out) :: f2(x2grid*y2grid*z2grid)
   real(kind=dp) :: xweights(xpixlen), yweights(ypixlen), zweights(zpixlen)
   integer :: xpix(xpixlen), ypix(ypixlen), zpix(zpixlen), pix(xpixlen*ypixlen*zpixlen), i, j, k
   integer :: xwhich2pix, ywhich2pix, zwhich2pix, ii, jj, i1, j1, k1
 
   ! Function
 
-  do i = 1, xgrid2
+  do i = 1, x2grid
 
     xwhich2pix = i-1
-    call remap_1d_grid2grid_pixel(x1min, x1max, xgrid1, x2min, x2max, xgrid2, xwhich2pix, xpixlen, xpix, xweights)
+    call remap_1d_grid2grid_pixel(x1min, x1max, x1grid, x2min, x2max, x2grid, xwhich2pix, xpixlen, xpix, xweights)
 
-    do j = 1, ygrid2
+    do j = 1, y2grid
 
       ywhich2pix = j-1
-      call remap_1d_grid2grid_pixel(y1min, y1max, ygrid1, y2min, y2max, ygrid2, ywhich2pix, ypixlen, ypix, yweights)
+      call remap_1d_grid2grid_pixel(y1min, y1max, y1grid, y2min, y2max, y2grid, ywhich2pix, ypixlen, ypix, yweights)
 
-      do k = 1, zgrid2
+      do k = 1, z2grid
 
         zwhich2pix = k-1
-        call remap_1d_grid2grid_pixel(z1min, z1max, zgrid1, z2min, z2max, zgrid2, zwhich2pix, zpixlen, zpix, zweights)
+        call remap_1d_grid2grid_pixel(z1min, z1max, z1grid, z2min, z2max, z2grid, zwhich2pix, zpixlen, zpix, zweights)
 
-        call pix1dto3d(xpix, ypix, zpix, xpixlen, ypixlen, zpixlen, ygrid1, zgrid1, pix)
+        call pix1dto3d(xpix, ypix, zpix, xpixlen, ypixlen, zpixlen, y1grid, z1grid, pix)
 
-        ii = zwhich2pix + zgrid2*(ywhich2pix + ygrid2*xwhich2pix) + 1
+        ii = zwhich2pix + z2grid*(ywhich2pix + y2grid*xwhich2pix) + 1
         f2(ii) = 0.
 
         jj = 1

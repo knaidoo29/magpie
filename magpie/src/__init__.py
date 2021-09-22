@@ -11,7 +11,3 @@ from .remap_utils import remap_1d_grid2grid_pixel
 from .remap_1d_grid2grid import remap_1d_grid2grid
 from .remap_2d_grid2grid import remap_2d_grid2grid
 from .remap_3d_grid2grid import remap_3d_grid2grid
-
-# Prior inexact technique, useful as a guide for when this cannot be calculated exactly
-from .remap_2d_gridtogrid import remap_2d_gridtogrid
-from .remap_3d_gridtogrid import remap_3d_gridtogrid
