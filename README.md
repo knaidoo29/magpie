@@ -1,9 +1,13 @@
 # MAGPIE: Monte cArlo weiGhted PIxel rEmapping
 
-Author:         Krishna Naidoo                          
-Version:        0.2.1                               
-Homepage:       https://github.com/knaidoo29/magpie    
-Documentation:  n/a
+[![Documentation Status](https://readthedocs.org/projects/magpie-doc/badge/?version=latest)](https://magpie-doc.readthedocs.io/en/latest/?badge=latest)
+
+|               |                                       |
+|---------------|---------------------------------------|
+| Author        | Krishna Naidoo                        |                          
+| Version       | 0.2.1                                 |
+| Repository    | https://github.com/knaidoo29/magpie   |
+| Documentation | https://magpie-doc.readthedocs.io/    |
 
 MAGPIE is a python module for remapping bins (in 1D), pixels (in 2D) and cells (in 3D) into different
 coordinate systems. The package will enable data to be remapped from cartesian to

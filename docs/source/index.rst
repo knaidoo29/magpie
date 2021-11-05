@@ -2,7 +2,6 @@
 Monte cArlo weiGhted PIxel rEmapping
 ====================================
 
-
 +---------------+-----------------------------------------+
 | Author        | Krishna Naidoo                          |
 +---------------+-----------------------------------------+
@@ -12,6 +11,10 @@ Monte cArlo weiGhted PIxel rEmapping
 +---------------+-----------------------------------------+
 | Documentation | https://magpie-doc.readthedocs.io/      |
 +---------------+-----------------------------------------+
+
+.. image:: https://readthedocs.org/projects/magpie-doc/badge/?version=latest
+:target: https://magpie-doc.readthedocs.io/en/latest/?badge=latest
+:alt: Documentation Status
 
 .. warning ::
   MAGPIE is currently in development. Functions and classes may change. Use with caution.
