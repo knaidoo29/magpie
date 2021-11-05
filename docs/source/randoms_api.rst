@@ -22,9 +22,9 @@ Cartesian
 
     :param size: Number of randoms to produce.
     :type size: int
-    :param mins: Minimum value.
+    :param mins: Minimum values.
     :type mins: list
-    :param xmaxs: Maximum value.
+    :param maxs: Maximum values.
     :type maxs: list
 
     :returns: Returns a tuple of the following:
@@ -39,9 +39,9 @@ Cartesian
 
     :param size: Number of randoms to produce.
     :type size: int
-    :param mins: Minimum value.
+    :param mins: Minimum values.
     :type mins: list
-    :param xmaxs: Maximum value.
+    :param maxs: Maximum values.
     :type maxs: list
 
     :returns: Returns a tuple of the following:
