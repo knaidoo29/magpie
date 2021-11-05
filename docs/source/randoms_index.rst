@@ -7,6 +7,3 @@ Theory
 
 Tutorial
 ========
-
-Randoms API
-===========
