@@ -6,7 +6,7 @@ Randoms
 =======
 
 1. Cartesian
-  * :py:func:`randoms.randoms_1d`
+  * :py:func:`randoms.randoms_1d(size[, xmin=0., xmax=1.])`
   * :py:func:`randoms.randoms_2d`
   * :py:func:`randoms.randoms_3d`
 2. Polar
@@ -20,7 +20,7 @@ Randoms
 5. Sample PDF/CDF
   * :py:func:`randoms.pdf2cdf`
   * :py:func:`randoms.randoms_cdf`
-  * :py:func:`randoms.randoms_pdf`  
+  * :py:func:`randoms.randoms_pdf`
 
 
 .. toctree::
