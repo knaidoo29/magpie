@@ -1,6 +1,8 @@
 import numpy as np
 import healpy as hp
+
 from .. import coords
+
 
 def randoms_sky(size, phi_min=0., phi_max=2*np.pi, theta_min=0., theta_max=np.pi):
     """
