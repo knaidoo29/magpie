@@ -2,7 +2,7 @@ Cartesian
 ---------
 
 
-.. function:: randoms_1d(size[, xmin=0., xmax=1.])
+.. function:: randoms.randoms_1d(size[, xmin=0., xmax=1.])
 
     Returns uniform randoms in 1D.
 
@@ -16,7 +16,7 @@ Cartesian
     :returns: **xrands** *(array)* -- Uniform randoms in 1D.
 
 
-.. function:: randoms_2d(size[, mins=[0., 0.], maxs=[1., 1.]])
+.. function:: randoms.randoms_2d(size[, mins=[0., 0.], maxs=[1., 1.]])
 
     Returns uniform randoms in 2D.
 
@@ -33,7 +33,7 @@ Cartesian
       * **yrands** *(array)* -- Uniform randoms in along y-axis in 2D.
 
 
-.. function:: randoms_3d(size[, mins=[0., 0., 0.], maxs=[1., 1., 1.]])
+.. function:: randoms.randoms_3d(size[, mins=[0., 0., 0.], maxs=[1., 1., 1.]])
 
     Returns uniform randoms in 3D.
 
@@ -54,7 +54,7 @@ Cartesian
 Polar
 -----
 
-.. function:: randoms_polar(size[, r_min=0., r_max=1., phi_min=0., phi_max=2.*np.pi])
+.. function:: randoms.randoms_polar(size[, r_min=0., r_max=1., phi_min=0., phi_max=2.*np.pi])
 
     Generates randoms for polar coordinates. Default will produce randoms within
     a unit circle. This can be specified to a ring segment, i.e. with inner radius
@@ -81,7 +81,7 @@ Unit Sphere
 -----------
 
 
-.. function:: randoms_usphere(size[, phi_min=0., phi_max=2.*np.pi, theta_min=0., theta_max=np.pi])
+.. function:: randoms.randoms_usphere(size[, phi_min=0., phi_max=2.*np.pi, theta_min=0., theta_max=np.pi])
 
     Random points on the unit sphere or more generally across the surface of a sphere. The
     default will give randoms on the full sky.
@@ -107,7 +107,7 @@ Unit Sphere
       * **theta** *(array)* -- Random theta coordinates.
 
 
-.. function:: randoms_healpix_pixel(size, pix, nside)
+.. function:: randoms.randoms_healpix_pixel(size, pix, nside)
 
     Returns roughly `size` number of randoms inside a HEALPix pixel.
 
@@ -128,7 +128,7 @@ Spherical
 ---------
 
 
-.. function:: randoms_sphere_r(size[, r_min=0., r_max=1.])
+.. function:: randoms.randoms_sphere_r(size[, r_min=0., r_max=1.])
 
     Random radial points for a segment of a sphere (default will give randoms within a unit sphere).
 
@@ -142,7 +142,7 @@ Spherical
     :returns: **r** *(array)* -- Random r.
 
 
-.. function:: randoms_sphere(size[, r_min=0., r_max=1., phi_min=0., phi_max=2*np.pi, theta_min=0., theta_max=np.pi])
+.. function:: randoms.randoms_sphere(size[, r_min=0., r_max=1., phi_min=0., phi_max=2*np.pi, theta_min=0., theta_max=np.pi])
 
     Random points inside a sphere (default will give randoms within a unit sphere).
     You can specify the inner and outer radii to get randoms in a shell and the region
@@ -178,7 +178,7 @@ Sample PDF/CDF Functions
 ------------------------
 
 
-.. function:: pdf2cdf(xmid, pdf[, return_normpdf=True])
+.. function:: randoms.pdf2cdf(xmid, pdf[, return_normpdf=True])
 
     Calculates the CDF from a given PDF.
 
@@ -196,7 +196,7 @@ Sample PDF/CDF Functions
         * **normpdf** *(array)* -- Normalised PDF.
 
 
-.. function:: randoms_cdf(x, cdf, size[, kind='cubic'])
+.. function:: randoms.randoms_cdf(x, cdf, size[, kind='cubic'])
 
     Generates randoms from a given cumulative distribution function.
 
@@ -212,7 +212,7 @@ Sample PDF/CDF Functions
     :returns: **rands** *(array)* -- Randoms drawn from sample CDF.
 
 
-.. function:: randoms_pdf(x, pdf, size[, kind='cubic'])
+.. function:: randoms.randoms_pdf(x, pdf, size[, kind='cubic'])
 
     Generates randoms from a given probability distribution function by first calculating a CDF.
 
