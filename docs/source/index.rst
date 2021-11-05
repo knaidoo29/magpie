@@ -10,7 +10,7 @@ Monte cArlo weiGhted PIxel rEmapping
 +---------------+-----------------------------------------+
 | Repository    | https://github.com/knaidoo29/magpie     |
 +---------------+-----------------------------------------+
-| Documentation | https://magpie-docs.readthedocs.io/     |
+| Documentation | https://magpie-doc.readthedocs.io/      |
 +---------------+-----------------------------------------+
 
 .. warning ::
@@ -37,7 +37,7 @@ is very fast and should be used for large data sets and all 3D transformations.
 In 1D these are computed exactly without requiring the approximate schemes above.
 
 .. warning ::
-  MPI functionality is currently not unavailable but the plan will be to implement
+  MPI functionality is currently unavailable but the plan will be to implement this
   using mpi4py and an additional library MPIutils which will handle all of the MPI
   enabled functions.
 
@@ -106,6 +106,6 @@ Version History
 
   * Randoms in a variety of coordinate systems: cartesian, polar, spherical and from an input PDF/CDF.
 
-  * Remapping procedures in 1D (exact and analytical), 2D (monte-carlo and grid based methods) in cartesian grids, polar and spherical coordinates.
+  * Remapping procedures in 1D (exact and analytical), 2D (monte-carlo and grid based methods) for cartesian, polar and the surface of a sphere and lastly in 3D (monte-carlo and grid based methods) cartesian and spherical polar coordinates.
 
   * Plotting routines.
