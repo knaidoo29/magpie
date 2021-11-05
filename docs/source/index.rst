@@ -13,8 +13,8 @@ Monte cArlo weiGhted PIxel rEmapping
 +---------------+-----------------------------------------+
 
 .. image:: https://readthedocs.org/projects/magpie-doc/badge/?version=latest
-:target: https://magpie-doc.readthedocs.io/en/latest/?badge=latest
-:alt: Documentation Status
+    :target: https://magpie-doc.readthedocs.io/en/latest/?badge=latest
+    :alt: Documentation Status
 
 .. warning ::
   MAGPIE is currently in development. Functions and classes may change. Use with caution.
