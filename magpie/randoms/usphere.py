@@ -4,9 +4,9 @@ import healpy as hp
 from .. import coords
 
 
-def randoms_sky(size, phi_min=0., phi_max=2*np.pi, theta_min=0., theta_max=np.pi):
+def randoms_usphere(size, phi_min=0., phi_max=2*np.pi, theta_min=0., theta_max=np.pi):
     """
-    Random points on the sky or more generally across the surface of a sphere. The
+    Random points on the unit sphere or more generally across the surface of a sphere. The
     default will give randoms on the full sky.
 
     Note
