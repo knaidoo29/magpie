@@ -2,16 +2,16 @@ import numpy as np
 
 
 def cart2polar(x, y, center=[0., 0.]):
-    """Return polar coordinates for a given set of cartesian coordinates.
+    """Returns the polar coordinates for a given set of cartesian coordinates.
 
     Parameters
     ----------
     x : array
-        x coordinate
+        x coordinates.
     y : array
-        y coordinate
+        y coordinates.
     center : list
-        Center point of polar coordinate grid.Coordin
+        Center point of polar coordinate grid.
 
     Returns
     -------

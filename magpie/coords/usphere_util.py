@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def sky_area(phi_min, phi_max, theta_min, theta_max):
+def usphere_area(phi_min, phi_max, theta_min, theta_max):
     """Returns the area for a 'square' segment of a unit sphere given in
     spherical coordinates phi, theta.
 

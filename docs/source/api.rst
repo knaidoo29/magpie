@@ -2,6 +2,12 @@
 API
 ===
 
+Coords
+======
+
+1. Transformations
+  * :py:funct:`coords.cart2polar`
+
 Randoms
 =======
 
