@@ -5,6 +5,8 @@ API
 Randoms
 =======
 
+testing something
+
 1. Cartesian
   * :py:func:`randoms.randoms_1d(size[, xmin=0., xmax=1.])`
   * :py:func:`randoms.randoms_2d(size[, mins=[0., 0.], maxs=[1., 1.]])`
