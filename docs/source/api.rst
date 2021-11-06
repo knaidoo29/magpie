@@ -6,16 +6,19 @@ Coords
 ======
 
 * Conversions
-  * :py:func:`coords.cart2polar`
-  * :py:func:`coords.polar2cart`
-  * :py:func:`coords.cart2sphere`
-  * :py:func:`coords.sphere2cart`
-  * :py:func:`coords.ortho2cart`
+
+    * :py:func:`coords.cart2polar`
+    * :py:func:`coords.polar2cart`
+    * :py:func:`coords.cart2sphere`
+    * :py:func:`coords.sphere2cart`
+    * :py:func:`coords.ortho2cart`
+
 * Rotations
 * Utility
-  * :py:func:`coords.usphere_area`
-  * :py:func:`coords.sphere2lonlat`
-  * :py:func:`coords.lonlat2sphere`
+
+    * :py:func:`coords.usphere_area`
+    * :py:func:`coords.sphere2lonlat`
+    * :py:func:`coords.lonlat2sphere`
 
 Randoms
 =======
