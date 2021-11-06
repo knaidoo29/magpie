@@ -14,8 +14,8 @@ Coords
 * Rotations
 * Utility
   * :py:func:`coords.usphere_area`
-  * :py:func:`coords.polar2lonlat`
-  * :py:func:`coords.lonlat2polar`
+  * :py:func:`coords.sphere2lonlat`
+  * :py:func:`coords.lonlat2sphere`
 
 Randoms
 =======
