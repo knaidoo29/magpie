@@ -54,6 +54,7 @@ Contents
    remap_index
    randoms_index
    api
+   modules
 
 
 Dependencies
