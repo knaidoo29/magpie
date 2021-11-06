@@ -124,7 +124,7 @@ Utility
     :returns: **latitude** *(array)* -- Latitude given in the range [-pi/2, pi/2].
 
 
-.. function:: coords.lonlat2sphere(theta)
+.. function:: coords.lonlat2sphere(latitude)
 
     Converts from latitude to spherical coordinate convention.
 
