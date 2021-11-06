@@ -5,8 +5,13 @@ API
 Coords
 ======
 
-1. Transformations
+1. Conversions
   * :py:func:`coords.cart2polar`
+  * :py:func:`coords.polar2cart`
+  * :py:func:`coords.cart2sphere`
+  * :py:func:`coords.sphere2cart`
+  * :py:func:`coords.ortho2cart`
+2. Rotations
 
 Randoms
 =======
