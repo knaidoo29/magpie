@@ -6,7 +6,7 @@ Coords
 ======
 
 1. Transformations
-  * :py:funct:`coords.cart2polar`
+  * :py:func:`coords.cart2polar`
 
 Randoms
 =======

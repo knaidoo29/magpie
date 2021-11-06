@@ -1,10 +1,17 @@
 
-from .transforms import cart2polar
-from .transforms import polar2cart
-from .transforms import cart2sphere
-from .transforms import sphere2cart
-from .transforms import ortho2cart
+from .conversions import cart2polar
+from .conversions import polar2cart
+from .conversions import cart2sphere
+from .conversions import sphere2cart
+from .conversions import ortho2cart
 
-from .sky_util import sky_area
-from .sky_util import polar2lonlat
-from .sky_util import lonlat2polar
+from .usphere_util import usphere_area
+from .usphere_util import polar2lonlat
+from .usphere_util import lonlat2polar
+
+from .polar import rotate_polar
+
+from .usphere import usphere_rotate
+from .usphere import usphere_phi_shift
+from .usphere import usphere_shift
+from .usphere import usphere_spin

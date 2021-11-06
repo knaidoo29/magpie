@@ -17,28 +17,28 @@ def cart2polar(x, y, center=[0., 0.]):
     -------
     r : array
         Radial coordinate.
-    p : array
+    phi : array
         Phi coordinate.
     """
     r = np.sqrt((x-center[0])**2. + (y-center[1])**2.)
-    p = np.arctan2(y-center[1], x-center[0])
-    if np.isscalar(p) == True:
-        if p < 0.:
-            p += 2.*np.pi
+    phi = np.arctan2(y-center[1], x-center[0])
+    if np.isscalar(phi) == True:
+        if phi < 0.:
+            phi += 2.*np.pi
     else:
-        condition = np.where(p < 0.)
-        p[condition] += 2.*np.pi
-    return r, p
+        condition = np.where(phi < 0.)
+        phi[condition] += 2.*np.pi
+    return r, phi
 
 
-def polar2cart(r, p, center=[0., 0.]):
+def polar2cart(r, phi, center=[0., 0.]):
     """Return cartesian coordinates for a given set of polar coordinates.
 
     Parameters
     ----------
     r : array
         Radial coordinate.
-    p : array
+    phi : array
         Phi coordinate.
     center : list
         Center point of polar coordinate grid.
@@ -50,8 +50,8 @@ def polar2cart(r, p, center=[0., 0.]):
     y : array
         y coordinate
     """
-    x = r*np.cos(p) + center[0]
-    y = r*np.sin(p) + center[1]
+    x = r*np.cos(phi) + center[0]
+    y = r*np.sin(phi) + center[1]
     return x, y
 
 

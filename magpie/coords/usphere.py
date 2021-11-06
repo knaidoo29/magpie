@@ -3,7 +3,7 @@ import numpy as np
 from .. import coords
 
 
-def sky_rotate(phi, theta, phi_end, theta_end, phi_start=0., theta_start=0.):
+def usphere_rotate(phi, theta, phi_end, theta_end, phi_start=0., theta_start=0.):
     """Rotate positions on the sky (phi_start, theta_start) to (phi_end, theta_end) along the line of shortest length.
 
 
@@ -74,7 +74,7 @@ def sky_rotate(phi, theta, phi_end, theta_end, phi_start=0., theta_start=0.):
     return phi_new, theta_new
 
 
-def sky_phi_shift(phi, dphi):
+def usphere_phi_shift(phi, dphi):
     """Shift the longitudinal coordinate.
 
     Parameters
@@ -109,7 +109,7 @@ def sky_phi_shift(phi, dphi):
     return phi_new
 
 
-def sky_shift(phi, theta, phi_start, theta_start, phi_end, theta_end):
+def usphere_shift(phi, theta, phi_start, theta_start, phi_end, theta_end):
     """Shifted sky coordinates.
 
     Parameters
@@ -151,7 +151,7 @@ def sky_shift(phi, theta, phi_start, theta_start, phi_end, theta_end):
     return new_phi, new_theta
 
 
-def sky_spin(phi, theta, phi_center, theta_center, alpha):
+def usphere_spin(phi, theta, phi_center, theta_center, alpha):
     """Spin coordinates from the longitude and latitude coordinates.
 
     Parameters
