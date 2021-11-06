@@ -113,7 +113,7 @@ Utility
     :returns: **area** *(float)* -- Area in square radians.
 
 
-.. function:: sphere2lonlat(theta)
+.. function:: coords.sphere2lonlat(theta)
 
     Converts the spherical coordinates theta to the longitude and latitude
     convention (where theta lies [-pi/2., pi/2.].
@@ -124,7 +124,7 @@ Utility
     :returns: **latitude** *(array)* -- Latitude given in the range [-pi/2, pi/2].
 
 
-.. function:: lonlat2sphere(theta)
+.. function:: coords.lonlat2sphere(theta)
 
     Converts from latitude to spherical coordinate convention.
 
