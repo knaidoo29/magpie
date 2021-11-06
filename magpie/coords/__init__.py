@@ -6,8 +6,8 @@ from .conversions import sphere2cart
 from .conversions import ortho2cart
 
 from .usphere_util import usphere_area
-from .usphere_util import polar2lonlat
-from .usphere_util import lonlat2polar
+from .usphere_util import sphere2lonlat
+from .usphere_util import lonlat2sphere
 
 from .polar import rotate_polar
 

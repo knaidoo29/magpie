@@ -95,3 +95,40 @@ Rotations
 
 Utility
 -------
+
+.. function:: coords.usphere_area(phi_min, phi_max, theta_min, theta_max)
+
+    Returns the area for a 'square' segment of a unit sphere given in
+    spherical coordinates phi, theta.
+
+    :param phi_min: Minimum latitudinal coordinate in radians (where phi lies [0, 2pi]).
+    :type phi_min: float
+    :param phi_max: Maximum latitudinal coordinate in radians (where phi lies [0, 2pi]).
+    :type phi_max: float
+    :param theta_min: Minimum longitudinal coordinate in radians (where theta lies [0, pi]).
+    :type theta_min: float
+    :param theta_max: Maximum longitudinal coordinate in radians (where theta lies [0, pi]).
+    :type theta_max: float
+
+    :returns: **area** *(float)* -- Area in square radians.
+
+
+.. function:: sphere2lonlat(theta)
+
+    Converts the spherical coordinates theta to the longitude and latitude
+    convention (where theta lies [-pi/2., pi/2.].
+
+    :param theta: Latitude given in the range [0., pi] where theta = 0 at the north pole.
+    :type theta: array
+
+    :returns: **latitude** *(array)* -- Latitude given in the range [-pi/2, pi/2].
+
+
+.. function:: lonlat2sphere(theta)
+
+    Converts from latitude to spherical coordinate convention.
+
+    :param latitude: Latitude given in the range [-pi/2, pi/2].
+    :type latitude: array
+
+    :returns: **theta** *(array)* -- Latitude given in the range [0., pi] where theta = 0 at the north pole.

@@ -5,13 +5,17 @@ API
 Coords
 ======
 
-1. Conversions
+* Conversions
   * :py:func:`coords.cart2polar`
   * :py:func:`coords.polar2cart`
   * :py:func:`coords.cart2sphere`
   * :py:func:`coords.sphere2cart`
   * :py:func:`coords.ortho2cart`
-2. Rotations
+* Rotations
+* Utility
+  * :py:func:`coords.usphere_area`
+  * :py:func:`coords.polar2lonlat`
+  * :py:func:`coords.lonlat2polar`
 
 Randoms
 =======

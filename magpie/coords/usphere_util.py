@@ -33,26 +33,37 @@ def usphere_area(phi_min, phi_max, theta_min, theta_max):
     return area
 
 
-def polar2lonlat(theta):
-    """Converts polar coordinates to the longitude and latitude convention where
-    latitude goes from (where theta lies [-pi/2., pi/2.].
+def sphere2lonlat(theta):
+    """Converts the spherical coordinates theta to the longitude and latitude
+    convention (where theta lies [-pi/2., pi/2.].
 
     Parameters
     ----------
     theta : array
-        Latitude given in [0., pi].
+        Latitude given in the range [0., pi] where theta = 0 at the north pole.
+
+    Returns
+    -------
+    Latitude : array
+        Latitude given in the range [-pi/2, pi/2].
     """
-    return np.pi/2. - theta
+    latitude = np.pi/2. - theta
+    return latitude
 
 
 
-def lonlat2polar(theta):
-    """Converts polar coordinates to the longitude and latitude convention where
-    latitude goes from (where theta lies [-pi/2., pi/2.].
+def lonlat2sphere(theta):
+    """Converts from latitude to spherical coordinate convention.
 
     Parameters
     ----------
+    Latitude : array
+        Latitude given in the range [-pi/2, pi/2].
+
+    Returns
+    -------
     theta : array
-        Latitude given in [0., pi].
+        Latitude given in the range [0., pi] where theta = 0 at the north pole.
     """
-    return np.pi/2. - theta
+    theta = np.pi/2. - theta
+    return theta
