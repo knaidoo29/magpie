@@ -65,4 +65,5 @@ def random_prob_draw(sample, prob, size=None):
         u_w = u_r/prob
         sortind = np.argsort(u_w)
         randsamp = sample[sortind[:size]]
+        randsamp = shuffle(randsamp)
     return randsamp

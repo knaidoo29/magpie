@@ -10,5 +10,7 @@ from .healpix_boundary import _healpix_boundary
 
 from .healpix_index import healpix2healringij
 from .healpix_index import healringij2healpix
+from .healpix_index import heali2idash
+from .healpix_index import healj2jdash
 from .healpix_index import healringij2healxy
 from .healpix_index import healpix2healxy

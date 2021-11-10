@@ -105,6 +105,115 @@ def healringij2healpix(ringi, ringj, Nside):
     return p
 
 
+def heali2idash(ringi, Nside):
+    """Converts ringi to ringidash.
+
+    Parameters
+    ----------
+    ringi : int
+        Pixel ring index.
+    Nside : int
+        Healpix Nside.
+
+    Returns
+    -------
+    ringidash : int
+        Alternate pixel index along each ring. This is for pixel transformations
+        as this maps exactly to healpix y without a factor.
+    """
+    ringidash = Nside - ringi/2
+    return ringidash
+
+
+def healj2jdash(ringi, ringj, Nside):
+    """Converts ringj to ringjdash.
+
+    Parameters
+    ----------
+    ringi : int
+        Pixel ring index.
+    ringj : int
+        Pixel index along each ring.
+    Nside : int
+        Healpix Nside.
+
+    Returns
+    -------
+    ringjdash : int
+        Alternate pixel index along each ring. This is for pixel transformations
+        as this maps exactly to healpix x without a factor.
+    """
+    if np.isscalar(ringi) == True:
+        # North Polar Cap
+        if ringi <= Nside:
+            jlen = 4*ringi
+            k = np.floor(4*(ringj-1)/jlen)
+            x0 = int(Nside/2) + Nside*k
+            if Nside % 2 == 0:
+                x0 = x0 - 0.5*(ringi-1)
+            else:
+                x0 = x0 - 0.5*(ringi) + 1
+            ringjdash = x0 + ((ringj - 1) % (jlen/4))
+
+        # Equatorial Segment
+        elif ringi > Nside and ringi < 3*Nside:
+            if Nside % 2 == 0:
+                x0 = 0.5*((ringi+1) % 2)
+            else:
+                x0 = 0.5*(ringi % 2)
+            ringjdash = x0 + ringj - 1.
+
+        # South Polar Cap
+        elif ringi >= 3*Nside:
+            jlen = 4*(4*Nside - ringi)
+            k =  np.floor(4*(ringj-1)/jlen)
+            x0 = int(Nside/2) + Nside*k
+            if Nside % 2 == 0:
+                x0 = x0 - 0.5*(4*Nside-ringi-1)
+            else:
+                x0 = x0 - 0.5*(4*Nside-ringi) + 1
+            ringjdash = x0 + ((ringj - 1) % (jlen/4))
+
+    else:
+
+        ringjdash = np.zeros(len(ringi))
+
+        # North Polar Cap
+        cond = np.where(ringi <= Nside)[0]
+
+        jlen = 4*ringi[cond]
+        k = np.floor(4*(ringj[cond]-1)/jlen)
+        x0 = int(Nside/2) + Nside*k
+        if Nside % 2 == 0:
+            x0 = x0 - 0.5*(ringi[cond]-1)
+        else:
+            x0 = x0 - 0.5*(ringi[cond]) + 1
+        ringjdash[cond] = x0 + ((ringj[cond]-1) % (jlen/4))
+
+        # Equatorial Segment
+        cond = np.where((ringi > Nside) & (ringi < 3*Nside))[0]
+
+        if Nside % 2 == 0:
+            x0 = 0.5*((ringi[cond]+1) % 2)
+        else:
+            x0 = 0.5*(ringi[cond] % 2)
+        ringjdash[cond] = x0 + ringj[cond] - 1.
+
+        # South Polar Cap
+        cond = np.where(ringi >= 3*Nside)[0]
+
+        jlen = 4*(4*Nside - ringi[cond])
+        k = np.floor(4*(ringj[cond]-1)/jlen)
+        x0 = int(Nside/2) + Nside*k
+        if Nside % 2 == 0:
+            x0 = x0 - 0.5*(4*Nside-ringi[cond]-1)
+        else:
+            x0 = x0 - 0.5*(4*Nside-ringi[cond]) + 1
+        ringjdash[cond] = x0 + ((ringj[cond]-1) % (jlen/4))
+
+    return ringjdash
+
+
 def healringij2healxy(ringi, ringj, Nside):
     """Conversion of healpix ring i and j to healpix x and y.
 
@@ -124,86 +233,10 @@ def healringij2healxy(ringi, ringj, Nside):
     healy : array
         Healpix y coordinates.
     """
-    i = ringi
-    j = ringj
-    if np.isscalar(ringi) == True:
-        # North Polar Cap
-        if ringi <= Nside:
-            jlen = 4*ringi
-            k = np.floor(4*(ringj-1)/jlen)
-            x0 = int(Nside/2) + Nside*k
-            if Nside % 2 == 0:
-                x0 = x0 - 0.5*(ringi-1)
-            else:
-                x0 = x0 - 0.5*(ringi) + 1
-            x = x0 + ((ringj - 1) % (jlen/4))
-            y = ringi
-
-        # Equatorial Segment
-        elif ringi > Nside and ringi < 3*Nside:
-            if Nside % 2 == 0:
-                x0 = 0.5*((ringi+1) % 2)
-            else:
-                x0 = 0.5*(ringi % 2)
-            x = x0 + ringj - 1.
-            y = ringi
-
-        # South Polar Cap
-        elif ringi >= 3*Nside:
-            jlen = 4*(4*Nside - ringi)
-            k =  np.floor(4*(ringj-1)/jlen)
-            x0 = int(Nside/2) + Nside*k
-            if Nside % 2 == 0:
-                x0 = x0 - 0.5*(4*Nside-ringi-1)
-            else:
-                x0 = x0 - 0.5*(4*Nside-ringi) + 1
-            x = x0 + ((ringj - 1) % (jlen/4))
-            y = ringi
-
-    else:
-
-        x = np.zeros(len(ringj))
-        y = np.zeros(len(ringi))
-
-        # North Polar Cap
-        cond = np.where(ringi <= Nside)[0]
-
-        jlen = 4*ringi[cond]
-        k = np.floor(4*(ringj[cond]-1)/jlen)
-        x0 = int(Nside/2) + Nside*k
-        if Nside % 2 == 0:
-            x0 = x0 - 0.5*(ringi[cond]-1)
-        else:
-            x0 = x0 - 0.5*(ringi[cond]) + 1
-        x[cond] = x0 + ((ringj[cond]-1) % (jlen/4))
-        y[cond] = ringi[cond]
-
-        # Equatorial Segment
-        cond = np.where((ringi > Nside) & (ringi < 3*Nside))[0]
-
-        if Nside % 2 == 0:
-            x0 = 0.5*((ringi[cond]+1) % 2)
-        else:
-            x0 = 0.5*(ringi[cond] % 2)
-        x[cond] = x0 + ringj[cond] - 1.
-        y[cond] = ringi[cond]
-
-        # South Polar Cap
-        cond = np.where(ringi >= 3*Nside)[0]
-
-        jlen = 4*(4*Nside - ringi[cond])
-        k = np.floor(4*(ringj[cond]-1)/jlen)
-        x0 = int(Nside/2) + Nside*k
-        if Nside % 2 == 0:
-            x0 = x0 - 0.5*(4*Nside-ringi[cond]-1)
-        else:
-            x0 = x0 - 0.5*(4*Nside-ringi[cond]) + 1
-        x[cond] = x0 + ((ringj[cond]-1) % (jlen/4))
-        y[cond] = ringi[cond]
-
-    healx = x * np.pi/(2*Nside)
-    healy = y * np.pi/(4*Nside)
-    healy = np.pi/2. - healy
+    ringjdash = healj2jdash(ringi, ringj, Nside)
+    ringidash = heali2idash(ringi, Nside)
+    healx = ringjdash * np.pi/(2*Nside)
+    healy = ringidash * np.pi/(2*Nside)
     return healx, healy
 
 
