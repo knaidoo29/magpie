@@ -1,6 +1,6 @@
 import numpy as np
 import healpy as hp
-from . import sky
+from . import usphere
 
 
 def randoms_sphere_r(size, r_min=0., r_max=1.):
@@ -66,5 +66,5 @@ def randoms_sphere(size, r_min=0., r_max=1., phi_min=0., phi_max=2*np.pi, theta_
         Random theta.
     """
     r = randoms_sphere_r(size, r_min=r_min, r_max=r_max)
-    phi, theta = sky.randoms_sky(size, phi_min=phi_min, phi_max=phi_max, theta_min=theta_min, theta_max=theta_max)
+    phi, theta = usphere.randoms_usphere(size, phi_min=phi_min, phi_max=phi_max, theta_min=theta_min, theta_max=theta_max)
     return r, phi, theta
