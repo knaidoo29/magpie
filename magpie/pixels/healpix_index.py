@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def healpix2healringij(p, Nside):
+def healpix_pix2ij(p, Nside):
     """Returns the healpix ring i and pixel along the ring j.
 
     Parameters
@@ -60,7 +60,7 @@ def healpix2healringij(p, Nside):
     return ringi, ringj
 
 
-def healringij2healpix(ringi, ringj, Nside):
+def healpix_ij2pix(ringi, ringj, Nside):
     """Returns the healpix ring i and pixel along the ring j.
 
     Parameters
@@ -105,8 +105,8 @@ def healringij2healpix(ringi, ringj, Nside):
     return p
 
 
-def heali2idash(ringi, Nside):
-    """Converts ringi to ringidash.
+def healpix_i2id(ringi, Nside):
+    """Converts ringi to idash.
 
     Parameters
     ----------
@@ -117,16 +117,16 @@ def heali2idash(ringi, Nside):
 
     Returns
     -------
-    ringidash : int
+    idash : int
         Alternate pixel index along each ring. This is for pixel transformations
         as this maps exactly to healpix y without a factor.
     """
-    ringidash = Nside - ringi/2
-    return ringidash
+    idash = Nside - ringi/2
+    return idash
 
 
-def healj2jdash(ringi, ringj, Nside):
-    """Converts ringj to ringjdash.
+def healpix_j2jd(ringi, ringj, Nside):
+    """Converts ringj to jdash.
 
     Parameters
     ----------
@@ -139,7 +139,7 @@ def healj2jdash(ringi, ringj, Nside):
 
     Returns
     -------
-    ringjdash : int
+    jdash : int
         Alternate pixel index along each ring. This is for pixel transformations
         as this maps exactly to healpix x without a factor.
     """
@@ -153,7 +153,7 @@ def healj2jdash(ringi, ringj, Nside):
                 x0 = x0 - 0.5*(ringi-1)
             else:
                 x0 = x0 - 0.5*(ringi) + 1
-            ringjdash = x0 + ((ringj - 1) % (jlen/4))
+            jdash = x0 + ((ringj - 1) % (jlen/4))
 
         # Equatorial Segment
         elif ringi > Nside and ringi < 3*Nside:
@@ -161,7 +161,7 @@ def healj2jdash(ringi, ringj, Nside):
                 x0 = 0.5*((ringi+1) % 2)
             else:
                 x0 = 0.5*(ringi % 2)
-            ringjdash = x0 + ringj - 1.
+            jdash = x0 + ringj - 1.
 
         # South Polar Cap
         elif ringi >= 3*Nside:
@@ -172,11 +172,11 @@ def healj2jdash(ringi, ringj, Nside):
                 x0 = x0 - 0.5*(4*Nside-ringi-1)
             else:
                 x0 = x0 - 0.5*(4*Nside-ringi) + 1
-            ringjdash = x0 + ((ringj - 1) % (jlen/4))
+            jdash = x0 + ((ringj - 1) % (jlen/4))
 
     else:
 
-        ringjdash = np.zeros(len(ringi))
+        jdash = np.zeros(len(ringi))
 
         # North Polar Cap
         cond = np.where(ringi <= Nside)[0]
@@ -188,7 +188,7 @@ def healj2jdash(ringi, ringj, Nside):
             x0 = x0 - 0.5*(ringi[cond]-1)
         else:
             x0 = x0 - 0.5*(ringi[cond]) + 1
-        ringjdash[cond] = x0 + ((ringj[cond]-1) % (jlen/4))
+        jdash[cond] = x0 + ((ringj[cond]-1) % (jlen/4))
 
         # Equatorial Segment
         cond = np.where((ringi > Nside) & (ringi < 3*Nside))[0]
@@ -197,7 +197,7 @@ def healj2jdash(ringi, ringj, Nside):
             x0 = 0.5*((ringi[cond]+1) % 2)
         else:
             x0 = 0.5*(ringi[cond] % 2)
-        ringjdash[cond] = x0 + ringj[cond] - 1.
+        jdash[cond] = x0 + ringj[cond] - 1.
 
         # South Polar Cap
         cond = np.where(ringi >= 3*Nside)[0]
@@ -209,12 +209,68 @@ def healj2jdash(ringi, ringj, Nside):
             x0 = x0 - 0.5*(4*Nside-ringi[cond]-1)
         else:
             x0 = x0 - 0.5*(4*Nside-ringi[cond]) + 1
-        ringjdash[cond] = x0 + ((ringj[cond]-1) % (jlen/4))
+        jdash[cond] = x0 + ((ringj[cond]-1) % (jlen/4))
 
-    return ringjdash
+    return jdash
 
 
-def healringij2healxy(ringi, ringj, Nside):
+def healpix_ijd2ijs(idash, jdash, Nside):
+    """Converts from healpix i and j dash to i and j star, which is useful for
+    finding neighbours.
+
+    Parameters
+    ----------
+    idash : int
+        Alternate pixel index along each ring. This is for pixel transformations
+        as this maps exactly to healpix y without a factor.
+    jdash : int
+        Alternate pixel index along each ring. This is for pixel transformations
+        as this maps exactly to healpix x without a factor.
+
+    Returns
+    -------
+    istar : array
+        Healpix integer i star index.
+    jstar : array
+        Healpix integer i star index.
+    """
+    istar = jdash - idash + Nside/2
+    jstar = jdash + idash + Nside/2
+    istar -= 0.5
+    istar = istar.astype('int')
+    jstar -= 0.5
+    jstar = jstar.astype('int')
+    return istar, jstar
+
+
+def healpix_ijs2ijd(istar, jstar, Nside):
+    """Converts from healpix i and j star to i and j dash, which is useful for
+    finding neighbours.
+
+    Parameters
+    ----------
+    istar : array
+        Healpix integer i star index.
+    jstar : array
+        Healpix integer i star index.
+
+    Returns
+    -------
+    idash : int
+        Alternate pixel index along each ring. This is for pixel transformations
+        as this maps exactly to healpix y without a factor.
+    jdash : int
+        Alternate pixel index along each ring. This is for pixel transformations
+        as this maps exactly to healpix x without a factor.
+    """
+    istar = istar.astype('float') + 0.5
+    jstar = jstar.astype('float') + 0.5
+    jdash = (istar + jstar - Nside)/2
+    idash = (jstar - istar)/2
+    return idash, jdash
+
+
+def healpix_ij2xy(ringi, ringj, Nside):
     """Conversion of healpix ring i and j to healpix x and y.
 
     Parameters
@@ -233,14 +289,14 @@ def healringij2healxy(ringi, ringj, Nside):
     healy : array
         Healpix y coordinates.
     """
-    ringjdash = healj2jdash(ringi, ringj, Nside)
-    ringidash = heali2idash(ringi, Nside)
-    healx = ringjdash * np.pi/(2*Nside)
-    healy = ringidash * np.pi/(2*Nside)
+    jdash = healj2jdash(ringi, ringj, Nside)
+    idash = heali2idash(ringi, Nside)
+    healx = jdash * np.pi/(2*Nside)
+    healy = idash * np.pi/(2*Nside)
     return healx, healy
 
 
-def healpix2healxy(p, Nside):
+def healpix_pix2xy(p, Nside):
     """Returns the healpix ring i and pixel along the ring j.
 
     Parameters

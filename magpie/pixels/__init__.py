@@ -8,9 +8,11 @@ from .healpix_boundary import _healpix_top
 from .healpix_boundary import _healpix_bot
 from .healpix_boundary import _healpix_boundary
 
-from .healpix_index import healpix2healringij
-from .healpix_index import healringij2healpix
-from .healpix_index import heali2idash
-from .healpix_index import healj2jdash
-from .healpix_index import healringij2healxy
-from .healpix_index import healpix2healxy
+from .healpix_index import healpix_pix2ij
+from .healpix_index import healpix_ij2pix
+from .healpix_index import healpix_i2id
+from .healpix_index import healpix_j2jd
+from .healpix_index import healpix_ij2xy
+from .healpix_index import healpix_ijd2ijs
+from .healpix_index import healpix_ijs2ijd
+from .healpix_index import healpix_pix2xy

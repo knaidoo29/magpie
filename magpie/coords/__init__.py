@@ -5,8 +5,8 @@ from .conversions import cart2sphere
 from .conversions import sphere2cart
 from .conversions import ortho2cart
 
-from .healpix import healxy2usphere
-from .healpix import usphere2healxy
+from .healpix import healpix_xy2ang
+from .healpix import healpix_ang2xy
 
 from .usphere_util import usphere_area
 from .usphere_util import sphere2lonlat

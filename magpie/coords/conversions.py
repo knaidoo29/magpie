@@ -144,7 +144,13 @@ def ortho2cart(x, y, r=1., fill_value=np.nan):
         Returns the z value of the cartesian coordinates.
     """
     xy = x**2. + y**2.
-    z = np.ones(np.shape(x)) * fill_value
-    condition = np.where(xy < r**2.)
-    z[condition] = np.sqrt(r**2. - xy[condition])
+    if np.isscalar(x) == True:
+        if xy < r**2.:
+            z = np.sqrt(r**2 - xy)
+        else:
+            z = fill_value
+    else:
+        z = np.ones(np.shape(x)) * fill_value
+        condition = np.where(xy < r**2.)
+        z[condition] = np.sqrt(r**2. - xy[condition])
     return z
