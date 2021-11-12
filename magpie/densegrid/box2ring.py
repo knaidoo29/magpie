@@ -3,7 +3,6 @@ import numpy as np
 from .. import coords
 from .. import polar
 from .. import randoms
-from .. import rotate
 from .. import utils
 
 
@@ -230,7 +229,7 @@ class Box2Ring:
             Rotated polar coordinate data.
         """
         assert np.shape(f_polar) == np.shape(self.p2d), "Shape of f_polar does not match stored polar coordinate grid."
-        return rotate.rotate_polar(self.pedges, f_polar, phi_shift)
+        return coords.rotate_polar(self.pedges, f_polar, phi_shift)
 
 
     def polar2radial(self, f_polar, sigma=None, w=None, verbose=False):

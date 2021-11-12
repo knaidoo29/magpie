@@ -4,7 +4,6 @@ import healpy as hp
 from .. import coords
 from .. import polar
 from .. import randoms
-from .. import rotate
 from .. import utils
 
 

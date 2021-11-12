@@ -17,5 +17,5 @@ from .subsample import random_draw
 from .subsample import random_prob_draw
 
 from .usphere import randoms_usphere
-from .usphere import _randoms_xy_healpix
+from .usphere import _randoms_healpix_xy
 from .usphere import randoms_healpix_pixel

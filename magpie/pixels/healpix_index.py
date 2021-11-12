@@ -270,6 +270,93 @@ def healpix_ijs2ijd(istar, jstar, Nside):
     return idash, jdash
 
 
+def healpix_ijs_neighbours(isd, jsd, Nside):
+    """Gets the healpix i, jstar neighbours for a single healpix pixel.
+
+    Parameters
+    ----------
+    istar : array
+        Healpix integer i star index.
+    jstar : array
+        Healpix integer i star index.
+    Nside : int
+        Healpix Nside.
+
+    Returns
+    -------
+    istar_neigh : array
+        Neighbour healpix integer i star index.
+    jstar_neigh : array
+        Neighbour healpix integer j star index.
+    """
+    if jsd - isd + 1 == 2*Nside:
+        isd_neigh = [isd, isd + 1, isd + 1, isd + Nside, isd + Nside, isd - Nside, isd + 1 - Nside, isd+2*Nside]
+        jsd_neigh = [jsd - 1,  jsd - 1, jsd, jsd - 1 + Nside, jsd + Nside, jsd - Nside, jsd - Nside, jsd+2*Nside]
+    elif isd - jsd + 1 == 2*Nside:
+        isd_neigh = [isd, isd - 1, isd - 1, isd - Nside, isd - Nside, isd + Nside, isd - 1 + Nside, isd-2*Nside]
+        jsd_neigh = [jsd + 1,  jsd + 1, jsd, jsd + 1 - Nside, jsd - Nside, jsd + Nside, jsd + Nside, jsd-2*Nside]
+    elif jsd - isd + 1 == Nside and isd % Nside == 0:
+        isd_neigh = [isd - 1, isd, isd + 1,  isd - 1, isd + 1, isd, isd + 1]
+        jsd_neigh = [jsd - 1, jsd - 1, jsd - 1, jsd, jsd, jsd + 1, jsd + 1]
+    elif isd - jsd + 1 == Nside and jsd % Nside == 0:
+        isd_neigh = [isd - 1, isd, isd - 1, isd + 1, isd - 1, isd, isd + 1]
+        jsd_neigh = [jsd - 1, jsd - 1, jsd, jsd, jsd + 1, jsd + 1, jsd + 1]
+    elif isd % Nside == 0 and jsd + 1 - Nside*(np.floor(isd/Nside) + 1) > 0:
+        isd_neigh = [isd, isd + 1, isd + 1, isd, isd + 1,
+                     isd - ((jsd+1)-Nside*np.floor(jsd/Nside)),
+                     isd - ((jsd)-Nside*np.floor(jsd/Nside)),
+                     isd - ((jsd-1)-Nside*np.floor(jsd/Nside))]
+        jsd_neigh = [jsd - 1, jsd - 1, jsd, jsd + 1, jsd + 1,
+                     Nside*np.floor(jsd/Nside)-1,
+                     Nside*np.floor(jsd/Nside)-1,
+                     Nside*np.floor(jsd/Nside)-1]
+    elif jsd % Nside == 0 and isd + 1 - Nside*(np.floor(jsd/Nside) + 1) > 0:
+        jsd_neigh = [jsd, jsd + 1, jsd + 1, jsd, jsd + 1,
+                     jsd - ((isd+2)-Nside*np.floor(isd/Nside)),
+                     jsd - ((isd+1)-Nside*np.floor(isd/Nside)),
+                     jsd - ((isd)-Nside*np.floor(isd/Nside))]
+        isd_neigh = [isd - 1, isd - 1, isd, isd + 1, isd + 1,
+                     Nside*np.floor(isd/Nside)-1,
+                     Nside*np.floor(isd/Nside)-1,
+                     Nside*np.floor(isd/Nside)-1]
+    elif (jsd + 1 - Nside) % Nside == 0 and jsd + 1 - Nside*(np.floor(isd/Nside) + 1) > 0:
+        jsd_neigh = [jsd, jsd - 1, jsd - 1, jsd, jsd - 1,
+                     jsd + Nside*(np.floor(isd/Nside)+1)-isd,
+                     jsd + Nside*(np.floor(isd/Nside)+1)-isd-1,
+                     jsd + Nside*(np.floor(isd/Nside)+1)-isd+1]
+        isd_neigh = [isd - 1, isd - 1, isd, isd + 1, isd + 1,
+                     Nside*(np.floor(isd/Nside)+1),
+                     Nside*(np.floor(isd/Nside)+1),
+                     Nside*(np.floor(isd/Nside)+1)]
+    elif (isd + 1 - Nside) % Nside == 0 and isd + 1 - Nside*(np.floor(jsd/Nside) + 1) > 0:
+        isd_neigh = [isd, isd - 1, isd - 1, isd, isd - 1,
+                     isd + Nside*(np.floor(jsd/Nside)+1)-jsd,
+                     isd + Nside*(np.floor(jsd/Nside)+1)-jsd-1,
+                     isd + Nside*(np.floor(jsd/Nside)+1)-jsd+1]
+        jsd_neigh = [jsd - 1, jsd - 1, jsd, jsd + 1, jsd + 1,
+                     Nside*(np.floor(jsd/Nside)+1),
+                     Nside*(np.floor(jsd/Nside)+1),
+                     Nside*(np.floor(jsd/Nside)+1)]
+    else:
+        isd_neigh = [isd - 1, isd, isd + 1, isd - 1, isd + 1, isd - 1, isd, isd + 1]
+        jsd_neigh = [jsd - 1, jsd - 1, jsd - 1, jsd, jsd, jsd + 1, jsd + 1, jsd + 1]
+
+    isd_neigh = np.array(isd_neigh)
+    jsd_neigh = np.array(jsd_neigh)
+
+    cond = np.where(isd_neigh + jsd_neigh > 9*Nside-1)[0]
+    isd_neigh[cond] = isd_neigh[cond] - 4*Nside
+    jsd_neigh[cond] = jsd_neigh[cond] - 4*Nside
+
+    cond = np.where(isd_neigh + jsd_neigh < Nside-1)[0]
+    isd_neigh[cond] = isd_neigh[cond] + 4*Nside
+    jsd_neigh[cond] = jsd_neigh[cond] + 4*Nside
+
+    isd_neigh = np.unique(isd_neigh)
+    jsd_neigh = np.unique(jsd_neigh)
+    return isd_neigh, jsd_neigh
+
+
 def healpix_ij2xy(ringi, ringj, Nside):
     """Conversion of healpix ring i and j to healpix x and y.
 
@@ -289,8 +376,8 @@ def healpix_ij2xy(ringi, ringj, Nside):
     healy : array
         Healpix y coordinates.
     """
-    jdash = healj2jdash(ringi, ringj, Nside)
-    idash = heali2idash(ringi, Nside)
+    jdash = healpix_j2jd(ringi, ringj, Nside)
+    idash = healpix_i2id(ringi, Nside)
     healx = jdash * np.pi/(2*Nside)
     healy = idash * np.pi/(2*Nside)
     return healx, healy
@@ -313,6 +400,6 @@ def healpix_pix2xy(p, Nside):
     healy : array
         Healpix y coordinates.
     """
-    ringi, ringj = healpix2healringij(p, Nside)
-    healx, healy = healringij2healxy(ringi, ringj, Nside)
+    ringi, ringj = healpix_pix2ij(p, Nside)
+    healx, healy = healpix_ij2xy(ringi, ringj, Nside)
     return healx, healy

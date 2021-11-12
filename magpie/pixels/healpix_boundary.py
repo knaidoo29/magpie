@@ -42,7 +42,7 @@ def _healpix_top_left(p, nside, steps=10, reverse=False):
     y : array
         Y-coordinates of the top left side of the healpix pixel.
     """
-    xp, yp = healpix_index.healpix2healxy(p, nside)
+    xp, yp = healpix_index.healpix_pix2xy(p, nside)
     delta = _healpix_get_delta(nside)
     x = np.linspace(xp-delta, xp, steps)
     y = x - xp + delta + yp
@@ -73,7 +73,7 @@ def _healpix_top_right(p, nside, steps=10, reverse=False):
     y : array
         Y-coordinates of the top right side of the healpix pixel.
     """
-    xp, yp = healpix_index.healpix2healxy(p, nside)
+    xp, yp = healpix_index.healpix_pix2xy(p, nside)
     delta = _healpix_get_delta(nside)
     x = np.linspace(xp, xp+delta, steps)
     y = - x + xp + delta + yp
@@ -104,7 +104,7 @@ def _healpix_bot_left(p, nside, steps=10, reverse=False):
     y : array
         Y-coordinates of the bottom left side of the healpix pixel.
     """
-    xp, yp = healpix_index.healpix2healxy(p, nside)
+    xp, yp = healpix_index.healpix_pix2xy(p, nside)
     delta = _healpix_get_delta(nside)
     x = np.linspace(xp-delta, xp, steps)
     y = - x + xp - delta + yp
@@ -135,7 +135,7 @@ def _healpix_bot_right(p, nside, steps=10, reverse=False):
     y : array
         Y-coordinates of the bottom right side of the healpix pixel.
     """
-    xp, yp = healpix_index.healpix2healxy(p, nside)
+    xp, yp = healpix_index.healpix_pix2xy(p, nside)
     delta = _healpix_get_delta(nside)
     x = np.linspace(xp, xp+delta, steps)
     y = x - xp - delta + yp

@@ -4,7 +4,6 @@ import healpy as hp
 from .. import coords
 from .. import polar
 from .. import randoms
-from .. import rotate
 from .. import utils
 
 
@@ -116,8 +115,8 @@ class Heal2Polar:
         yy = self.rebin_y2d.flatten()
         yy = np.pi/2. - yy
         if self.alpha != 0.:
-            xx, yy = rotate.sky_spin(xx, yy, 0., np.pi/2., self.alpha)
-        xx, yy = rotate.sky_shift(xx, yy, 0., np.pi/2., self.center[0], self.center[1])
+            xx, yy = coords.usphere_spin(xx, yy, 0., np.pi/2., self.alpha)
+        xx, yy = coords.usphere_shift(xx, yy, 0., np.pi/2., self.center[0], self.center[1])
         self.rebin_pix = hp.ang2pix(self.nside, yy, xx)
 
 

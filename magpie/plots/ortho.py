@@ -3,7 +3,6 @@ import matplotlib.pylab as plt
 import scipy.interpolate as interpolate
 
 from . import shapes as plot_shapes
-from .. import rotate
 from .. import coords
 from .. import shapes
 
@@ -191,7 +190,7 @@ class PlotOrtho:
             x = self.heal2ortho.xedges[-1]*np.ones(interpaxis)
             z = np.sqrt(self.heal2ortho.radius**2. - (x**2. + y**2.))
             rr, phi, theta = coords.cart2sphere(x, y, z)
-            phi, theta = rotate.sky_shift(phi, theta, self.heal2ortho.end_center[0], self.heal2ortho.end_center[1], self.heal2ortho.center[0], self.heal2ortho.center[1])
+            phi, theta = coords.usphere_shift(phi, theta, self.heal2ortho.end_center[0], self.heal2ortho.end_center[1], self.heal2ortho.center[0], self.heal2ortho.center[1])
 
             if np.argmax(theta) != 0 and np.argmax(theta) != len(theta)-1:
                 split = True
@@ -249,7 +248,7 @@ class PlotOrtho:
             y = self.heal2ortho.yedges[0]*np.ones(interpaxis)
             z = np.sqrt(self.heal2ortho.radius**2. - (x**2. + y**2.))
             rr, phi, theta = coords.cart2sphere(x, y, z)
-            phi, theta = rotate.sky_shift(phi, theta, self.heal2ortho.end_center[0], self.heal2ortho.end_center[1], self.heal2ortho.center[0], self.heal2ortho.center[1])
+            phi, theta = coords.usphere_shift(phi, theta, self.heal2ortho.end_center[0], self.heal2ortho.end_center[1], self.heal2ortho.center[0], self.heal2ortho.center[1])
 
             if np.argmax(phi) != 0 and np.argmax(phi) != len(phi)-1:
                 split = True

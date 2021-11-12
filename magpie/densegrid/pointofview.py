@@ -1,7 +1,6 @@
 import numpy as np
 
 from .. import coords
-from .. import rotate
 
 
 class PointOfView:
@@ -64,10 +63,10 @@ class PointOfView:
         """
         r, phi, theta = coords.cart2sphere(x, y, z, center=self.camera)
         if self.theta_point_towards != np.pi/2.:
-            phi, theta = rotate.sky_rotate(phi, theta, self.phi_point_towards, np.pi/2., phi_start=self.phi_point_towards, theta_start=self.theta_point_towards)
-        phi = rotate.sky_phi_shift(phi, -self.phi_point_towards)
+            phi, theta = coords.usphere_rotate(phi, theta, self.phi_point_towards, np.pi/2., phi_start=self.phi_point_towards, theta_start=self.theta_point_towards)
+        phi = coords.usphere_phi_shift(phi, -self.phi_point_towards)
         if self.spin != 0.:
-            phi, theta = rotate.sky_spin(phi, theta, 0., np.pi/2., self.spin)
+            phi, theta = coords.usphere_spin(phi, theta, 0., np.pi/2., self.spin)
         dx, dy, dz = coords.sphere2cart(r, phi, theta)
         f = self.display/dx
         condition = np.where(f >= 1.)[0]
@@ -104,10 +103,10 @@ class PointOfView:
         dz = by / f
         r, phi, theta = coords.cart2sphere(dx, dy, dz)
         if self.spin != 0.:
-            phi, theta = rotate.sky_spin(phi, theta, 0., np.pi/2., -self.spin)
-        phi = rotate.sky_phi_shift(phi, self.phi_point_towards)
+            phi, theta = coords.usphere_spin(phi, theta, 0., np.pi/2., -self.spin)
+        phi = coords.usphere_phi_shift(phi, self.phi_point_towards)
         if self.theta_point_towards != np.pi/2.:
-            phi, theta = rotate.sky_rotate(phi, theta, self.phi_point_towards, self.theta_point_towards, phi_start=self.phi_point_towards, theta_start=np.pi/2.)
+            phi, theta = coords.usphere_rotate(phi, theta, self.phi_point_towards, self.theta_point_towards, phi_start=self.phi_point_towards, theta_start=np.pi/2.)
         x, y, z = coords.sphere2cart(r, phi, theta, center=self.camera)
         return x, y, z
 

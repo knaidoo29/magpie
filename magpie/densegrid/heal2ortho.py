@@ -4,7 +4,6 @@ import healpy as hp
 from .. import coords
 from .. import polar
 from .. import randoms
-from .. import rotate
 from .. import utils
 
 
@@ -123,7 +122,7 @@ class Heal2Ortho:
         yy = self.rebin_y2d.flatten()
         zz = self.rebin_z2d.flatten()
         rr, phi, theta = coords.cart2sphere(xx, yy, zz)
-        phi, theta = rotate.sky_shift(phi, theta, self.end_center[0], self.end_center[1], self.center[0], self.center[1])
+        phi, theta = coords.usphere_shift(phi, theta, self.end_center[0], self.end_center[1], self.center[0], self.center[1])
         self.rebin_pix = hp.ang2pix(self.nside, theta, phi)
 
 
@@ -186,7 +185,7 @@ class Heal2Ortho:
             r = 1.
         else:
             r = np.ones(len(phi))
-        phi, theta = rotate.sky_shift(phi, theta, self.center[0], self.center[1], self.end_center[0], self.end_center[1])
+        phi, theta = coords.usphere_shift(phi, theta, self.center[0], self.center[1], self.end_center[0], self.end_center[1])
         x, y, z = coords.sphere2cart(r, phi, theta)
         if np.isscalar(phi) == True:
             if z < 0.:

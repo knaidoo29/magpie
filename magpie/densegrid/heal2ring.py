@@ -4,7 +4,6 @@ import healpy as hp
 from .. import coords
 from .. import polar
 from .. import randoms
-from .. import rotate
 from .. import utils
 
 
@@ -113,10 +112,10 @@ class Heal2Ring:
         self.rebin_alpha_ind = self.rebin_alpha_ind.flatten()
         self.rebin_beta_ind = self.rebin_beta_ind.flatten()
         if self.beta_shift != 0.:
-            phi, theta = rotate.sky_spin(self.rebin_beta2d.flatten(), self.rebin_alpha2d.flatten(), 0., 0., self.beta_shift)
+            phi, theta = coords.usphere_spin(self.rebin_beta2d.flatten(), self.rebin_alpha2d.flatten(), 0., 0., self.beta_shift)
         else:
             phi, theta = self.rebin_beta2d.flatten(), self.rebin_alpha2d.flatten()
-        phi, theta = rotate.sky_shift(phi, theta, 0., 0., self.center[0], self.center[1])
+        phi, theta = coords.usphere_shift(phi, theta, 0., 0., self.center[0], self.center[1])
         self.rebin_pix = hp.ang2pix(self.nside, theta, phi)
 
 
@@ -189,7 +188,7 @@ class Heal2Ring:
             Rotated polar coordinate data.
         """
         assert np.shape(f_polar) == np.shape(self.beta2d), "Shape of f_polar does not match stored polar coordinate grid."
-        return rotate.rotate_polar(self.beta_edges, f_polar, beta_shift)
+        return coords.rotate_polar(self.beta_edges, f_polar, beta_shift)
 
 
     def polar2radial(self, f_polar, sigma=None, w=None, verbose=False):

@@ -109,7 +109,7 @@ def randoms_usphere(size, phi_min=0., phi_max=2*np.pi, theta_min=0., theta_max=n
 #     return phi, theta
 
 
-def _randoms_xy_healpix(size, p, nside):
+def _randoms_healpix_xy(size, p, nside):
     """Generates randoms points in a healpix pixel in healpix x and y coordinates.
 
     Parameters
@@ -129,7 +129,7 @@ def _randoms_xy_healpix(size, p, nside):
         Random y in the healpix pixel.
     """
     delta = pixels._healpix_get_delta(nside)
-    xp, yp = pixels.healpix2healxy(p, nside)
+    xp, yp = pixels.healpix_pix2xy(p, nside)
     ux = np.random.random_sample(size)
     uy = np.random.random_sample(size)
     xrand = np.zeros(size)
@@ -163,6 +163,6 @@ def randoms_healpix_pixel(size, p, nside):
     theta : array
         Random theta (longitude angle) in radians.
     """
-    xrand, yrand = _randoms_xy_healpix(size, p, nside)
-    phi, theta = coords.healxy2usphere(xrand, yrand)
+    xrand, yrand = _randoms_healpix_xy(size, p, nside)
+    phi, theta = coords.healpix_xy2ang(xrand, yrand)
     return phi, theta
