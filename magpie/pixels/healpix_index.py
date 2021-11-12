@@ -270,7 +270,7 @@ def healpix_ijs2ijd(istar, jstar, Nside):
     return idash, jdash
 
 
-def healpix_ijs_neighbours(isd, jsd, Nside):
+def healpix_ijs_neighbours(istar, jstar, Nside):
     """Gets the healpix i, jstar neighbours for a single healpix pixel.
 
     Parameters
@@ -289,72 +289,72 @@ def healpix_ijs_neighbours(isd, jsd, Nside):
     jstar_neigh : array
         Neighbour healpix integer j star index.
     """
-    if jsd - isd + 1 == 2*Nside:
-        isd_neigh = [isd, isd + 1, isd + 1, isd + Nside, isd + Nside, isd - Nside, isd + 1 - Nside, isd+2*Nside]
-        jsd_neigh = [jsd - 1,  jsd - 1, jsd, jsd - 1 + Nside, jsd + Nside, jsd - Nside, jsd - Nside, jsd+2*Nside]
-    elif isd - jsd + 1 == 2*Nside:
-        isd_neigh = [isd, isd - 1, isd - 1, isd - Nside, isd - Nside, isd + Nside, isd - 1 + Nside, isd-2*Nside]
-        jsd_neigh = [jsd + 1,  jsd + 1, jsd, jsd + 1 - Nside, jsd - Nside, jsd + Nside, jsd + Nside, jsd-2*Nside]
-    elif jsd - isd + 1 == Nside and isd % Nside == 0:
-        isd_neigh = [isd - 1, isd, isd + 1,  isd - 1, isd + 1, isd, isd + 1]
-        jsd_neigh = [jsd - 1, jsd - 1, jsd - 1, jsd, jsd, jsd + 1, jsd + 1]
-    elif isd - jsd + 1 == Nside and jsd % Nside == 0:
-        isd_neigh = [isd - 1, isd, isd - 1, isd + 1, isd - 1, isd, isd + 1]
-        jsd_neigh = [jsd - 1, jsd - 1, jsd, jsd, jsd + 1, jsd + 1, jsd + 1]
-    elif isd % Nside == 0 and jsd + 1 - Nside*(np.floor(isd/Nside) + 1) > 0:
-        isd_neigh = [isd, isd + 1, isd + 1, isd, isd + 1,
-                     isd - ((jsd+1)-Nside*np.floor(jsd/Nside)),
-                     isd - ((jsd)-Nside*np.floor(jsd/Nside)),
-                     isd - ((jsd-1)-Nside*np.floor(jsd/Nside))]
-        jsd_neigh = [jsd - 1, jsd - 1, jsd, jsd + 1, jsd + 1,
-                     Nside*np.floor(jsd/Nside)-1,
-                     Nside*np.floor(jsd/Nside)-1,
-                     Nside*np.floor(jsd/Nside)-1]
-    elif jsd % Nside == 0 and isd + 1 - Nside*(np.floor(jsd/Nside) + 1) > 0:
-        jsd_neigh = [jsd, jsd + 1, jsd + 1, jsd, jsd + 1,
-                     jsd - ((isd+2)-Nside*np.floor(isd/Nside)),
-                     jsd - ((isd+1)-Nside*np.floor(isd/Nside)),
-                     jsd - ((isd)-Nside*np.floor(isd/Nside))]
-        isd_neigh = [isd - 1, isd - 1, isd, isd + 1, isd + 1,
-                     Nside*np.floor(isd/Nside)-1,
-                     Nside*np.floor(isd/Nside)-1,
-                     Nside*np.floor(isd/Nside)-1]
-    elif (jsd + 1 - Nside) % Nside == 0 and jsd + 1 - Nside*(np.floor(isd/Nside) + 1) > 0:
-        jsd_neigh = [jsd, jsd - 1, jsd - 1, jsd, jsd - 1,
-                     jsd + Nside*(np.floor(isd/Nside)+1)-isd,
-                     jsd + Nside*(np.floor(isd/Nside)+1)-isd-1,
-                     jsd + Nside*(np.floor(isd/Nside)+1)-isd+1]
-        isd_neigh = [isd - 1, isd - 1, isd, isd + 1, isd + 1,
-                     Nside*(np.floor(isd/Nside)+1),
-                     Nside*(np.floor(isd/Nside)+1),
-                     Nside*(np.floor(isd/Nside)+1)]
-    elif (isd + 1 - Nside) % Nside == 0 and isd + 1 - Nside*(np.floor(jsd/Nside) + 1) > 0:
-        isd_neigh = [isd, isd - 1, isd - 1, isd, isd - 1,
-                     isd + Nside*(np.floor(jsd/Nside)+1)-jsd,
-                     isd + Nside*(np.floor(jsd/Nside)+1)-jsd-1,
-                     isd + Nside*(np.floor(jsd/Nside)+1)-jsd+1]
-        jsd_neigh = [jsd - 1, jsd - 1, jsd, jsd + 1, jsd + 1,
-                     Nside*(np.floor(jsd/Nside)+1),
-                     Nside*(np.floor(jsd/Nside)+1),
-                     Nside*(np.floor(jsd/Nside)+1)]
+    if jstar - istar + 1 == 2*Nside:
+        istar_neigh = [istar, istar + 1, istar + 1, istar + Nside, istar + Nside, istar - Nside, istar + 1 - Nside, istar+2*Nside]
+        jstar_neigh = [jstar - 1,  jstar - 1, jstar, jstar - 1 + Nside, jstar + Nside, jstar - Nside, jstar - Nside, jstar+2*Nside]
+    elif istar - jstar + 1 == 2*Nside:
+        istar_neigh = [istar, istar - 1, istar - 1, istar - Nside, istar - Nside, istar + Nside, istar - 1 + Nside, istar-2*Nside]
+        jstar_neigh = [jstar + 1,  jstar + 1, jstar, jstar + 1 - Nside, jstar - Nside, jstar + Nside, jstar + Nside, jstar-2*Nside]
+    elif jstar - istar + 1 == Nside and istar % Nside == 0:
+        istar_neigh = [istar - 1, istar, istar + 1,  istar - 1, istar + 1, istar, istar + 1]
+        jstar_neigh = [jstar - 1, jstar - 1, jstar - 1, jstar, jstar, jstar + 1, jstar + 1]
+    elif istar - jstar + 1 == Nside and jstar % Nside == 0:
+        istar_neigh = [istar - 1, istar, istar - 1, istar + 1, istar - 1, istar, istar + 1]
+        jstar_neigh = [jstar - 1, jstar - 1, jstar, jstar, jstar + 1, jstar + 1, jstar + 1]
+    elif istar % Nside == 0 and jstar + 1 - Nside*(np.floor(istar/Nside) + 1) > 0:
+        istar_neigh = [istar, istar + 1, istar + 1, istar, istar + 1,
+                     istar - ((jstar+1)-Nside*np.floor(jstar/Nside)),
+                     istar - ((jstar)-Nside*np.floor(jstar/Nside)),
+                     istar - ((jstar-1)-Nside*np.floor(jstar/Nside))]
+        jstar_neigh = [jstar - 1, jstar - 1, jstar, jstar + 1, jstar + 1,
+                     Nside*np.floor(jstar/Nside)-1,
+                     Nside*np.floor(jstar/Nside)-1,
+                     Nside*np.floor(jstar/Nside)-1]
+    elif jstar % Nside == 0 and istar + 1 - Nside*(np.floor(jstar/Nside) + 1) > 0:
+        jstar_neigh = [jstar, jstar + 1, jstar + 1, jstar, jstar + 1,
+                     jstar - ((istar+2)-Nside*np.floor(istar/Nside)),
+                     jstar - ((istar+1)-Nside*np.floor(istar/Nside)),
+                     jstar - ((istar)-Nside*np.floor(istar/Nside))]
+        istar_neigh = [istar - 1, istar - 1, istar, istar + 1, istar + 1,
+                     Nside*np.floor(istar/Nside)-1,
+                     Nside*np.floor(istar/Nside)-1,
+                     Nside*np.floor(istar/Nside)-1]
+    elif (jstar + 1 - Nside) % Nside == 0 and jstar + 1 - Nside*(np.floor(istar/Nside) + 1) > 0:
+        jstar_neigh = [jstar, jstar - 1, jstar - 1, jstar, jstar - 1,
+                     jstar + Nside*(np.floor(istar/Nside)+1)-istar,
+                     jstar + Nside*(np.floor(istar/Nside)+1)-istar-1,
+                     jstar + Nside*(np.floor(istar/Nside)+1)-istar+1]
+        istar_neigh = [istar - 1, istar - 1, istar, istar + 1, istar + 1,
+                     Nside*(np.floor(istar/Nside)+1),
+                     Nside*(np.floor(istar/Nside)+1),
+                     Nside*(np.floor(istar/Nside)+1)]
+    elif (istar + 1 - Nside) % Nside == 0 and istar + 1 - Nside*(np.floor(jstar/Nside) + 1) > 0:
+        istar_neigh = [istar, istar - 1, istar - 1, istar, istar - 1,
+                     istar + Nside*(np.floor(jstar/Nside)+1)-jstar,
+                     istar + Nside*(np.floor(jstar/Nside)+1)-jstar-1,
+                     istar + Nside*(np.floor(jstar/Nside)+1)-jstar+1]
+        jstar_neigh = [jstar - 1, jstar - 1, jstar, jstar + 1, jstar + 1,
+                     Nside*(np.floor(jstar/Nside)+1),
+                     Nside*(np.floor(jstar/Nside)+1),
+                     Nside*(np.floor(jstar/Nside)+1)]
     else:
-        isd_neigh = [isd - 1, isd, isd + 1, isd - 1, isd + 1, isd - 1, isd, isd + 1]
-        jsd_neigh = [jsd - 1, jsd - 1, jsd - 1, jsd, jsd, jsd + 1, jsd + 1, jsd + 1]
+        istar_neigh = [istar - 1, istar, istar + 1, istar - 1, istar + 1, istar - 1, istar, istar + 1]
+        jstar_neigh = [jstar - 1, jstar - 1, jstar - 1, jstar, jstar, jstar + 1, jstar + 1, jstar + 1]
 
-    isd_neigh = np.array(isd_neigh)
-    jsd_neigh = np.array(jsd_neigh)
+    istar_neigh = np.array(istar_neigh)
+    jstar_neigh = np.array(jstar_neigh)
 
-    cond = np.where(isd_neigh + jsd_neigh > 9*Nside-1)[0]
-    isd_neigh[cond] = isd_neigh[cond] - 4*Nside
-    jsd_neigh[cond] = jsd_neigh[cond] - 4*Nside
+    cond = np.where(istar_neigh + jstar_neigh > 9*Nside-1)[0]
+    istar_neigh[cond] = istar_neigh[cond] - 4*Nside
+    jstar_neigh[cond] = jstar_neigh[cond] - 4*Nside
 
-    cond = np.where(isd_neigh + jsd_neigh < Nside-1)[0]
-    isd_neigh[cond] = isd_neigh[cond] + 4*Nside
-    jsd_neigh[cond] = jsd_neigh[cond] + 4*Nside
+    cond = np.where(istar_neigh + jstar_neigh < Nside-1)[0]
+    istar_neigh[cond] = istar_neigh[cond] + 4*Nside
+    jstar_neigh[cond] = jstar_neigh[cond] + 4*Nside
 
-    isd_neigh = np.unique(isd_neigh)
-    jsd_neigh = np.unique(jsd_neigh)
-    return isd_neigh, jsd_neigh
+    istar_neigh = np.unique(istar_neigh)
+    jstar_neigh = np.unique(jstar_neigh)
+    return istar_neigh, jstar_neigh
 
 
 def healpix_ij2xy(ringi, ringj, Nside):
