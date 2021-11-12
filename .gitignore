@@ -6,3 +6,4 @@
 *.ipynb_checkpoints
 *.pytest_cache
 magpie/src/old/*
+src/*.so
