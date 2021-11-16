@@ -110,8 +110,8 @@ class Heal2Ring:
                 beta_rand, alpha_rand = randoms.randoms_sky(mc_size, phi_min=beta_min, phi_max=beta_max,
                                                             theta_min=alpha_min, theta_max=alpha_max)
                 if self.beta_shift != 0.:
-                    beta_rand, alpha_rand = rotate.sky_spin(beta_rand, alpha_rand, 0., 0., self.beta_shift)
-                phi_rand, theta_rand = rotate.sky_shift(beta_rand, alpha_rand, 0., 0., self.center[0], self.center[1])
+                    beta_rand, alpha_rand = coords.usphere_spin(beta_rand, alpha_rand, 0., 0., self.beta_shift)
+                phi_rand, theta_rand = coords.usphere_shift(beta_rand, alpha_rand, 0., 0., self.center[0], self.center[1])
                 pix_rand = hp.ang2pix(self.nside, theta_rand, phi_rand)
                 pix_uniq, pix_counts = np.unique(pix_rand, return_counts=True)
                 ind_pix = pix_uniq
@@ -182,7 +182,7 @@ class Heal2Ring:
             Rotated polar coordinate data.
         """
         assert np.shape(f_polar) == np.shape(self.beta2d), "Shape of f_polar does not match stored polar coordinate grid."
-        return rotate.rotate_polar(self.beta_edges, f_polar, beta_shift)
+        return coords.rotate_polar(self.beta_edges, f_polar, beta_shift)
 
 
     def polar2radial(self, f_polar, sigma=None, w=None, verbose=False):

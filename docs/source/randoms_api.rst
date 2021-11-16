@@ -54,6 +54,7 @@ Cartesian
 Polar
 -----
 
+
 .. function:: randoms.randoms_polar(size[, r_min=0., r_max=1., phi_min=0., phi_max=2.*np.pi])
 
     Generates randoms for polar coordinates. Default will produce randoms within
@@ -226,3 +227,63 @@ Sample PDF/CDF Functions
     :type kind: str
 
     :returns: **rands** *(array)* -- Randoms drawn from sample PDF.
+
+
+Subsampling
+-----------
+
+
+.. function:: randoms.shuffle(sample)
+
+    Shuffles the ordering of a sample.
+
+    :param sample: Input sample data.
+    :type sample: array
+
+    :returns: Randomly ordered sample.
+
+
+.. function:: randoms.random_draw(sample, size)
+
+    Draws a random sample from an input function, the algorithm ensures there can be no repeats.
+
+    :param sample: Input sample data.
+    :type sample: array
+    :param size: Size of the random draws.
+    :type size: int
+
+    :returns: **randsamp** *(array)* -- Random subsample.
+
+
+.. function:: randoms.random_prob_draw(sample, prob, size)
+
+    Probabilistic draw from an input sample.
+
+    :param sample: Input sample data.
+    :type sample: array
+    :param prob: The probability assigned to each sample.
+    :type prob: array
+    :param size: Size of the probabilistic draw.
+    :type size: int
+
+    :returns: **randsamp** *(array)* -- Random subsample.
+
+
+.. function:: randoms.stochastic_integer_weights(weights)
+
+    Returns stochastic integer weights for an input weight. This is useful for point processes that require integer weights, where a non-integer weight can be achieved by superposition of many realisations.
+
+    :param weights: Input weights.
+    :type weights: array
+
+    :returns: **weights_SI** *(array)* -- Stochastic integer weights.
+
+
+.. function:: randoms.stochastic_binary_weights(weights)
+
+    Returns stochastic binary integer weights for an input weight. This is useful for point processes that require binary integer weights, where a non-integer weight can be achieved by superposition of many realisations.
+
+    :param weights: Input weights.
+    :type weights: array
+
+    :returns: **weights_SB** *(array)* -- Stochastic binary weights.

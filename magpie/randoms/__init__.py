@@ -15,6 +15,8 @@ from .sphere import randoms_sphere
 from .subsample import shuffle
 from .subsample import random_draw
 from .subsample import random_prob_draw
+from .subsample import stochastic_integer_weights
+from .subsample import stochastic_binary_weights
 
 from .usphere import randoms_usphere
 from .usphere import _randoms_healpix_xy

@@ -67,3 +67,57 @@ def random_prob_draw(sample, prob, size=None):
         randsamp = sample[sortind[:size]]
         randsamp = shuffle(randsamp)
     return randsamp
+
+
+def stochastic_integer_weights(weights):
+    """Returns stochastic integer weights for an input weight. This is useful for
+    point processes that require integer weights, where a non-integer weight can
+    be achieved by superposition of many realisations.
+
+    Parameters
+    ----------
+    weights : array
+        Input weights.
+
+    Returns
+    -------
+    weights_SI : array
+        Stochastic integer weights.
+    """
+    if np.isscalar(weights) == True:
+        u_r = np.random.random_sample(1)[0]
+        weights_SI = np.ceil(weights)
+        if u_r < weights_SI - weights:
+            weights_SI = np.floor(weights)
+    else:
+        u_r = np.random.random_sample(len(weights))
+        weights_SI = np.ceil(weights)
+        cond = np.where(u_r < weights_SI - weights)
+        weights_SI[cond] = np.floor(weights[cond])
+    return weights_SI
+
+
+def stochastic_binary_weights(weights):
+    """Returns stochastic binary integer weights for an input weight. This is
+    useful for point processes that require binary integer weights, where a
+    non-integer weight can be achieved by superposition of many realisations.
+
+    Parameters
+    ----------
+    weights : array
+        Input weights.
+
+    Returns
+    -------
+    weights_SB : array
+        Stochastic binary weights.
+    """
+    weights_SI = stochastic_integer_weights(weights)
+    weights_SB = np.copy(weights_SI)
+    if np.isscalar(weights) == True:
+        if weights_SI > 1:
+            weights_SB = 1
+    else:
+        cond = np.where(weights_SI > 1)[0]
+        weights_SB[cond] = 1
+    return weights_SB
