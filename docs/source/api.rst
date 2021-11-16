@@ -36,6 +36,12 @@ Randoms
     * :py:func:`randoms.pdf2cdf`
     * :py:func:`randoms.randoms_cdf`
     * :py:func:`randoms.randoms_pdf`
+* Subsampling
+    * :py:func:`randoms.shuffle`
+    * :py:func:`randoms.random_draw`
+    * :py:func:`randoms.random_prob_draw`
+    * :py:func:`randoms.stochastic_integer_weights`
+    * :py:func:`randoms.stochastic_binary_weights`
 
 Remap
 =====
