@@ -4,6 +4,10 @@ Monte cArlo weiGhted PIxel rEmapping
 
 .. image:: https://circleci.com/gh/knaidoo29/magpie/tree/master.svg?style=svg
         :target: https://circleci.com/gh/knaidoo29/magpie/tree/master
+
+.. image:: https://codecov.io/gh/knaidoo29/magpie/branch/master/graph/badge.svg?token=P7H8FAJT43
+        :target: https://codecov.io/gh/knaidoo29/magpie
+
 .. image:: https://readthedocs.org/projects/magpie-doc/badge/?version=latest
     :target: https://magpie-doc.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
