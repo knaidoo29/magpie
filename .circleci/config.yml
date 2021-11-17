@@ -41,13 +41,15 @@ jobs:
       - run: pip install codecov
       - run: pip install .
       - run: python setup.py test
+      - run: coverage run --source=magpie setup.py test
+      - run: codecov
 #      - run:
 #          name: Run tests
           # This assumes pytest is installed via the install-package step above
 #          command: pytest
-      - codecov/upload:
-          file: './coverage/clover.xml'
-          token: 6d13d1d1-bba3-4d2b-bc06-2f4f0d040d31
+#      - codecov/upload:
+#          file: './coverage/clover.xml'
+#          token: 6d13d1d1-bba3-4d2b-bc06-2f4f0d040d31
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
