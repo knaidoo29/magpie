@@ -6,7 +6,7 @@
 
 |               |                                       |
 |---------------|---------------------------------------|
-| Author        | Krishna Naidoo                        |                          
+| Author        | Krishna Naidoo                        |          
 | Version       | 0.2.1                                 |
 | Repository    | https://github.com/knaidoo29/magpie   |
 | Documentation | https://magpie-doc.readthedocs.io/    |

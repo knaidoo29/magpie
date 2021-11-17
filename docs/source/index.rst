@@ -12,7 +12,6 @@ Monte cArlo weiGhted PIxel rEmapping
     :target: https://magpie-doc.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
 
-
 +---------------+-----------------------------------------+
 | Author        | Krishna Naidoo                          |
 +---------------+-----------------------------------------+
@@ -77,8 +76,8 @@ The following Python modules are required.
 * `healpy <https://healpy.readthedocs.io/>`_
 
 ..  If you want to run with MPI you will need the following:
-* `mpi4py <https://mpi4py.readthedocs.io/en/stable/>`_
-* `MPIutils <https://github.com/knaidoo29/MPIutils>`_
+..  * `mpi4py <https://mpi4py.readthedocs.io/en/stable/>`_
+..  * `MPIutils <https://github.com/knaidoo29/MPIutils>`_
 
 For testing you will require `nose <https://nose.readthedocs.io/en/latest/>`_ or
 `pytest <http://pytest.org/en/latest/>`_ .
@@ -87,7 +86,9 @@ For testing you will require `nose <https://nose.readthedocs.io/en/latest/>`_ or
 Installation
 ============
 
-SHIFT can be installed by cloning the github repository::
+Magpie can be installed in a variety of ways. The first and simplest is to use `pip`
+
+Magpie can be installed by cloning the github repository::
 
     git clone https://github.com/knaidoo29/magpie.git
     cd magpie
@@ -111,10 +112,14 @@ open a new issue (`here <https://github.com/knaidoo29/magpie/issues>`_) or
 Version History
 ===============
 
-**Version 0.0**:
-
-  * Randoms in a variety of coordinate systems: cartesian, polar, spherical and from an input PDF/CDF.
-
-  * Remapping procedures in 1D (exact and analytical), 2D (monte-carlo and grid based methods) for cartesian, polar and the surface of a sphere and lastly in 3D (monte-carlo and grid based methods) cartesian and spherical polar coordinates.
-
-  * Plotting routines.
+* **Version 0.2**:
+    * Restructured layout and the incorporation of documentation and unit testing for eventual first release.
+    * Randoms in a variety of coordinate systems: cartesian, polar, spherical and from an input PDF/CDF and subsampling and stochastic weights.
+    * Cartesian coordinate remapping in 1D, 2D and 3D.
+* **Version 0.1**:
+    * Coordinate transformations between cartesian, polar and spherical polar coordinates.
+    * Rebinning in 1D (computed exactly), in 2D and 3D via monte-carlo weighted remapping and a dense mesh.
+    * Randoms in cartesian, polar and sphercal polar coordinates.
+    * Rotation transformations.
+    * Polar coordinate utilities and integration for polar grid to radial profiles.
+    * Plotting routine for orthographic projection of unit sphere data.
