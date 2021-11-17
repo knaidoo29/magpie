@@ -2,6 +2,8 @@
 Monte cArlo weiGhted PIxel rEmapping
 ====================================
 
+.. image:: https://circleci.com/gh/knaidoo29/magpie/tree/master.svg?style=svg
+        :target: https://circleci.com/gh/knaidoo29/magpie/tree/master
 .. image:: https://readthedocs.org/projects/magpie-doc/badge/?version=latest
     :target: https://magpie-doc.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
@@ -70,8 +72,7 @@ The following Python modules are required.
 * `scipy <https://scipy.org/>`_
 * `healpy <https://healpy.readthedocs.io/>`_
 
-If you want to run with MPI you will need the following:
-
+..  If you want to run with MPI you will need the following:
 * `mpi4py <https://mpi4py.readthedocs.io/en/stable/>`_
 * `MPIutils <https://github.com/knaidoo29/MPIutils>`_
 

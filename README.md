@@ -1,5 +1,6 @@
 # MAGPIE: Monte cArlo weiGhted PIxel rEmapping
 
+[![CircleCI](https://circleci.com/gh/knaidoo29/magpie/tree/master.svg?style=svg)](https://circleci.com/gh/knaidoo29/magpie/tree/master)
 [![Documentation Status](https://readthedocs.org/projects/magpie-doc/badge/?version=latest)](https://magpie-doc.readthedocs.io/en/latest/?badge=latest)
 
 |               |                                       |
