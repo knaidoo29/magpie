@@ -29,12 +29,13 @@ jobs:
     # CircleCI will report the results back to your VCS provider.
     steps:
       - checkout
+      - run: sudo apt-get -y update
+      - run: sudo apt-get -y install gfortran
       - python/install-packages:
           pkg-manager: pip
           # app-dir: ~/project/package-directory/  # If you're requirements.txt isn't in the root directory.
           # pip-dependency-file: test-requirements.txt  # if you have a different name for your requirements file, maybe one that combines your runtime and test requirements.
 # Edits
-      - run: sudo apt-get install gfortran
       - run: pip install -r requirements.txt
       - run: pip install .
       - run: python setup.py test
