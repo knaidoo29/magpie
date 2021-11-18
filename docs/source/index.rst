@@ -12,6 +12,16 @@ Monte cArlo weiGhted PIxel rEmapping
     :target: https://magpie-doc.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
 
+.. image:: https://badge.fury.io/py/magpie-pkg.svg
+    :target: https://badge.fury.io/py/magpie-pkg
+
+.. image:: https://anaconda.org/knaidoo29/magpie-pkg/badges/installer/conda.svg
+    :target: https://conda.anaconda.org/knaidoo29
+
+.. image:: https://anaconda.org/knaidoo29/magpie-pkg/badges/license.svg
+    :target: https://anaconda.org/knaidoo29/magpie-pkg
+
+
 +---------------+-----------------------------------------+
 | Author        | Krishna Naidoo                          |
 +---------------+-----------------------------------------+
@@ -86,9 +96,17 @@ For testing you will require `nose <https://nose.readthedocs.io/en/latest/>`_ or
 Installation
 ============
 
-Magpie can be installed in a variety of ways. The first and simplest is to use `pip`
+Magpie can be installed in a variety of ways.
 
-Magpie can be installed by cloning the github repository::
+#. Using ``pip``::
+
+    pip install magpie-pkg
+
+#. Using ``conda``::
+
+    conda install -c knaidoo29 magpie-pkg
+
+#. By cloning the github repository::
 
     git clone https://github.com/knaidoo29/magpie.git
     cd magpie
