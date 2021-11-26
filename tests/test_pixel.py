@@ -109,3 +109,28 @@ def test_healpix_boundary():
     x2, y2 = magpie.pixel.healpix_boundary(982, 64, reverse=True)
     assert np.round(np.sum(x1-x2[::-1]), decimals=2) == 0., "Reversing should match."
     assert np.round(np.sum(y1-y2[::-1]), decimals=2) == 0., "Reversing should match."
+
+
+def test_healpix_pixels():
+    nside = 32
+    p = np.arange(12*nside**2)
+    ringi, ringj = magpie.pixel.healpix_pix2ij(p, nside)
+    p2 = magpie.pixel.healpix_ij2pix(ringi, ringj, nside)
+    assert np.sum(p-p2) == 0, "Test pix to ij converts forward and backward."
+    idash = magpie.pixel.healpix_i2id(ringi, nside)
+    jdash = magpie.pixel.healpix_j2jd(ringi, ringj, nside)
+    istar, jstar = magpie.pixel.healpix_ijd2ijs(idash, jdash, nside)
+    idash2, jdash2 = magpie.pixel.healpix_ijs2ijd(istar, jstar, nside)
+    assert np.sum(idash - idash2) == 0, "Test pix to idash to istar converts forward and backward."
+    assert np.sum(jdash - jdash2) == 0, "Test pix to jdash to jstar converts forward and backward."
+    nside = 16
+    p = np.arange(12*nside**2)
+    ringi, ringj = magpie.pixel.healpix_pix2ij(p, nside)
+    idash = magpie.pixel.healpix_i2id(ringi, nside)
+    jdash = magpie.pixel.healpix_j2jd(ringi, ringj, nside)
+    istar, jstar = magpie.pixel.healpix_ijd2ijs(idash, jdash, nside)
+    # check neighbours returns without errors
+    for pix in p:
+        istar_neigh, jstar_neigh = magpie.pixel.healpix_ijs_neighbours(istar[pix], jstar[pix], nside)
+    # check pix2xy and ij2xy returns without errors
+    healx, healy = magpie.pixel.healpix_pix2xy(p, nside)
