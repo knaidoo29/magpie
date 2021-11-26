@@ -99,6 +99,15 @@ def test_get_box():
 
 
 def test_healpix_boundary():
+    # check all boundary edges run without errors
+    x, y = magpie.pixel._healpix_top_left(174, 32)
+    x, y = magpie.pixel._healpix_top_right(174, 32)
+    x, y = magpie.pixel._healpix_bot_left(174, 32)
+    x, y = magpie.pixel._healpix_bot_right(174, 32)
+    x, y = magpie.pixel._healpix_top_left(174, 32, reverse=True)
+    x, y = magpie.pixel._healpix_top_right(174, 32, reverse=True)
+    x, y = magpie.pixel._healpix_bot_left(174, 32, reverse=True)
+    x, y = magpie.pixel._healpix_bot_right(174, 32, reverse=True)
     x, y = magpie.pixel.healpix_boundary(10, 32)
     assert len(x) == 40, "Length does not match expectations."
     assert len(y) == 40, "Length does not match expectations."
@@ -116,11 +125,13 @@ def test_healpix_pixels():
     p = np.arange(12*nside**2)
     for pix in p:
         ringi, ringj = magpie.pixel.healpix_pix2ij(pix, nside)
-        p = magpie.pixel.healpix_ij2pix(ringi, ringj, nside)
+        _p = magpie.pixel.healpix_ij2pix(ringi, ringj, nside)
     ringi, ringj = magpie.pixel.healpix_pix2ij(p, nside)
     p2 = magpie.pixel.healpix_ij2pix(ringi, ringj, nside)
     assert np.sum(p-p2) == 0, "Test pix to ij converts forward and backward."
     idash = magpie.pixel.healpix_i2id(ringi, nside)
+    for pix in p:
+        jdash = magpie.pixel.healpix_j2jd(ringi[pix], ringj[pix], nside)
     jdash = magpie.pixel.healpix_j2jd(ringi, ringj, nside)
     istar, jstar = magpie.pixel.healpix_ijd2ijs(idash, jdash, nside)
     idash2, jdash2 = magpie.pixel.healpix_ijs2ijd(istar, jstar, nside)

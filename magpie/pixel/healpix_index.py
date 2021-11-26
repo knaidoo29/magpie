@@ -1,15 +1,15 @@
 import numpy as np
 
 
-def healpix_pix2ij(p, Nside):
+def healpix_pix2ij(p, nside):
     """Returns the healpix ring i and pixel along the ring j.
 
     Parameters
     ----------
     p : int
         Healpix pixel index.
-    Nside : int
-        Healpix Nside.
+    nside : int
+        Healpix nside.
 
     Returns
     -------
@@ -19,48 +19,48 @@ def healpix_pix2ij(p, Nside):
         Pixel index along each ring.
     """
     if np.isscalar(p) == True:
-        if p <= 2*Nside*(Nside+1):
+        if p <= 2*nside*(nside+1):
             # top polar cap
             ph = (p+1)/2
             i = np.floor(np.sqrt(ph - np.sqrt(np.floor(ph))))+1
             j = p + 1 - 2*i*(i-1)
             ringi, ringj = int(i), int(j)
-        elif p > 2*Nside*(Nside+1) and p < 2*Nside*(5*Nside-1):
+        elif p > 2*nside*(nside+1) and p < 2*nside*(5*nside-1):
             # equatorial sector
-            pd = p - 2*Nside*(Nside-1)
-            i = np.floor(pd/(4*Nside)) + Nside
-            j = (pd % (4*Nside)) + 1
+            pd = p - 2*nside*(nside-1)
+            i = np.floor(pd/(4*nside)) + nside
+            j = (pd % (4*nside)) + 1
             ringi, ringj = int(i), int(j)
-        elif p >= 2*Nside*(5*Nside-1) and p <= 12*Nside**2:
+        elif p >= 2*nside*(5*nside-1) and p <= 12*nside**2:
             # bottom polar cap
-            ph = (12*Nside**2 - p)/2
+            ph = (12*nside**2 - p)/2
             i = np.floor(np.sqrt(ph-np.sqrt(np.floor(ph))))+1
-            j = p + 2*i*(i + 1) + 1 - 12*Nside**2
-            ringi, ringj = int(4*Nside-i), int(j)
+            j = p + 2*i*(i + 1) + 1 - 12*nside**2
+            ringi, ringj = int(4*nside-i), int(j)
     else:
         i, j = np.zeros(len(p)), np.zeros(len(p))
         # top polar cap
-        cond = np.where(p <= 2*Nside*(Nside+1))[0]
+        cond = np.where(p <= 2*nside*(nside+1))[0]
         ph = (p[cond]+1)/2
         i[cond] = np.floor(np.sqrt(ph - np.sqrt(np.floor(ph)))) + 1
         j[cond] = p[cond] + 1 - 2*i[cond]*(i[cond]-1)
         # equatorial sector
-        cond = np.where((p > 2*Nside*(Nside+1)) & (p < 2*Nside*(5*Nside-1)))[0]
-        pd = p[cond] - 2*Nside*(Nside-1)
-        i[cond] = np.floor(pd/(4*Nside)) + Nside
-        j[cond] = (pd % (4*Nside)) + 1
+        cond = np.where((p > 2*nside*(nside+1)) & (p < 2*nside*(5*nside-1)))[0]
+        pd = p[cond] - 2*nside*(nside-1)
+        i[cond] = np.floor(pd/(4*nside)) + nside
+        j[cond] = (pd % (4*nside)) + 1
         # bottom polar cap
-        cond = np.where((p >= 2*Nside*(5*Nside-1)) & (p <= 12*Nside**2))[0]
-        ph = (12*Nside**2 - p[cond])/2
+        cond = np.where((p >= 2*nside*(5*nside-1)) & (p <= 12*nside**2))[0]
+        ph = (12*nside**2 - p[cond])/2
         i[cond] = np.floor(np.sqrt(ph-np.sqrt(np.floor(ph)))) + 1
-        j[cond] = p[cond] + 2*i[cond]*(i[cond] + 1) + 1 - 12*Nside**2
-        i[cond] = 4*Nside - i[cond]
+        j[cond] = p[cond] + 2*i[cond]*(i[cond] + 1) + 1 - 12*nside**2
+        i[cond] = 4*nside - i[cond]
         ringi = i.astype('int')
         ringj = j.astype('int')
     return ringi, ringj
 
 
-def healpix_ij2pix(ringi, ringj, Nside):
+def healpix_ij2pix(ringi, ringj, nside):
     """Returns the healpix ring i and pixel along the ring j.
 
     Parameters
@@ -69,8 +69,8 @@ def healpix_ij2pix(ringi, ringj, Nside):
         Pixel ring index.
     ringj : int
         Pixel index along each ring.
-    Nside : int
-        Healpix Nside.
+    nside : int
+        Healpix nside.
 
     Returns
     -------
@@ -78,42 +78,42 @@ def healpix_ij2pix(ringi, ringj, Nside):
         Healpix pixel index.
     """
     if np.isscalar(ringi) == True:
-        if ringi <= Nside:
+        if ringi <= nside:
             # top polar cap
             p = 2*ringi*(ringi - 1) + ringj - 1
-        elif ringi > Nside and ringi < 3*Nside:
+        elif ringi > nside and ringi < 3*nside:
             # equatorial sector
-            p = 4*Nside*(ringi - Nside) + ringj - 1 + 2*Nside*(Nside - 1)
-        elif ringi >= 3*Nside:
+            p = 4*nside*(ringi - nside) + ringj - 1 + 2*nside*(nside - 1)
+        elif ringi >= 3*nside:
             # bottom polar cap
-            i = 4*Nside - ringi
-            p = 12*Nside**2 + ringj - 2*i*(i + 1) - 1
+            i = 4*nside - ringi
+            p = 12*nside**2 + ringj - 2*i*(i + 1) - 1
         p = int(p)
     else:
         p = np.zeros(len(ringi))
         # top polar cap
-        cond = np.where(ringi <= Nside)[0]
+        cond = np.where(ringi <= nside)[0]
         p[cond] = 2*ringi[cond]*(ringi[cond] - 1) + ringj[cond] - 1
         # equatorial sector
-        cond = np.where((ringi > Nside) & (ringi < 3*Nside))[0]
-        p[cond] = 4*Nside*(ringi[cond] - Nside) + ringj[cond] - 1 + 2*Nside*(Nside - 1)
+        cond = np.where((ringi > nside) & (ringi < 3*nside))[0]
+        p[cond] = 4*nside*(ringi[cond] - nside) + ringj[cond] - 1 + 2*nside*(nside - 1)
         # bottom polar cap
-        cond = np.where(ringi >= 3*Nside)[0]
-        i = 4*Nside - ringi[cond]
-        p[cond] = 12*Nside**2 + ringj[cond] - 2*i*(i + 1) - 1
+        cond = np.where(ringi >= 3*nside)[0]
+        i = 4*nside - ringi[cond]
+        p[cond] = 12*nside**2 + ringj[cond] - 2*i*(i + 1) - 1
         p = p.astype('int')
     return p
 
 
-def healpix_i2id(ringi, Nside):
+def healpix_i2id(ringi, nside):
     """Converts ringi to idash.
 
     Parameters
     ----------
     ringi : int
         Pixel ring index.
-    Nside : int
-        Healpix Nside.
+    nside : int
+        Healpix nside.
 
     Returns
     -------
@@ -121,11 +121,11 @@ def healpix_i2id(ringi, Nside):
         Alternate pixel index along each ring. This is for pixel transformations
         as this maps exactly to healpix y without a factor.
     """
-    idash = Nside - ringi/2
+    idash = nside - ringi/2
     return idash
 
 
-def healpix_j2jd(ringi, ringj, Nside):
+def healpix_j2jd(ringi, ringj, nside):
     """Converts ringj to jdash.
 
     Parameters
@@ -134,8 +134,8 @@ def healpix_j2jd(ringi, ringj, Nside):
         Pixel ring index.
     ringj : int
         Pixel index along each ring.
-    Nside : int
-        Healpix Nside.
+    nside : int
+        Healpix nside.
 
     Returns
     -------
@@ -145,33 +145,33 @@ def healpix_j2jd(ringi, ringj, Nside):
     """
     if np.isscalar(ringi) == True:
         # North Polar Cap
-        if ringi <= Nside:
+        if ringi <= nside:
             jlen = 4*ringi
             k = np.floor(4*(ringj-1)/jlen)
-            x0 = int(Nside/2) + Nside*k
-            if Nside % 2 == 0:
+            x0 = int(nside/2) + nside*k
+            if nside % 2 == 0:
                 x0 = x0 - 0.5*(ringi-1)
             else:
                 x0 = x0 - 0.5*(ringi) + 1
             jdash = x0 + ((ringj - 1) % (jlen/4))
 
         # Equatorial Segment
-        elif ringi > Nside and ringi < 3*Nside:
-            if Nside % 2 == 0:
+        elif ringi > nside and ringi < 3*nside:
+            if nside % 2 == 0:
                 x0 = 0.5*((ringi+1) % 2)
             else:
                 x0 = 0.5*(ringi % 2)
             jdash = x0 + ringj - 1.
 
         # South Polar Cap
-        elif ringi >= 3*Nside:
-            jlen = 4*(4*Nside - ringi)
+        elif ringi >= 3*nside:
+            jlen = 4*(4*nside - ringi)
             k =  np.floor(4*(ringj-1)/jlen)
-            x0 = int(Nside/2) + Nside*k
-            if Nside % 2 == 0:
-                x0 = x0 - 0.5*(4*Nside-ringi-1)
+            x0 = int(nside/2) + nside*k
+            if nside % 2 == 0:
+                x0 = x0 - 0.5*(4*nside-ringi-1)
             else:
-                x0 = x0 - 0.5*(4*Nside-ringi) + 1
+                x0 = x0 - 0.5*(4*nside-ringi) + 1
             jdash = x0 + ((ringj - 1) % (jlen/4))
 
     else:
@@ -179,42 +179,42 @@ def healpix_j2jd(ringi, ringj, Nside):
         jdash = np.zeros(len(ringi))
 
         # North Polar Cap
-        cond = np.where(ringi <= Nside)[0]
+        cond = np.where(ringi <= nside)[0]
 
         jlen = 4*ringi[cond]
         k = np.floor(4*(ringj[cond]-1)/jlen)
-        x0 = int(Nside/2) + Nside*k
-        if Nside % 2 == 0:
+        x0 = int(nside/2) + nside*k
+        if nside % 2 == 0:
             x0 = x0 - 0.5*(ringi[cond]-1)
         else:
             x0 = x0 - 0.5*(ringi[cond]) + 1
         jdash[cond] = x0 + ((ringj[cond]-1) % (jlen/4))
 
         # Equatorial Segment
-        cond = np.where((ringi > Nside) & (ringi < 3*Nside))[0]
+        cond = np.where((ringi > nside) & (ringi < 3*nside))[0]
 
-        if Nside % 2 == 0:
+        if nside % 2 == 0:
             x0 = 0.5*((ringi[cond]+1) % 2)
         else:
             x0 = 0.5*(ringi[cond] % 2)
         jdash[cond] = x0 + ringj[cond] - 1.
 
         # South Polar Cap
-        cond = np.where(ringi >= 3*Nside)[0]
+        cond = np.where(ringi >= 3*nside)[0]
 
-        jlen = 4*(4*Nside - ringi[cond])
+        jlen = 4*(4*nside - ringi[cond])
         k = np.floor(4*(ringj[cond]-1)/jlen)
-        x0 = int(Nside/2) + Nside*k
-        if Nside % 2 == 0:
-            x0 = x0 - 0.5*(4*Nside-ringi[cond]-1)
+        x0 = int(nside/2) + nside*k
+        if nside % 2 == 0:
+            x0 = x0 - 0.5*(4*nside-ringi[cond]-1)
         else:
-            x0 = x0 - 0.5*(4*Nside-ringi[cond]) + 1
+            x0 = x0 - 0.5*(4*nside-ringi[cond]) + 1
         jdash[cond] = x0 + ((ringj[cond]-1) % (jlen/4))
 
     return jdash
 
 
-def healpix_ijd2ijs(idash, jdash, Nside):
+def healpix_ijd2ijs(idash, jdash, nside):
     """Converts from healpix i and j dash to i and j star, which is useful for
     finding neighbours.
 
@@ -234,8 +234,8 @@ def healpix_ijd2ijs(idash, jdash, Nside):
     jstar : array
         Healpix integer i star index.
     """
-    istar = jdash - idash + Nside/2
-    jstar = jdash + idash + Nside/2
+    istar = jdash - idash + nside/2
+    jstar = jdash + idash + nside/2
     istar -= 0.5
     istar = istar.astype('int')
     jstar -= 0.5
@@ -243,7 +243,7 @@ def healpix_ijd2ijs(idash, jdash, Nside):
     return istar, jstar
 
 
-def healpix_ijs2ijd(istar, jstar, Nside):
+def healpix_ijs2ijd(istar, jstar, nside):
     """Converts from healpix i and j star to i and j dash, which is useful for
     finding neighbours.
 
@@ -265,12 +265,12 @@ def healpix_ijs2ijd(istar, jstar, Nside):
     """
     istar = istar.astype('float') + 0.5
     jstar = jstar.astype('float') + 0.5
-    jdash = (istar + jstar - Nside)/2
+    jdash = (istar + jstar - nside)/2
     idash = (jstar - istar)/2
     return idash, jdash
 
 
-def healpix_ijs_neighbours(istar, jstar, Nside):
+def healpix_ijs_neighbours(istar, jstar, nside):
     """Gets the healpix i, jstar neighbours for a single healpix pixel.
 
     Parameters
@@ -279,8 +279,8 @@ def healpix_ijs_neighbours(istar, jstar, Nside):
         Healpix integer i star index.
     jstar : array
         Healpix integer i star index.
-    Nside : int
-        Healpix Nside.
+    nside : int
+        Healpix nside.
 
     Returns
     -------
@@ -289,54 +289,54 @@ def healpix_ijs_neighbours(istar, jstar, Nside):
     jstar_neigh : array
         Neighbour healpix integer j star index.
     """
-    if jstar - istar + 1 == 2*Nside:
-        istar_neigh = [istar, istar + 1, istar + 1, istar + Nside, istar + Nside, istar - Nside, istar + 1 - Nside, istar+2*Nside]
-        jstar_neigh = [jstar - 1,  jstar - 1, jstar, jstar - 1 + Nside, jstar + Nside, jstar - Nside, jstar - Nside, jstar+2*Nside]
-    elif istar - jstar + 1 == 2*Nside:
-        istar_neigh = [istar, istar - 1, istar - 1, istar - Nside, istar - Nside, istar + Nside, istar - 1 + Nside, istar-2*Nside]
-        jstar_neigh = [jstar + 1,  jstar + 1, jstar, jstar + 1 - Nside, jstar - Nside, jstar + Nside, jstar + Nside, jstar-2*Nside]
-    elif jstar - istar + 1 == Nside and istar % Nside == 0:
+    if jstar - istar + 1 == 2*nside:
+        istar_neigh = [istar, istar + 1, istar + 1, istar + nside, istar + nside, istar - nside, istar + 1 - nside, istar+2*nside]
+        jstar_neigh = [jstar - 1,  jstar - 1, jstar, jstar - 1 + nside, jstar + nside, jstar - nside, jstar - nside, jstar+2*nside]
+    elif istar - jstar + 1 == 2*nside:
+        istar_neigh = [istar, istar - 1, istar - 1, istar - nside, istar - nside, istar + nside, istar - 1 + nside, istar-2*nside]
+        jstar_neigh = [jstar + 1,  jstar + 1, jstar, jstar + 1 - nside, jstar - nside, jstar + nside, jstar + nside, jstar-2*nside]
+    elif jstar - istar + 1 == nside and istar % nside == 0:
         istar_neigh = [istar - 1, istar, istar + 1,  istar - 1, istar + 1, istar, istar + 1]
         jstar_neigh = [jstar - 1, jstar - 1, jstar - 1, jstar, jstar, jstar + 1, jstar + 1]
-    elif istar - jstar + 1 == Nside and jstar % Nside == 0:
+    elif istar - jstar + 1 == nside and jstar % nside == 0:
         istar_neigh = [istar - 1, istar, istar - 1, istar + 1, istar - 1, istar, istar + 1]
         jstar_neigh = [jstar - 1, jstar - 1, jstar, jstar, jstar + 1, jstar + 1, jstar + 1]
-    elif istar % Nside == 0 and jstar + 1 - Nside*(np.floor(istar/Nside) + 1) > 0:
+    elif istar % nside == 0 and jstar + 1 - nside*(np.floor(istar/nside) + 1) > 0:
         istar_neigh = [istar, istar + 1, istar + 1, istar, istar + 1,
-                     istar - ((jstar+1)-Nside*np.floor(jstar/Nside)),
-                     istar - ((jstar)-Nside*np.floor(jstar/Nside)),
-                     istar - ((jstar-1)-Nside*np.floor(jstar/Nside))]
+                       istar - ((jstar+1)-nside*np.floor(jstar/nside)),
+                       istar - ((jstar)-nside*np.floor(jstar/nside)),
+                       istar - ((jstar-1)-nside*np.floor(jstar/nside))]
         jstar_neigh = [jstar - 1, jstar - 1, jstar, jstar + 1, jstar + 1,
-                     Nside*np.floor(jstar/Nside)-1,
-                     Nside*np.floor(jstar/Nside)-1,
-                     Nside*np.floor(jstar/Nside)-1]
-    elif jstar % Nside == 0 and istar + 1 - Nside*(np.floor(jstar/Nside) + 1) > 0:
+                       nside*np.floor(jstar/nside)-1,
+                       nside*np.floor(jstar/nside)-1,
+                       nside*np.floor(jstar/nside)-1]
+    elif jstar % nside == 0 and istar + 1 - nside*(np.floor(jstar/nside) + 1) > 0:
         jstar_neigh = [jstar, jstar + 1, jstar + 1, jstar, jstar + 1,
-                     jstar - ((istar+2)-Nside*np.floor(istar/Nside)),
-                     jstar - ((istar+1)-Nside*np.floor(istar/Nside)),
-                     jstar - ((istar)-Nside*np.floor(istar/Nside))]
+                       jstar - ((istar+2)-nside*np.floor(istar/nside)),
+                       jstar - ((istar+1)-nside*np.floor(istar/nside)),
+                       jstar - ((istar)-nside*np.floor(istar/nside))]
         istar_neigh = [istar - 1, istar - 1, istar, istar + 1, istar + 1,
-                     Nside*np.floor(istar/Nside)-1,
-                     Nside*np.floor(istar/Nside)-1,
-                     Nside*np.floor(istar/Nside)-1]
-    elif (jstar + 1 - Nside) % Nside == 0 and jstar + 1 - Nside*(np.floor(istar/Nside) + 1) > 0:
+                       nside*np.floor(istar/nside)-1,
+                       nside*np.floor(istar/nside)-1,
+                       nside*np.floor(istar/nside)-1]
+    elif (jstar + 1 - nside) % nside == 0 and jstar + 1 - nside*(np.floor(istar/nside) + 1) > 0:
         jstar_neigh = [jstar, jstar - 1, jstar - 1, jstar, jstar - 1,
-                     jstar + Nside*(np.floor(istar/Nside)+1)-istar,
-                     jstar + Nside*(np.floor(istar/Nside)+1)-istar-1,
-                     jstar + Nside*(np.floor(istar/Nside)+1)-istar+1]
+                       jstar + nside*(np.floor(istar/nside)+1)-istar,
+                       jstar + nside*(np.floor(istar/nside)+1)-istar-1,
+                       jstar + nside*(np.floor(istar/nside)+1)-istar+1]
         istar_neigh = [istar - 1, istar - 1, istar, istar + 1, istar + 1,
-                     Nside*(np.floor(istar/Nside)+1),
-                     Nside*(np.floor(istar/Nside)+1),
-                     Nside*(np.floor(istar/Nside)+1)]
-    elif (istar + 1 - Nside) % Nside == 0 and istar + 1 - Nside*(np.floor(jstar/Nside) + 1) > 0:
+                       nside*(np.floor(istar/nside)+1),
+                       nside*(np.floor(istar/nside)+1),
+                       nside*(np.floor(istar/nside)+1)]
+    elif (istar + 1 - nside) % nside == 0 and istar + 1 - nside*(np.floor(jstar/nside) + 1) > 0:
         istar_neigh = [istar, istar - 1, istar - 1, istar, istar - 1,
-                     istar + Nside*(np.floor(jstar/Nside)+1)-jstar,
-                     istar + Nside*(np.floor(jstar/Nside)+1)-jstar-1,
-                     istar + Nside*(np.floor(jstar/Nside)+1)-jstar+1]
+                       istar + nside*(np.floor(jstar/nside)+1)-jstar,
+                       istar + nside*(np.floor(jstar/nside)+1)-jstar-1,
+                       istar + nside*(np.floor(jstar/nside)+1)-jstar+1]
         jstar_neigh = [jstar - 1, jstar - 1, jstar, jstar + 1, jstar + 1,
-                     Nside*(np.floor(jstar/Nside)+1),
-                     Nside*(np.floor(jstar/Nside)+1),
-                     Nside*(np.floor(jstar/Nside)+1)]
+                       nside*(np.floor(jstar/nside)+1),
+                       nside*(np.floor(jstar/nside)+1),
+                       nside*(np.floor(jstar/nside)+1)]
     else:
         istar_neigh = [istar - 1, istar, istar + 1, istar - 1, istar + 1, istar - 1, istar, istar + 1]
         jstar_neigh = [jstar - 1, jstar - 1, jstar - 1, jstar, jstar, jstar + 1, jstar + 1, jstar + 1]
@@ -344,20 +344,20 @@ def healpix_ijs_neighbours(istar, jstar, Nside):
     istar_neigh = np.array(istar_neigh)
     jstar_neigh = np.array(jstar_neigh)
 
-    cond = np.where(istar_neigh + jstar_neigh > 9*Nside-1)[0]
-    istar_neigh[cond] = istar_neigh[cond] - 4*Nside
-    jstar_neigh[cond] = jstar_neigh[cond] - 4*Nside
+    cond = np.where(istar_neigh + jstar_neigh > 9*nside-1)[0]
+    istar_neigh[cond] = istar_neigh[cond] - 4*nside
+    jstar_neigh[cond] = jstar_neigh[cond] - 4*nside
 
-    cond = np.where(istar_neigh + jstar_neigh < Nside-1)[0]
-    istar_neigh[cond] = istar_neigh[cond] + 4*Nside
-    jstar_neigh[cond] = jstar_neigh[cond] + 4*Nside
+    cond = np.where(istar_neigh + jstar_neigh < nside-1)[0]
+    istar_neigh[cond] = istar_neigh[cond] + 4*nside
+    jstar_neigh[cond] = jstar_neigh[cond] + 4*nside
 
     istar_neigh = np.unique(istar_neigh)
     jstar_neigh = np.unique(jstar_neigh)
     return istar_neigh, jstar_neigh
 
 
-def healpix_ij2xy(ringi, ringj, Nside):
+def healpix_ij2xy(ringi, ringj, nside):
     """Conversion of healpix ring i and j to healpix x and y.
 
     Parameters
@@ -366,8 +366,8 @@ def healpix_ij2xy(ringi, ringj, Nside):
         Pixel ring index.
     ringj : int
         Pixel index along each ring.
-    Nside : int
-        Healpix Nside.
+    nside : int
+        Healpix nside.
 
     Returns
     -------
@@ -376,22 +376,22 @@ def healpix_ij2xy(ringi, ringj, Nside):
     healy : array
         Healpix y coordinates.
     """
-    jdash = healpix_j2jd(ringi, ringj, Nside)
-    idash = healpix_i2id(ringi, Nside)
-    healx = jdash * np.pi/(2*Nside)
-    healy = idash * np.pi/(2*Nside)
+    jdash = healpix_j2jd(ringi, ringj, nside)
+    idash = healpix_i2id(ringi, nside)
+    healx = jdash * np.pi/(2*nside)
+    healy = idash * np.pi/(2*nside)
     return healx, healy
 
 
-def healpix_pix2xy(p, Nside):
+def healpix_pix2xy(p, nside):
     """Returns the healpix ring i and pixel along the ring j.
 
     Parameters
     ----------
     p : int
         Healpix pixel index.
-    Nside : int
-        Healpix Nside.
+    nside : int
+        Healpix nside.
 
     Returns
     -------
@@ -400,6 +400,6 @@ def healpix_pix2xy(p, Nside):
     healy : array
         Healpix y coordinates.
     """
-    ringi, ringj = healpix_pix2ij(p, Nside)
-    healx, healy = healpix_ij2xy(ringi, ringj, Nside)
+    ringi, ringj = healpix_pix2ij(p, nside)
+    healx, healy = healpix_ij2xy(ringi, ringj, nside)
     return healx, healy
