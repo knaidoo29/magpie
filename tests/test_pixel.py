@@ -114,7 +114,7 @@ def test_healpix_boundary():
 def test_healpix_pixels():
     nside = 32
     p = np.arange(12*nside**2)
-    or pix in p:
+    for pix in p:
         ringi, ringj = magpie.pixel.healpix_pix2ij(pix, nside)
         p = magpie.pixel.healpix_ij2pix(ringi, ringj, nside)
     ringi, ringj = magpie.pixel.healpix_pix2ij(p, nside)
