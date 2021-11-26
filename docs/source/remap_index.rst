@@ -45,15 +45,9 @@ The weights :math:`w(X, Y)` are given by
   w(X, Y) = \frac{A(X\cap Y)}{A(Y)},
 
 where :math:`A(Y)` is the area (length in 1D and volume in 3D) of pixel Y and :math:`A(X\cap Y)`
-is the area of the overlapping region for pixels X and Y. While by definition :math:`w(X, Y)`
-is unitless the explicit dependence on area is useful since the units of our data
-is given by :math:`{\rm arb. units}\, A^{-1}(X)` for a pixel :math:`X`. This means
-a remapping from one coordinate system to another also requires a conversion of units.
-For the mean this dependence drops out but this is not the case for remapping variance.
-
-For variance we can use propagation of errors to determine the variance on the
-remapped coordinate system although note we assume covariant terms are zero. The
-remapped variance is given by
+is the area of the overlapping region for pixels X and Y. For variance we can use
+propagation of errors to determine the variance on the remapped coordinate system
+although note we assume covariant terms are zero. The remapped variance is given by
 
 .. math::
 

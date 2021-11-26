@@ -4,7 +4,7 @@ import scipy.interpolate as interpolate
 
 from . import shapes as plot_shapes
 from .. import coords
-from .. import shapes
+from .. import pixel
 
 
 class PlotOrtho:

@@ -5,43 +5,23 @@ API
 Coords
 ======
 
-* Conversions
-    * :py:func:`coords.cart2polar`
-    * :py:func:`coords.polar2cart`
-    * :py:func:`coords.cart2sphere`
-    * :py:func:`coords.sphere2cart`
-    * :py:func:`coords.ortho2cart`
-* Rotations
-* Utility
-    * :py:func:`coords.usphere_area`
-    * :py:func:`coords.sphere2lonlat`
-    * :py:func:`coords.lonlat2sphere`
+.. toctree::
+
+    coords_func_list
+
+Grids
+=====
+
+.. toctree::
+
+    grids_func_list
 
 Randoms
 =======
 
-* Cartesian
-    * :py:func:`randoms.randoms_1d`
-    * :py:func:`randoms.randoms_2d`
-    * :py:func:`randoms.randoms_3d`
-* Polar
-    * :py:func:`randoms.randoms_polar`
-* Unit Sphere
-    * :py:func:`randoms.randoms_usphere`
-    * :py:func:`randoms.randoms_healpix_pixel`
-* Spherical
-    * :py:func:`randoms.random_sphere_r`
-    * :py:func:`randoms.random_sphere`
-* Sample PDF/CDF
-    * :py:func:`randoms.pdf2cdf`
-    * :py:func:`randoms.randoms_cdf`
-    * :py:func:`randoms.randoms_pdf`
-* Subsampling
-    * :py:func:`randoms.shuffle`
-    * :py:func:`randoms.random_draw`
-    * :py:func:`randoms.random_prob_draw`
-    * :py:func:`randoms.stochastic_integer_weights`
-    * :py:func:`randoms.stochastic_binary_weights`
+.. toctree::
+
+    randoms_func_list
 
 Remap
 =====

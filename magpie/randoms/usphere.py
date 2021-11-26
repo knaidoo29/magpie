@@ -2,7 +2,7 @@ import numpy as np
 import healpy as hp
 
 from .. import coords
-from .. import pixels
+from .. import pixel
 
 
 def randoms_usphere(size, phi_min=0., phi_max=2*np.pi, theta_min=0., theta_max=np.pi):
@@ -128,8 +128,8 @@ def _randoms_healpix_xy(size, p, nside):
     yrand : array
         Random y in the healpix pixel.
     """
-    delta = pixels._healpix_get_delta(nside)
-    xp, yp = pixels.healpix_pix2xy(p, nside)
+    delta = pixel._healpix_get_delta(nside)
+    xp, yp = pixel.healpix_pix2xy(p, nside)
     ux = np.random.random_sample(size)
     uy = np.random.random_sample(size)
     xrand = np.zeros(size)

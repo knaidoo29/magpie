@@ -1,12 +1,16 @@
+from .basic_shapes import get_square
+from .basic_shapes import get_arc
+from .basic_shapes import get_disc
+from .basic_shapes import get_box
 
 from .healpix_boundary import _healpix_get_delta
 from .healpix_boundary import _healpix_top_left
 from .healpix_boundary import _healpix_top_right
 from .healpix_boundary import _healpix_bot_left
 from .healpix_boundary import _healpix_bot_right
-from .healpix_boundary import _healpix_top
-from .healpix_boundary import _healpix_bot
-from .healpix_boundary import _healpix_boundary
+from .healpix_boundary import healpix_boundary_top
+from .healpix_boundary import healpix_boundary_bot
+from .healpix_boundary import healpix_boundary
 
 from .healpix_index import healpix_pix2ij
 from .healpix_index import healpix_ij2pix

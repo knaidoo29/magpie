@@ -1,16 +1,16 @@
 # MAGPIE: Monte cArlo weiGhted PIxel rEmapping
 
+[![PyPI version](https://badge.fury.io/py/magpie-pkg.svg)](https://badge.fury.io/py/magpie-pkg)
+[![Anaconda-Server Badge](https://anaconda.org/knaidoo29/magpie-pkg/badges/version.svg)](https://anaconda.org/knaidoo29/magpie-pkg)
+[![Documentation Status](https://readthedocs.org/projects/magpie-doc/badge/?version=latest)](https://magpie-doc.readthedocs.io/en/latest/?badge=latest)
 [![CircleCI](https://circleci.com/gh/knaidoo29/magpie/tree/master.svg?style=svg)](https://circleci.com/gh/knaidoo29/magpie/tree/master)
 [![codecov](https://codecov.io/gh/knaidoo29/magpie/branch/master/graph/badge.svg?token=P7H8FAJT43)](https://codecov.io/gh/knaidoo29/magpie)
-[![Documentation Status](https://readthedocs.org/projects/magpie-doc/badge/?version=latest)](https://magpie-doc.readthedocs.io/en/latest/?badge=latest)
-[![PyPI version](https://badge.fury.io/py/magpie-pkg.svg)](https://badge.fury.io/py/magpie-pkg)
-[![Anaconda-Server Badge](https://anaconda.org/knaidoo29/magpie-pkg/badges/installer/conda.svg)](https://conda.anaconda.org/knaidoo29)
 [![Anaconda-Server Badge](https://anaconda.org/knaidoo29/magpie-pkg/badges/license.svg)](https://anaconda.org/knaidoo29/magpie-pkg)
 
 |               |                                       |
 |---------------|---------------------------------------|
 | Author        | Krishna Naidoo                        |          
-| Version       | 0.2.1                                 |
+| Version       | 0.2.2                                 |
 | Repository    | https://github.com/knaidoo29/magpie   |
 | Documentation | https://magpie-doc.readthedocs.io/    |
 

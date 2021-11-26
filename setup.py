@@ -16,7 +16,7 @@ ext4 = Extension(name='magpie.src.remap_3d_grid2grid', sources=['magpie/src/rema
 exts = [ext1, ext2, ext3, ext4]#, ext5]
 
 setup(name = 'magpie-pkg',
-      version = '0.2.1',
+      version = '0.2.2',
       description       = "Monte cArlo weiGhted PIxel rEmapping",
       long_description  = long_description,
       long_description_content_type = 'text/markdown',

@@ -16,7 +16,8 @@ def rotate_polar(phi, rotate):
     rot_phi : array
         Rotated angular polar coordinates.
     """
-    assert rotate > 0. and rotate < 2.*np.pi, "Rotation angles must have lie between [0, 2pi]."
+    assert rotate > 0. and rotate < 2.*np.pi, \
+        "Rotation angles must have lie between [0, 2pi]."
     rot_phi = rotate
     cond = np.where(rot_phi >= 2.*np.pi)[0]
     rot_phi[cond] -= 2.*np.pi

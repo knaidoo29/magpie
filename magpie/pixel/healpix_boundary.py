@@ -1,6 +1,5 @@
 import numpy as np
 
-
 from . import healpix_index
 
 
@@ -144,7 +143,7 @@ def _healpix_bot_right(p, nside, steps=10, reverse=False):
     return x, y
 
 
-def _healpix_top(p, nside, steps=20, reverse=False):
+def healpix_boundary_top(p, nside, steps=20, reverse=False):
     """Returns the top side of a healpix pixel in healpix x and y coordinates.
 
     Parameters
@@ -176,7 +175,7 @@ def _healpix_top(p, nside, steps=20, reverse=False):
     return x, y
 
 
-def _healpix_bot(p, nside, steps=20, reverse=False):
+def healpix_boundary_bot(p, nside, steps=20, reverse=False):
     """Returns the bottom side of a healpix pixel in healpix x and y coordinates.
 
     Parameters
@@ -208,7 +207,7 @@ def _healpix_bot(p, nside, steps=20, reverse=False):
     return x, y
 
 
-def _healpix_boundary(p, nside, steps=40, reverse=False):
+def healpix_boundary(p, nside, steps=40, reverse=False):
     """Returns the boundary of a healpix pixel in healpix x and y coordinates,
     default given in clockwise directions.
 
@@ -232,8 +231,8 @@ def _healpix_boundary(p, nside, steps=40, reverse=False):
     """
     size_top = int(steps/2)
     size_bot = steps - size_top
-    x_top, y_top = _healpix_top(p, nside, steps=size_top)
-    x_bot, y_bot = _healpix_bot(p, nside, steps=size_bot, reverse=True)
+    x_top, y_top = healpix_boundary_top(p, nside, steps=size_top)
+    x_bot, y_bot = healpix_boundary_bot(p, nside, steps=size_bot, reverse=True)
     x = np.concatenate([x_top, x_bot])
     y = np.concatenate([y_top, y_bot])
     if reverse == True:

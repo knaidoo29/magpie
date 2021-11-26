@@ -1,7 +1,7 @@
 import numpy
 import matplotlib.pylab as plt
 
-from .. import shapes
+from .. import pixel
 
 
 def plot_box(x_min, x_max, y_min, y_max, ax=None, divisions=100, **kwargs):

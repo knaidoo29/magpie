@@ -2,21 +2,21 @@
 MAGPIE: Monte cArlo weiGhted PIxel rEmapping
 ============================================
 
-.. image:: https://circleci.com/gh/knaidoo29/magpie/tree/master.svg?style=svg
-        :target: https://circleci.com/gh/knaidoo29/magpie/tree/master
+.. image:: https://badge.fury.io/py/magpie-pkg.svg
+    :target: https://badge.fury.io/py/magpie-pkg
 
-.. image:: https://codecov.io/gh/knaidoo29/magpie/branch/master/graph/badge.svg?token=P7H8FAJT43
-        :target: https://codecov.io/gh/knaidoo29/magpie
+.. image:: https://anaconda.org/knaidoo29/magpie-pkg/badges/version.svg
+    :target: https://anaconda.org/knaidoo29/magpie-pkg
 
 .. image:: https://readthedocs.org/projects/magpie-doc/badge/?version=latest
     :target: https://magpie-doc.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
 
-.. image:: https://badge.fury.io/py/magpie-pkg.svg
-    :target: https://badge.fury.io/py/magpie-pkg
+.. image:: https://circleci.com/gh/knaidoo29/magpie/tree/master.svg?style=svg
+        :target: https://circleci.com/gh/knaidoo29/magpie/tree/master
 
-.. image:: https://anaconda.org/knaidoo29/magpie-pkg/badges/installer/conda.svg
-    :target: https://conda.anaconda.org/knaidoo29
+.. image:: https://codecov.io/gh/knaidoo29/magpie/branch/master/graph/badge.svg?token=P7H8FAJT43
+        :target: https://codecov.io/gh/knaidoo29/magpie
 
 .. image:: https://anaconda.org/knaidoo29/magpie-pkg/badges/license.svg
     :target: https://anaconda.org/knaidoo29/magpie-pkg
@@ -25,7 +25,7 @@ MAGPIE: Monte cArlo weiGhted PIxel rEmapping
 +---------------+-----------------------------------------+
 | Author        | Krishna Naidoo                          |
 +---------------+-----------------------------------------+
-| Version       | 0.2.1                                   |
+| Version       | 0.2.2                                   |
 +---------------+-----------------------------------------+
 | Repository    | https://github.com/knaidoo29/magpie     |
 +---------------+-----------------------------------------+
@@ -34,6 +34,16 @@ MAGPIE: Monte cArlo weiGhted PIxel rEmapping
 
 .. warning::
   MAGPIE is currently in development. Functions and classes may change. Use with caution.
+
+Contents
+========
+
+* `Introduction`_
+* `Tutorials and API`_
+* `Dependencies`_
+* `Installation`_
+* `Support`_
+* `Version History`_
 
 Introduction
 ============
@@ -60,15 +70,18 @@ exactly without requiring the approximate schemes above.
   using mpi4py and an additional library MPIutils which will handle all of the MPI
   enabled functions.
 
-Contents
-========
+Tutorials and API
+=================
 
 .. toctree::
-   :maxdepth: 2
+  :maxdepth: 2
 
-   remap_index
-   randoms_index
-   api
+  coords_index
+  grids_index
+  pixel_index
+  randoms_index
+  remap_index
+  api
 
 
 Dependencies

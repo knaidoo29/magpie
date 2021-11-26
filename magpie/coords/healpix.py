@@ -18,7 +18,7 @@ def healpix_xy2ang(healx, healy):
     theta : array
         Theta coordinates [0, pi].
     """
-    if np.isscalar(healx) == True:
+    if np.isscalar(healx) is True:
         if abs(healy) <= np.pi/4:
             z = 8*healy/(3*np.pi)
             theta = np.arccos(z)
@@ -45,13 +45,14 @@ def healpix_xy2ang(healx, healy):
         theta[cond] = np.arccos(z)
         siga = abs(sigz)-1
         k = np.floor(2*healx[cond]/np.pi)
-        if any(siga == 1.) == False:
+        if any(siga == 1.) is False:
             phi[cond] = (healx[cond] - (np.pi/4)*siga*(2*k+1)) / (1-siga)
         else:
-            cond1 = np.where(siga == 1.)[0]
-            phi[cond[cond1]] = 0.
-            cond2 = np.where(siga != 1.)[0]
-            phi[cond[cond2]] = (healx[cond[cond2]] - (np.pi/4)*siga[cond2]*(2*k[cond2]+1)) / (1-siga[cond2])
+            c1 = np.where(siga == 1.)[0]
+            phi[cond[c1]] = 0.
+            c2 = np.where(siga != 1.)[0]
+            phi[cond[c2]] = (healx[cond[c2]]-(np.pi/4)*siga[c2]*(2*k[c2]+1))\
+                / (1-siga[c2])
     return phi, theta
 
 
@@ -72,7 +73,7 @@ def healpix_ang2xy(phi, theta):
     healy : array
         Healpix y coordinates.
     """
-    if np.isscalar(phi) == True:
+    if np.isscalar(phi) is True:
         z = np.cos(theta)
         if abs(z) <= 2/3:
             healx = phi
