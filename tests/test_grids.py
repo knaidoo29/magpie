@@ -157,3 +157,5 @@ def test_polarEA():
     assert r[3*7**2] == 0.75, "r values are incorrect."
     assert np.round(p[3*4**2], decimals=4) == np.round(np.pi/(3*(2*4+1)), decimals=4), "p values are incorrect."
     assert np.round(p[3*7**2 + 7], decimals=4) == np.round(15*np.pi/(3*(2*7+1)), decimals=4), "p values are incorrect."
+    area = magpie.grids.polarEA_area(10, rmax=10., base_nphi=4)
+    assert(np.round(area, decimals=4) == np.round(np.pi/4., decimals=4)), "area calculation is incorrect."
