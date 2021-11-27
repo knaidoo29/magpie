@@ -15,6 +15,8 @@ def check_assert(function, *args, **kwargs):
 
 def test_cart2polar():
     # check scalar case
+    r, p = magpie.coords.cart2polar(0., -1.)
+    assert r == 1. and p == 3.*np.pi/2, "Check cart2polar scalar case returns (x, y)=(0, -1) to (r, p)=(0, 3.*np.pi/2)."
     r, p = magpie.coords.cart2polar(0., 1.)
     assert r == 1. and p == np.pi/2., "Check cart2polar scalar case returns (x, y)=(0, 1) to (r, p)=(1, pi/2)."
     # check array case
@@ -39,6 +41,10 @@ def test_polar2cart():
 
 def test_cart2sphere():
     # scalar case
+    r, phi, theta = magpie.coords.cart2sphere(0., 0., 0.)
+    assert r == 0. and phi == 0. and theta == 0., "Check cart2sphere (x, y, z) = (0., 0., 0.) returns (r, p, t) = (0., 0., 0.)."
+    r, phi, theta = magpie.coords.cart2sphere(0., -1., 0.)
+    assert r == 1. and phi == 3*np.pi/2. and theta == np.pi/2., "Check cart2sphere (x, y, z) = (0., -1., 0.) returns (r, p, t) = (1., 3pi/2, pi/2)."
     r, phi, theta = magpie.coords.cart2sphere(1., 0., 0.)
     assert r == 1. and phi == 0. and theta == np.pi/2., "Check cart2sphere (x, y, z) = (1., 0., 0.) returns (r, p, t) = (1., 0., pi/2)."
     r, phi, theta = magpie.coords.cart2sphere(1., 0., 0., center=[1., 0., 1.])
@@ -107,6 +113,14 @@ def test_usphere_area_assert_full_usphere():
     area = magpie.coords.usphere_area(0., 2.*np.pi, 0., np.pi)
     assert area == 4.*np.pi, "Check unit sphere area for a full sphere is 4pi."
 
+def test_usphere_spherelonlat():
+    # test forward and backwards returns the same thing.
+    theta1 = np.linspace(0., np.pi, 10)
+    lat = magpie.coords.sphere2lonlat(theta1)
+    theta2 = magpie.coords.lonlat2sphere(lat)
+    assert np.round(np.sum(theta1-theta2), decimals=4) == 0., "Forward and backward sphere to lonlat must be equal."
+
+
 # test healpix.py
 
 def test_healpix_xy2ang():
@@ -124,6 +138,14 @@ def test_healpix_xy2ang():
     theta, theta2 = np.round(theta, decimals=5), np.round(theta2[2], decimals=5)
     assert np.sum(phi2 - phi) == 0., "Check phi healpix_xy2ang."
     assert np.sum(theta2 - theta) == 0., "Check theta healpix_xy2ang."
+    # Run test on entire healpix pixel map
+    nside = 16
+    p = np.arange(12*nside**2)
+    x, y = magpie.pixel.healpix_pix2xy(p, nside)
+    phi, theta = magpie.coords.healpix_xy2ang(x, y)
+    for pix in p:
+        phi, theta = magpie.coords.healpix_xy2ang(x[pix], y[pix])
+
 
 def test_healpix_ang2xy():
     phi = np.array([0., 1., 3./2.])*np.pi
@@ -140,3 +162,11 @@ def test_healpix_ang2xy():
     healy, healy2 = np.round(healy, decimals=5), np.round(healy2[2], decimals=5)
     assert np.sum(healx2 - healx) == 0., "Check phi healpix_ang2xy."
     assert np.sum(healy2 - healy) == 0., "Check theta healpix_ang2xy."
+    # Run test on entire healpix pixel map
+    nside = 16
+    p = np.arange(12*nside**2)
+    x, y = magpie.pixel.healpix_pix2xy(p, nside)
+    phi, theta = magpie.coords.healpix_xy2ang(x, y)
+    x, y = magpie.coords.healpix_ang2xy(phi, theta)
+    for pix in p:
+        x, y = magpie.coords.healpix_ang2xy(phi[pix], theta[pix])
