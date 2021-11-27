@@ -10,7 +10,7 @@ def test_is_pos_monotonic():
 
 
 def test_progress_bar():
-    length = 10
+    length = 100
     for index in range(length):
         magpie.utils.progress_bar(index, length, explanation=None, indexing=False,
                                   num_refresh=50, marker_done="#", marker_undone="_", bar_edges="|",
