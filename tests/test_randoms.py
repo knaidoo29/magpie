@@ -148,3 +148,60 @@ def test_randoms_healpix_pixel():
         phi, theta = magpie.randoms.randoms_healpix_pixel(10, pix, nside)
         ind = hp.ang2pix(nside, theta, phi)
         assert all(ind == ind[0]), "Healpix randoms are not correct."
+
+
+def test_shuffle():
+    xrands = magpie.randoms.randoms_1d(1000)
+    xmixed = magpie.randoms.shuffle(xrands)
+    assert np.sum(xrands - xmixed) != 0, "shuffle has not reordered sample."
+
+
+def test_random_draw():
+    rand = np.random.normal(size=10000)
+    randsamp = magpie.randoms.random_draw(rand, 100)
+    assert len(randsamp) == 100, "random_draw is not behaving as expected"
+
+
+def test_random_prob_draw():
+    rand = np.random.normal(size=10000)
+    prob = 0.1*rand + 5
+    cond = np.where(prob > 0)[0]
+    rand, prob = rand[cond], prob[cond]
+    randsamp = magpie.randoms.random_prob_draw(rand, prob)
+    randsamp = magpie.randoms.random_prob_draw(rand, prob, size=100)
+    assert len(randsamp) == 100, "random_prob_draw is not behaving as expected"
+
+
+def test_stochastic_integer_weights():
+    for i in range(100):
+        weights = 0.5
+        weight_SI = magpie.randoms.stochastic_integer_weights(weights)
+        assert weight_SI == 0. or weight_SI == 1., "SI weights not behaving as expected."
+    weights = np.array([0.1, 1.5, 6.7])
+    weight_SI = magpie.randoms.stochastic_integer_weights(weights)
+    check = True
+    if weight_SI[0] == 0. or weight_SI[0] == 1.:
+        pass
+    else:
+        check = False
+        assert check, "SI weights not behaving as expected."
+    if weight_SI[1] == 1. or weight_SI[1] == 2.:
+        pass
+    else:
+        check = False
+        assert check, "SI weights not behaving as expected."
+    if weight_SI[2] == 6. or weight_SI[2] == 7.:
+        pass
+    else:
+        check = False
+        assert check, "SI weights not behaving as expected."
+
+
+def test_stochastic_binary_weights():
+    weights = magpie.randoms.randoms_1d(100, xmin=0, xmax=2)
+    for i in range(0, len(weights)):
+        weight_BI = magpie.randoms.stochastic_binary_weights(weights[i])
+        assert weight_BI == 0. or weight_BI == 1., "BI weights not behaving as expected."
+    weight_BI = magpie.randoms.stochastic_binary_weights(weights)
+    cond = np.where((weight_BI != 0.) & (weight_BI != 1.))[0]
+    assert len(cond) == 0, "BI weights not behaving as expected."
