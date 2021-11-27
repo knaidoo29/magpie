@@ -58,10 +58,10 @@ def test_pdf_functions():
     assert cdf[-6] == 1., "cdf is incorrect."
     x, cdf = magpie.randoms.pdf2cdf(xmid, pdf, return_normpdf=False)
     rands = magpie.randoms.randoms_cdf(x[:6], cdf[:6], 100)
-    cond = np.where((rands >= 0) & (rands <= 5.))[0]
+    cond = np.where((rands >= 0) & (rands <= 5.5))[0]
     assert len(cond) == 100, "cdf randoms not behaving as expected."
     rands = magpie.randoms.randoms_pdf(xmid[:5], pdf[:5], 100)
-    cond = np.where((rands >= 0) & (rands <= 5.))[0]
+    cond = np.where((rands >= 0) & (rands <= 5.5))[0]
     assert len(cond) == 100, "pdf randoms not behaving as expected."
 
 
