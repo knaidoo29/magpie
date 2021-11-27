@@ -13,10 +13,14 @@ MAGPIE: Monte cArlo weiGhted PIxel rEmapping
     :alt: Documentation Status
 
 .. image:: https://circleci.com/gh/knaidoo29/magpie/tree/master.svg?style=svg
-        :target: https://circleci.com/gh/knaidoo29/magpie/tree/master
+    :target: https://circleci.com/gh/knaidoo29/magpie/tree/master
 
-.. image:: https://codecov.io/gh/knaidoo29/magpie/branch/master/graph/badge.svg?token=P7H8FAJT43
+..
+    .. image:: https://codecov.io/gh/knaidoo29/magpie/branch/master/graph/badge.svg?token=P7H8FAJT43
         :target: https://codecov.io/gh/knaidoo29/magpie
+
+.. image:: https://codecov.io/gh/knaidoo29/magpie/branch/development/graph/badge.svg?token=P7H8FAJT43
+    :target: https://codecov.io/gh/knaidoo29/magpie
 
 .. image:: https://anaconda.org/knaidoo29/magpie-pkg/badges/license.svg
     :target: https://anaconda.org/knaidoo29/magpie-pkg

@@ -104,3 +104,8 @@ Tutorial
 
 API
 ===
+
+
+.. toctree::
+
+    remap_func_list

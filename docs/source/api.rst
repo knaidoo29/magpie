@@ -25,3 +25,7 @@ Randoms
 
 Remap
 =====
+
+.. toctree::
+
+    remap_func_list
