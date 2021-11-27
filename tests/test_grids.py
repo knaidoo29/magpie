@@ -24,8 +24,8 @@ def test_xedges2mid():
 def test_xmid2edges():
     xedges = magpie.grids.get_xedges(1., 10)
     xmid = magpie.grids.xedges2mid(xedges)
-    xedges2 = magpie.grids.xmid2edges(xmid)
-    assert np.round(np.sum(xedges-xedges2), decimals=2), "Conversion from xmid to xedges is not consistent with input xedges."
+    xedges2 = np.round(magpie.grids.xmid2edges(xmid), decimals=2)
+    assert np.sum(xedges-xedges2), "Conversion from xmid to xedges is not consistent with input xedges."
 
 def test_grid1d():
     xmid = magpie.grids.grid1d(10., 10)

@@ -57,8 +57,8 @@ def xmid2edges(xmid):
     """
     dx = xmid[1] - xmid[0]
     xedges = np.zeros(len(xmid) + 1)
-    xedges[:-1] = xmid - dx
-    xedges[-1] = xmid[-1] + dx
+    xedges[:-1] = xmid - 0.5*dx
+    xedges[-1] = xmid[-1] + 0.5*dx
     return xedges
 
 
