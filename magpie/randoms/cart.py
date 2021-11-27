@@ -19,7 +19,7 @@ def randoms_1d(size, xmin=0., xmax=1.):
         Uniform randoms in 1D.
     """
     xrands = (xmax - xmin)*np.random.random_sample(size) + xmin
-    return xrand
+    return xrands
 
 
 def randoms_2d(size, mins=[0., 0.], maxs=[1., 1.]):

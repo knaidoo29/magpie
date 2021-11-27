@@ -1,6 +1,8 @@
 import numpy as np
 from scipy import interpolate
 
+from .. import grids
+
 
 def pdf2cdf(xmid, pdf, return_normpdf=True):
     """Calculates the CDF from a given PDF.
@@ -24,7 +26,7 @@ def pdf2cdf(xmid, pdf, return_normpdf=True):
         Normalised PDF.
     """
     dx = xmid[1] - xmid[0]
-    x = np.linspace(xmid[0] - 0.5*dx, xmid[-1]+0.5*dx, len(xmid)+1)
+    x = grids.xmid2edges(xmid)
     cdf = np.zeros(len(x))
     cdf[1:] = np.cumsum(pdf)*dx
     normpdf = pdf/np.max(cdf)
