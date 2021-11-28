@@ -35,7 +35,7 @@ subroutine get_remap_pix_len(x1min, x1max, grid1, x2min, x2max, grid2, pixlen)
 
   integer, intent(out) :: pixlen
 
-  ! Function
+  ! Main
 
   boxsize1 = x1max - x1min
   boxsize2 = x2max - x2min
@@ -75,7 +75,7 @@ subroutine which_pix(xmin, dx, x, pix)
   real(kind=dp), intent(in) :: xmin, dx, x
   integer, intent(out) :: pix
 
-  ! Function
+  ! Main
 
   pix = int(floor((x-xmin)/dx))
 
@@ -111,6 +111,8 @@ subroutine pix1dto2d(xpix, ypix, xlen, ylen, ygrid, pix)
   integer, intent(out) :: pix(xlen*ylen)
 
   integer :: i, j, ii
+
+  ! Main
 
   ii = 1
 
@@ -162,6 +164,8 @@ subroutine pix1dto3d(xpix, ypix, zpix, xlen, ylen, zlen, ygrid, zgrid, pix)
   integer, intent(out) :: pix(xlen*ylen*zlen)
 
   integer :: i, j, k, ii
+
+  ! Main
 
   ii = 1
 
@@ -229,7 +233,7 @@ subroutine remap_1d_grid2grid_pixel(x1min, x1max, grid1, x2min, x2max, grid2 &
   real(kind=dp) :: x1edge1, x1edge2, x2edge1, x2edge2
   integer :: i, pix1, pix2
 
-  ! Function
+  ! Main
 
   boxsize1 = x1max - x1min
   boxsize2 = x2max - x2min

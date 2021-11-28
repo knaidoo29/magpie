@@ -77,7 +77,7 @@ subroutine remap_3d_grid2grid(x1min, x1max, x1grid, y1min, y1max, y1grid &
   integer :: pix(xpixlen*ypixlen*zpixlen), i, j, k
   integer :: xwhich2pix, ywhich2pix, zwhich2pix, ii, jj, i1, j1, k1
 
-  ! Function
+  ! Main
 
   do i = 1, x2grid
 

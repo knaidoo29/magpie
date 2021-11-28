@@ -14,8 +14,9 @@ Rotations
 ---------
 
 .. toctree::
-  
+
   api/coords/rotate_rotate2d
+  api/coords/rotate_rotate3d
 
 Utility
 -------

@@ -42,7 +42,7 @@ subroutine remap_1d_grid2grid(x1min, x1max, grid1, x2min, x2max, grid2, pixlen &
   real(kind=dp) :: weights(pixlen)
   integer :: pix(pixlen), i, j, which2pix
 
-  ! Function
+  ! Main
 
   do i = 1, grid2
 

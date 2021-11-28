@@ -1,5 +1,4 @@
 
-
 subroutine rotate_2d_scalar(x, y, dphi, xrot, yrot)
 
   ! Rotates a single point in 2D cartesian coordinates counter clockwise by
@@ -25,10 +24,12 @@ subroutine rotate_2d_scalar(x, y, dphi, xrot, yrot)
   real(kind=dp), intent(in) :: x, y, dphi
   real(kind=dp), intent(out) :: xrot, yrot
 
+  ! Main
+
   xrot = cos(dphi)*x - sin(dphi)*y
   yrot = sin(dphi)*x + cos(dphi)*y
 
-end subroutine
+end subroutine rotate_2d_scalar
 
 
 subroutine rotate_2d_array(x, y, dphi, xlen, xrot, yrot)
@@ -59,10 +60,12 @@ subroutine rotate_2d_array(x, y, dphi, xlen, xrot, yrot)
 
   integer :: i
 
+  ! Main
+
   do i=1, xlen
 
     call rotate_2d_scalar(x(i), y(i), dphi, xrot(i), yrot(i))
 
   end do
 
-end subroutine
+end subroutine rotate_2d_array
