@@ -13,6 +13,10 @@ Conversion
 Rotations
 ---------
 
+.. toctree::
+  
+  api/coords/rotate_rotate2d
+
 Utility
 -------
 

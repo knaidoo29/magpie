@@ -170,3 +170,31 @@ def test_healpix_ang2xy():
     x, y = magpie.coords.healpix_ang2xy(phi, theta)
     for pix in p:
         x, y = magpie.coords.healpix_ang2xy(phi[pix], theta[pix])
+
+
+# test rotations
+
+def test_rotate2d():
+    x, y = 1., 0.
+    xrot, yrot = magpie.coords.rotate2d(x, y, np.deg2rad(90.))
+    xrot = np.round(xrot, decimals=4)
+    yrot = np.round(yrot, decimals=4)
+    assert xrot == 0. and yrot == 1., "rotate2d not behaving as expected."
+    x, y = np.array([1., 0., -1., 0.]), np.array([0., 1., 0., -1])
+    xexp, yexp = np.array([0., -1., 0., 1.]), np.array([1., 0., -1., 0.])
+    xrot, yrot = magpie.coords.rotate2d(x, y, np.deg2rad(90.))
+    xrot = np.round(xrot, decimals=4)
+    yrot = np.round(yrot, decimals=4)
+    assert np.sum(abs(xrot-xexp)) == 0. and np.sum(abs(yrot-yexp))  == 0., "rotate2d not behaving as expected."
+    x, y = 1., 0.
+    center = [1., 1.]
+    xrot, yrot = magpie.coords.rotate2d(x, y, np.deg2rad(90.), center=center)
+    xrot = np.round(xrot, decimals=4)
+    yrot = np.round(yrot, decimals=4)
+    assert xrot == 2. and yrot == 1., "rotate2d not behaving as expected."
+    x, y = np.array([1., 0., -1., 0.]), np.array([0., 1., 0., -1])
+    xexp, yexp = np.array([2., 1., 2., 3.]), np.array([1., 0., -1., 0.])
+    xrot, yrot = magpie.coords.rotate2d(x, y, np.deg2rad(90.), center = [1., 1.])
+    xrot = np.round(xrot, decimals=4)
+    yrot = np.round(yrot, decimals=4)
+    assert np.sum(abs(xrot-xexp)) == 0. and np.sum(abs(yrot-yexp))  == 0., "rotate2d not behaving as expected."

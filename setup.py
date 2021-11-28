@@ -11,8 +11,9 @@ ext1 = Extension(name='magpie.src.remap_utils', sources=['magpie/src/remap_utils
 ext2 = Extension(name='magpie.src.remap_1d_grid2grid', sources=['magpie/src/remap_1d_grid2grid.f90'])
 ext3 = Extension(name='magpie.src.remap_2d_grid2grid', sources=['magpie/src/remap_2d_grid2grid.f90'])
 ext4 = Extension(name='magpie.src.remap_3d_grid2grid', sources=['magpie/src/remap_3d_grid2grid.f90'])
+ext5 = Extension(name='magpie.src.rotate_2d', sources=['magpie/src/rotate_2d.f90'])
 
-exts = [ext1, ext2, ext3, ext4]#, ext5]
+exts = [ext1, ext2, ext3, ext4, ext5]
 
 setup(name = 'magpie-pkg',
       version = '0.2.2',
