@@ -1,6 +1,6 @@
 
 magpie.pixels.get_box
-^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^
 
 
 .. function:: magpie.pixels.get_box(xmin, xmax, ymin, ymax, zmin, zmax[, steps=120, return_nearest=False, center=[0., 0., 0.]])

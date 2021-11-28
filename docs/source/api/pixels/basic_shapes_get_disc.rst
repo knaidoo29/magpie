@@ -1,6 +1,6 @@
 
 magpie.pixels.get_disc
-^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^
 
 
 .. function:: magpie.pixels.get_disc([rmin=0., rmax=1., phimin=0., phimax=2.*np.pi, center=[0., 0.], steps=40])

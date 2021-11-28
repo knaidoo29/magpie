@@ -201,27 +201,27 @@ def test_rotate2d():
 
 def test_rotate3d():
     x, y, z = 1., 0., 0.
-    xrot, yrot, zrot = magpie.coords.rotate3d(x, y, z, np.deg2rad([90., 0., 0.]), axes='zyz')
+    xrot, yrot, zrot = magpie.coords.rotate3d_Euler(x, y, z, np.deg2rad([90., 0., 0.]), axes='zyz')
     xrot = np.round(xrot, decimals=4)
     yrot = np.round(yrot, decimals=4)
     zrot = np.round(zrot, decimals=4)
     assert xrot == 0. and yrot == 1. and zrot == 0., "rotate3d not behaving as expected."
     x, y, z = np.array([1., 0., -1., 0.]), np.array([0., 1., 0., -1]), np.array([0., 0., 0., 0.])
     xexp, yexp, zexp = np.array([0., -1., 0., 1.]), np.array([1., 0., -1., 0.]), np.array([0., 0., 0., 0.])
-    xrot, yrot, zrot = magpie.coords.rotate3d(x, y, z, np.deg2rad([90., 0., 0.]), axes='zyz')
+    xrot, yrot, zrot = magpie.coords.rotate3d_Euler(x, y, z, np.deg2rad([90., 0., 0.]), axes='zyz')
     xrot = np.round(xrot, decimals=4)
     yrot = np.round(yrot, decimals=4)
     zrot = np.round(zrot, decimals=4)
     assert np.sum(abs(xrot-xexp)) == 0. and np.sum(abs(yrot-yexp)) == 0. and np.sum(abs(zrot-zexp)) == 0., "rotate3d not behaving as expected."
     x, y, z = 0., 1., 0.
-    xrot, yrot, zrot = magpie.coords.rotate3d(x, y, z, np.deg2rad([90., 0., 0.]), axes='zyz')
+    xrot, yrot, zrot = magpie.coords.rotate3d_Euler(x, y, z, np.deg2rad([90., 0., 0.]), axes='zyz')
     xrot = np.round(xrot, decimals=4)
     yrot = np.round(yrot, decimals=4)
     zrot = np.round(zrot, decimals=4)
     assert xrot == -1. and yrot == 0. and zrot == 0., "rotate3d not behaving as expected."
     x, y, z = np.array([1., 0., -1., 0.]), np.array([0., 0., 0., 0.]), np.array([0., 1., 0., -1])
     xexp, yexp, zexp = np.array([0., 0., 0., 0.]), np.array([1., 0., -1., 0.]), np.array([0., 1., 0., -1.])
-    xrot, yrot, zrot = magpie.coords.rotate3d(x, y, z, np.deg2rad([90., 0., 0.]), axes='zyz')
+    xrot, yrot, zrot = magpie.coords.rotate3d_Euler(x, y, z, np.deg2rad([90., 0., 0.]), axes='zyz')
     xrot = np.round(xrot, decimals=4)
     yrot = np.round(yrot, decimals=4)
     zrot = np.round(zrot, decimals=4)
@@ -232,7 +232,7 @@ def test_rotate3d():
     xexp = np.array([0.5477, -1.2369, -2.385])
     yexp = np.array([2.3028, 1.8978, 5.1529])
     zexp = np.array([2.227, 5.1895, 0.8712])
-    xrot, yrot, zrot = magpie.coords.rotate3d(x, y, z, np.deg2rad([60., 45., 45.]), axes='zyz')
+    xrot, yrot, zrot = magpie.coords.rotate3d_Euler(x, y, z, np.deg2rad([60., 45., 45.]), axes='zyz')
     xrot = np.round(xrot, decimals=4)
     yrot = np.round(yrot, decimals=4)
     zrot = np.round(zrot, decimals=4)
@@ -240,7 +240,7 @@ def test_rotate3d():
     xexp = np.array([3.1467, 3.8923, 4.3837])
     yexp = np.array([0.0028, 1.8218, 3.3484])
     zexp = np.array([0.8128, 3.6869, -1.6037])
-    xrot, yrot, zrot = magpie.coords.rotate3d(x, y, z, np.deg2rad([60., 45., 45.]), axes='xyz')
+    xrot, yrot, zrot = magpie.coords.rotate3d_Euler(x, y, z, np.deg2rad([60., 45., 45.]), axes='xyz')
     xrot = np.round(xrot, decimals=4)
     yrot = np.round(yrot, decimals=4)
     zrot = np.round(zrot, decimals=4)

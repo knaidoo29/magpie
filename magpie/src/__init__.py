@@ -13,6 +13,7 @@ from .rotate_2d import rotate_2d_scalar
 from .rotate_2d import rotate_2d_array
 
 from .rotate_3d import rotmat_axis
-from .rotate_3d import rotmat
+from .rotate_3d import rotmat_euler
+from .rotate_3d import rotmat_rodrigues
 from .rotate_3d import rotate_3d_scalar
 from .rotate_3d import rotate_3d_array

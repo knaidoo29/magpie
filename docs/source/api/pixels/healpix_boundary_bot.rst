@@ -1,6 +1,6 @@
 
 magpie.pixels.healpix_boundary_bot
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
 .. function:: magpie.pixels.healpix_boundary_bot(p, nside[, steps=20, reverse=False])

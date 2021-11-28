@@ -1,6 +1,6 @@
 
 magpie.pixels.get_square
-^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 
 .. function:: magpie.pixels.get_square(xmin, xmax, ymin, ymax[, steps=40])

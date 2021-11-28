@@ -1,8 +1,8 @@
 
-magpie.coords.rotate3d
-^^^^^^^^^^^^^^^^^^^^^^
+magpie.coords.rotate3d_Euler
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. function:: magpie.coords.rotate3d(x, y, z, angles[, axes='zyz', center=[0., 0., 0.]]):
+.. function:: magpie.coords.rotate3d_Euler(x, y, z, angles[, axes='zyz', center=[0., 0., 0.]])
 
     Rotates points in 3D cartesian coordinates by Euler angle around
     specified axes.
@@ -18,4 +18,5 @@ magpie.coords.rotate3d
           Center of rotation, default=[0., 0., 0.].
 
     :Returns:
-      xrot, yrot, zrot : float or array
+      xrot, yrot, zrot : array or float
+          Rotated x, y and z coordinates.
