@@ -1,7 +1,8 @@
 include "remap_utils.f90"
 
 
-subroutine remap_1d_grid2grid(x1min, x1max, grid1, x2min, x2max, grid2, pixlen, f1, f2)
+subroutine remap_1d_grid2grid(x1min, x1max, grid1, x2min, x2max, grid2, pixlen &
+    , f1, f2)
 
   ! Remaps field 1 onto field 2 using exact weights.
   !
@@ -47,7 +48,8 @@ subroutine remap_1d_grid2grid(x1min, x1max, grid1, x2min, x2max, grid2, pixlen, 
 
     which2pix = i-1
 
-    call remap_1d_grid2grid_pixel(x1min, x1max, grid1, x2min, x2max, grid2, which2pix, pixlen, pix, weights)
+    call remap_1d_grid2grid_pixel(x1min, x1max, grid1, x2min, x2max, grid2 &
+      , which2pix, pixlen, pix, weights)
 
     f2(i) = 0.
 

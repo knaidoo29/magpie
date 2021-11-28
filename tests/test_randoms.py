@@ -153,7 +153,7 @@ def test_randoms_healpix_pixel():
 def test_shuffle():
     xrands = magpie.randoms.randoms_1d(1000)
     xmixed = magpie.randoms.shuffle(xrands)
-    assert np.sum(xrands - xmixed) != 0, "shuffle has not reordered sample."
+    assert np.sum(xrands - xmixed) != 0., "shuffle has not reordered sample."
 
 
 def test_random_draw():

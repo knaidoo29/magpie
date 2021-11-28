@@ -130,7 +130,8 @@ end subroutine pix1dto2d
 
 subroutine pix1dto3d(xpix, ypix, zpix, xlen, ylen, zlen, ygrid, zgrid, pix)
 
-  ! Maps pixels given along a single axis in x, y and z onto a 3d grid flattened.
+  ! Maps pixels given along a single axis in x, y and z onto a 3d grid
+  ! flattened.
   !
   ! Parameters
   ! ----------
@@ -167,7 +168,8 @@ subroutine pix1dto3d(xpix, ypix, zpix, xlen, ylen, zlen, ygrid, zgrid, pix)
   do i = 1, xlen
     do j = 1, ylen
       do k = 1, zlen
-        if ((xpix(i) .NE. -1) .AND. (ypix(j) .NE. -1) .AND. (zpix(k) .NE. -1)) then
+        if ((xpix(i) .NE. -1) .AND. (ypix(j) .NE. -1) .AND. &
+          (zpix(k) .NE. -1)) then
           pix(ii) = zpix(k) + zgrid*(ypix(j) + ygrid*xpix(i))
         else
           pix(ii) = -1
@@ -180,10 +182,11 @@ subroutine pix1dto3d(xpix, ypix, zpix, xlen, ylen, zlen, ygrid, zgrid, pix)
 end subroutine pix1dto3d
 
 
-subroutine remap_1d_grid2grid_pixel(x1min, x1max, grid1, x2min, x2max, grid2, which2pix, pixlen, pix, weights)
+subroutine remap_1d_grid2grid_pixel(x1min, x1max, grid1, x2min, x2max, grid2 &
+    , which2pix, pixlen, pix, weights)
 
-  ! Computes the exact weights for mapping a single pixel from a new grid (denoted by 2) onto an initial grid
-  ! (denoted with 1).
+  ! Computes the exact weights for mapping a single pixel from a new grid
+  ! (denoted by 2) onto an initial grid (denoted with 1).
   !
   ! Parameters
   ! ----------
@@ -222,7 +225,8 @@ subroutine remap_1d_grid2grid_pixel(x1min, x1max, grid1, x2min, x2max, grid2, wh
   integer, intent(out) :: pix(pixlen)
   real(kind=dp), intent(out) :: weights(pixlen)
 
-  real(kind=dp) :: boxsize1, boxsize2, dx1, dx2, x1edge1, x1edge2, x2edge1, x2edge2
+  real(kind=dp) :: boxsize1, boxsize2, dx1, dx2
+  real(kind=dp) :: x1edge1, x1edge2, x2edge1, x2edge2
   integer :: i, pix1, pix2
 
   ! Function
@@ -247,9 +251,11 @@ subroutine remap_1d_grid2grid_pixel(x1min, x1max, grid1, x2min, x2max, grid2, wh
         x1edge2 = x1min + dx1*real(pix(i)+1)
         if ((x2edge1 .GE. x1edge1) .AND. (x2edge2 .LE. x1edge2)) then
           weights(i) = (x2edge2 - x2edge1)/(x2edge2 - x2edge1)
-        else if ((x2edge1 .LT. x1edge1) .AND. (x2edge2 .LE. x1edge2) .AND. (x2edge2 .GT. x1edge1)) then
+        else if ((x2edge1 .LT. x1edge1) .AND. (x2edge2 .LE. x1edge2) &
+          .AND. (x2edge2 .GT. x1edge1)) then
           weights(i) = (x2edge2 - x1edge1)/(x2edge2 - x2edge1)
-        else if ((x2edge1 .GE. x1edge1) .AND. (x2edge1 .LT. x1edge2) .AND. (x2edge2 .GT. x1edge2)) then
+        else if ((x2edge1 .GE. x1edge1) .AND. (x2edge1 .LT. x1edge2) &
+          .AND. (x2edge2 .GT. x1edge2)) then
           weights(i) = (x1edge2 - x2edge1)/(x2edge2 - x2edge1)
         else if ((x2edge1 .LT. x1edge1) .AND. (x2edge2 .GT. x1edge2)) then
           weights(i) = (x1edge2 - x1edge1)/(x2edge2 - x2edge1)

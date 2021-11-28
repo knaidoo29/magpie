@@ -7,7 +7,6 @@ this_directory = path.abspath(path.dirname(__file__))
 with open(path.join(this_directory, 'README.md')) as f:
     long_description = f.read()
 
-#ext1 = Extension(name='magpie.src.utils', sources=['magpie/src/utils.f90'])
 ext1 = Extension(name='magpie.src.remap_utils', sources=['magpie/src/remap_utils.f90'])
 ext2 = Extension(name='magpie.src.remap_1d_grid2grid', sources=['magpie/src/remap_1d_grid2grid.f90'])
 ext3 = Extension(name='magpie.src.remap_2d_grid2grid', sources=['magpie/src/remap_2d_grid2grid.f90'])

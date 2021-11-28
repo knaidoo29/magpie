@@ -56,19 +56,22 @@ subroutine remap_2d_grid2grid(x1min, x1max, x1grid, y1min, y1max, y1grid &
   real(kind=dp), intent(in) :: f1(x1grid*y1grid)
   real(kind=dp), intent(out) :: f2(x2grid*y2grid)
   real(kind=dp) :: xweights(xpixlen), yweights(ypixlen)
-  integer :: xpix(xpixlen), ypix(ypixlen), pix(xpixlen*ypixlen), i, j, xwhich2pix, ywhich2pix, ii, jj, i1, j1
+  integer :: xpix(xpixlen), ypix(ypixlen), pix(xpixlen*ypixlen), i, j
+  integer :: xwhich2pix, ywhich2pix, ii, jj, i1, j1
 
   ! Function
 
   do i = 1, x2grid
 
     xwhich2pix = i-1
-    call remap_1d_grid2grid_pixel(x1min, x1max, x1grid, x2min, x2max, x2grid, xwhich2pix, xpixlen, xpix, xweights)
+    call remap_1d_grid2grid_pixel(x1min, x1max, x1grid, x2min, x2max, x2grid &
+      , xwhich2pix, xpixlen, xpix, xweights)
 
     do j = 1, y2grid
 
       ywhich2pix = j-1
-      call remap_1d_grid2grid_pixel(y1min, y1max, y1grid, y2min, y2max, y2grid, ywhich2pix, ypixlen, ypix, yweights)
+      call remap_1d_grid2grid_pixel(y1min, y1max, y1grid, y2min, y2max, y2grid &
+        , ywhich2pix, ypixlen, ypix, yweights)
 
       call pix1dto2d(xpix, ypix, xpixlen, ypixlen, y1grid, pix)
 
