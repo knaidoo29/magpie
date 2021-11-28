@@ -8,10 +8,16 @@ def shuffle(sample):
     ----------
     sample : array
         Input sample data.
+
+    Returns
+    -------
+    shuffled_sample : array
+        Shuffled input sample.
     """
     u_r = np.random.random_sample(len(sample))
     sortind = np.argsort(u_r)
-    return sample[sortind]
+    shuffled_sample = np.copy(sample[sortind])
+    return shuffled_sample
 
 
 def random_draw(sample, size):

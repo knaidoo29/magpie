@@ -8,4 +8,8 @@ magpie.randoms.shuffle
 
     :Parameters:
       sample : array
-          Input sample data.  
+          Input sample data.
+
+    :Returns:
+      shuffled_sample : array
+          Shuffled input sample.
