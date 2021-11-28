@@ -61,15 +61,10 @@ def rotate3d(x, y, z, angles, axes='zyz', center=[0., 0., 0.]):
         elif axes[i] == 'z':
             axes_int.append(2)
     _x, _y, _z = x-center[0], y-center[1], z-center[2]
-    #rot_mat = []
-    #for i in range(0, len(angles)):
-    #    rot_mat.append(src.rotmat(angle=angles[i], axis=axes_int[i]))
     rot = src.rotmat(angles=angles, axes=axes_int)
     if np.isscalar(x) is True:
-        #for i in range(0, len(angles)):
         _x, _y, _z = src.rotate_3d_scalar(x=_x, y=_y, z=_z, rot=rot)
     else:
-        #for i in range(0, len(angles)):
         _x, _y, _z = src.rotate_3d_array(x=_x, y=_y, z=_z, rot=rot)
     xrot = _x + center[0]
     yrot = _y + center[1]
