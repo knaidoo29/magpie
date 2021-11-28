@@ -16,6 +16,13 @@ Grids
 
     grids_func_list
 
+Pixels
+======
+
+..toctree::
+
+    pixels_func_list
+
 Randoms
 =======
 

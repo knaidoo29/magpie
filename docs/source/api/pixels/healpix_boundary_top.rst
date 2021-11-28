@@ -1,9 +1,9 @@
 
-magpie.pixel.healpix_boundary_top
+magpie.pixels.healpix_boundary_top
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
-.. function:: healpix_boundary_top(p, nside[, steps=20, reverse=False])
+.. function:: magpie.pixels.healpix_boundary_top(p, nside[, steps=20, reverse=False])
 
     Returns the top side of a healpix pixel in healpix x and y coordinates.
 

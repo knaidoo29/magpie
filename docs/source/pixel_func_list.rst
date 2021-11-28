@@ -4,13 +4,13 @@ Pixel Shapes
 
 .. toctree::
 
-    api/pixel/basic_shapes_get_square
-    api/pixel/basic_shapes_get_box
-    api/pixel/basic_shapes_get_arc
-    api/pixel/basic_shapes_get_disc
-    api/pixel/healpix_boundary_bot
-    api/pixel/healpix_boundary_top
-    api/pixel/healpix_boundary
+    api/pixels/basic_shapes_get_square
+    api/pixels/basic_shapes_get_box
+    api/pixels/basic_shapes_get_arc
+    api/pixels/basic_shapes_get_disc
+    api/pixels/healpix_boundary_bot
+    api/pixels/healpix_boundary_top
+    api/pixels/healpix_boundary
 
 Pixel Indices
 -------------

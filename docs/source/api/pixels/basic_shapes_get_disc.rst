@@ -1,17 +1,17 @@
 
-magpie.pixel.get_arc
-^^^^^^^^^^^^^^^^^^^^
+magpie.pixels.get_disc
+^^^^^^^^^^^^^^^^^^^^^
 
 
-.. function:: magpie.pixel.get_arc(radius[, phimin=0., phimax=2.*np.pi, center=[0., 0.], steps=10])
+.. function:: magpie.pixels.get_disc([rmin=0., rmax=1., phimin=0., phimax=2.*np.pi, center=[0., 0.], steps=40])
 
-    Returns the coordinates of the arc of a circle, default settings will
-    return the coordinates along a complete circle.
-
+    Returns the coordinates of a disc segment.
 
     :Parameters:
-      radius : float
-          Radius of the circle.
+      rmin : float, optional
+          Minimum radial value, default=0.
+      rmax : float, optional
+          Maximum radial value, default=1.
       phimin : float, optional
           Minimum phi value, default=0.
       phimax : float, optional

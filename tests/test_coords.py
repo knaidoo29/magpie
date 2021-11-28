@@ -141,7 +141,7 @@ def test_healpix_xy2ang():
     # Run test on entire healpix pixel map
     nside = 16
     p = np.arange(12*nside**2)
-    x, y = magpie.pixel.healpix_pix2xy(p, nside)
+    x, y = magpie.pixels.healpix_pix2xy(p, nside)
     phi, theta = magpie.coords.healpix_xy2ang(x, y)
     for pix in p:
         phi, theta = magpie.coords.healpix_xy2ang(x[pix], y[pix])
@@ -165,7 +165,7 @@ def test_healpix_ang2xy():
     # Run test on entire healpix pixel map
     nside = 16
     p = np.arange(12*nside**2)
-    x, y = magpie.pixel.healpix_pix2xy(p, nside)
+    x, y = magpie.pixels.healpix_pix2xy(p, nside)
     phi, theta = magpie.coords.healpix_xy2ang(x, y)
     x, y = magpie.coords.healpix_ang2xy(phi, theta)
     for pix in p:
