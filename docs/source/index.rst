@@ -29,7 +29,7 @@ MAGPIE: Monte cArlo weiGhted PIxel rEmapping
 +---------------+-----------------------------------------+
 | Author        | Krishna Naidoo                          |
 +---------------+-----------------------------------------+
-| Version       | 0.2.2                                   |
+| Version       | 0.3-alpha                               |
 +---------------+-----------------------------------------+
 | Repository    | https://github.com/knaidoo29/magpie     |
 +---------------+-----------------------------------------+
@@ -113,18 +113,18 @@ For testing you will require `nose <https://nose.readthedocs.io/en/latest/>`_ or
 Installation
 ============
 
-MAGPIE can be installed in a variety of ways -- using ``pip``, ``conda`` or by
-directly cloning the repository. If you are having trouble installing MAGPIE or
+MAGPIE can be installed in a variety of ways -- using ``conda``, ``pip`` or by
+directly cloning the repository. If you are having trouble installing or
 running MAGPIE we recommend using the conda install as this will setup the
 environment.
-
-#. Using ``pip``::
-
-    pip install magpie-pkg
 
 #. Using ``conda``::
 
     conda install -c knaidoo29 magpie-pkg
+
+#. Using ``pip``::
+
+    pip install magpie-pkg
 
 #. By cloning the github repository::
 
@@ -150,10 +150,20 @@ open a new issue (`here <https://github.com/knaidoo29/magpie/issues>`_) or
 Version History
 ===============
 
+* **Version 0.3**:
+    * Rewrite and removal of **Version 0.1** functions and classes.
+    * Coordinate transformation tools: 2D <-> polar, 3D <-> spherical polar, healpix angular <-> healpix x and y, usphere <-> lon/lat, 2D rotations, 3D rotations via Euler angles and Rodrigues rotation formula.
+    * Grid definitions: cartesian 1D, 2D & 3D, polar grid and polar equal area grid.
+    * Pixel functions: basic shapes -> square, arc, disc and box, healpix pixel boundaries and healpix pixel index conversion functions.
+    * Randoms functions: uniform randoms in cartesian 1D, 2D & 3D, polar, unit sphere, spherical polar, healpix pixels. Randoms from user defined PDF/CDF and random and probabilistic subsampling.
+    * Limited remapping functions for uniform grids without rotations computed exactly for 1D, 2D & 3D.
+
 * **Version 0.2**:
     * Restructured layout and the incorporation of documentation and unit testing for eventual first release.
     * Randoms in a variety of coordinate systems: cartesian, polar, spherical and from an input PDF/CDF and subsampling and stochastic weights.
     * Cartesian coordinate remapping in 1D, 2D and 3D.
+    * Legacy **version 0.1** functions and classes remain.
+
 * **Version 0.1**:
     * Coordinate transformations between cartesian, polar and spherical polar coordinates.
     * Rebinning in 1D (computed exactly), in 2D and 3D via monte-carlo weighted remapping and a higher-resolution mesh.
