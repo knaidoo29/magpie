@@ -19,7 +19,7 @@ Grids
 Pixels
 ======
 
-..toctree::
+.. toctree::
 
     pixels_func_list
 

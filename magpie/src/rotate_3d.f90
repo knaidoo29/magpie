@@ -215,7 +215,7 @@ subroutine rotmat_rodrigues(k, dphi, rot)
   integer, parameter :: dp = kind(1.d0)
   real(kind=dp), intent(in) :: k(3), dphi
   real(kind=dp), intent(out) :: rot(9)
-  real(kind=dp) :: kmat(9)
+  real(kind=dp) :: kmat(9), kmat2(9)
 
   kmat(1) = 0.
   kmat(2) = -k(3)
@@ -229,17 +229,19 @@ subroutine rotmat_rodrigues(k, dphi, rot)
   kmat(8) = k(1)
   kmat(9) = 0.
 
-  rot(1) = 1. + sin(dphi)*kmat(1) + (1. - cos(dphi))*kmat(1)**2.
-  rot(2) = sin(dphi)*kmat(2) + (1. - cos(dphi))*kmat(2)**2.
-  rot(3) = sin(dphi)*kmat(3) + (1. - cos(dphi))*kmat(3)**2.
+  call dot3by3(kmat, kmat, kmat2)
 
-  rot(4) = sin(dphi)*kmat(4) + (1. - cos(dphi))*kmat(4)**2.
-  rot(5) = 1. + sin(dphi)*kmat(5) + (1. - cos(dphi))*kmat(5)**2.
-  rot(6) = sin(dphi)*kmat(6) + (1. - cos(dphi))*kmat(6)**2.
+  rot(1) = 1. + sin(dphi)*kmat(1) + (1. - cos(dphi))*kmat2(1)
+  rot(2) = sin(dphi)*kmat(2) + (1. - cos(dphi))*kmat2(2)
+  rot(3) = sin(dphi)*kmat(3) + (1. - cos(dphi))*kmat2(3)
 
-  rot(7) = sin(dphi)*kmat(7) + (1. - cos(dphi))*kmat(7)**2.
-  rot(8) = sin(dphi)*kmat(8) + (1. - cos(dphi))*kmat(8)**2.
-  rot(9) = 1. + sin(dphi)*kmat(9) + (1. - cos(dphi))*kmat(9)**2.
+  rot(4) = sin(dphi)*kmat(4) + (1. - cos(dphi))*kmat2(4)
+  rot(5) = 1. + sin(dphi)*kmat(5) + (1. - cos(dphi))*kmat2(5)
+  rot(6) = sin(dphi)*kmat(6) + (1. - cos(dphi))*kmat2(6)
+
+  rot(7) = sin(dphi)*kmat(7) + (1. - cos(dphi))*kmat2(7)
+  rot(8) = sin(dphi)*kmat(8) + (1. - cos(dphi))*kmat2(8)
+  rot(9) = 1. + sin(dphi)*kmat(9) + (1. - cos(dphi))*kmat2(9)
 
 end subroutine rotmat_rodrigues
 

@@ -82,7 +82,7 @@ Tutorials and API
 
   coords_index
   grids_index
-  pixel_index
+  pixels_index
   randoms_index
   remap_index
   api

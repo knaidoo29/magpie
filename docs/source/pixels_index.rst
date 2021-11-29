@@ -13,4 +13,4 @@ API
 
 .. toctree::
 
-    pixel_func_list
+    pixels_func_list
