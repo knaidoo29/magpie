@@ -12,7 +12,7 @@
 |               |                                       |
 |---------------|---------------------------------------|
 | Author        | Krishna Naidoo                        |          
-| Version       | 0.3.0                                 |
+| Version       | 0.3.1                                 |
 | Repository    | https://github.com/knaidoo29/magpie   |
 | Documentation | https://magpie-doc.readthedocs.io/    |
 
@@ -25,7 +25,7 @@
   - [ ] Non-Uniform Grids.
   - [x] Polar grid and Equal Area Grid
   - [ ] Usphere grid and healpix.
-  - [ ] Spherical cap equal area grid
+  - [ ] Spherical cap grid and equal area grid
   - [ ] Spherial polar coordinate grid + healpix, equal volume grid if possible.
 * Coordinates
   - [x] 2D cartesian to polar.

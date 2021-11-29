@@ -18,7 +18,7 @@ ext7 = Extension(name='magpie.src.rotate_3d', sources=['magpie/src/rotate_3d.f90
 exts = [ext1, ext2, ext3, ext4, ext5, ext6, ext7]
 
 setup(name = 'magpie-pkg',
-      version = '0.2.2',
+      version = '0.3.1',
       description       = "Monte cArlo weiGhted PIxel rEmapping",
       long_description  = long_description,
       long_description_content_type = 'text/markdown',

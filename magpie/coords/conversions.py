@@ -1,5 +1,7 @@
 import numpy as np
 
+from .. import utils
+
 
 def cart2polar(x, y, center=[0., 0.]):
     """Returns the polar coordinates for a given set of cartesian coordinates.
@@ -22,7 +24,7 @@ def cart2polar(x, y, center=[0., 0.]):
     """
     r = np.sqrt((x-center[0])**2. + (y-center[1])**2.)
     phi = np.arctan2(y-center[1], x-center[0])
-    if np.isscalar(phi) is True:
+    if utils.isscalar(phi) is True:
         if phi < 0.:
             phi += 2.*np.pi
     else:
@@ -78,7 +80,7 @@ def cart2sphere(x, y, z, center=[0., 0., 0.]):
     """
     r = np.sqrt((x-center[0])**2. + (y-center[1])**2. + (z-center[2])**2.)
     phi = np.arctan2(y-center[1], x-center[0])
-    if np.isscalar(phi) is True:
+    if utils.isscalar(phi) is True:
         if phi < 0.:
             phi += 2.*np.pi
         if r != 0.:
@@ -144,7 +146,7 @@ def ortho2cart(x, y, r=1., fill_value=np.nan):
         Returns the z value of the cartesian coordinates.
     """
     xy = x**2. + y**2.
-    if np.isscalar(x) is True:
+    if utils.isscalar(x) is True:
         if xy < r**2.:
             z = np.sqrt(r**2 - xy)
         else:

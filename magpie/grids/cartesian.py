@@ -1,5 +1,7 @@
 import numpy as np
 
+from .. import utils
+
 
 def get_xedges(length, ngrid, xmin=None):
     """Returns the edges of a uniform grid along one axis.
@@ -112,13 +114,17 @@ def grid2d(lengths, ngrids, mins=[None, None], return1d=False):
     xmid, ymid : array, optional
         The mid-point of the uniform grid.
     """
-    if np.isscalar(lengths) is True:
-        lengths = [lengths, lengths]
-    if np.isscalar(ngrids) is True:
-        ngrids = [ngrids, ngrids]
-    xedges = get_xedges(lengths[0], ngrids[0], xmin=mins[0])
+    if utils.isscalar(lengths) is True:
+        _lengths = [lengths, lengths]
+    else:
+        _lengths = lengths
+    if utils.isscalar(ngrids) is True:
+        _ngrids = [ngrids, ngrids]
+    else:
+        _ngrids = ngrids
+    xedges = get_xedges(_lengths[0], _ngrids[0], xmin=mins[0])
     xmid = xedges2mid(xedges)
-    yedges = get_xedges(lengths[1], ngrids[1], xmin=mins[1])
+    yedges = get_xedges(_lengths[1], _ngrids[1], xmin=mins[1])
     ymid = xedges2mid(yedges)
     x2d, y2d = np.meshgrid(xmid, ymid, indexing='ij')
     if return1d is False:
@@ -148,15 +154,19 @@ def grid3d(lengths, ngrids, mins=[None, None, None], return1d=False):
     xmid, ymid, zmid : array, optional
         The mid-point of the uniform grid.
     """
-    if np.isscalar(lengths) is True:
-        lengths = [lengths, lengths, lengths]
-    if np.isscalar(ngrids) is True:
-        ngrids = [ngrids, ngrids, ngrids]
-    xedges = get_xedges(lengths[0], ngrids[0], xmin=mins[0])
+    if utils.isscalar(lengths) is True:
+        _lengths = [lengths, lengths, lengths]
+    else:
+        _lengths = lengths
+    if utils.isscalar(ngrids) is True:
+        _ngrids = [ngrids, ngrids, ngrids]
+    else:
+        _ngrids = ngrids
+    xedges = get_xedges(_lengths[0], _ngrids[0], xmin=mins[0])
     xmid = xedges2mid(xedges)
-    yedges = get_xedges(lengths[1], ngrids[1], xmin=mins[1])
+    yedges = get_xedges(_lengths[1], _ngrids[1], xmin=mins[1])
     ymid = xedges2mid(yedges)
-    zedges = get_xedges(lengths[2], ngrids[2], xmin=mins[2])
+    zedges = get_xedges(_lengths[2], _ngrids[2], xmin=mins[2])
     zmid = xedges2mid(zedges)
     x3d, y3d, z3d = np.meshgrid(xmid, ymid, zmid, indexing='ij')
     if return1d is False:

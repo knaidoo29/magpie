@@ -1,5 +1,7 @@
 import numpy as np
 
+from .. import utils
+
 
 def healpix_xy2ang(healx, healy):
     """Converts from healpix x and y to unit sphere phi and theta
@@ -18,7 +20,7 @@ def healpix_xy2ang(healx, healy):
     theta : array
         Theta coordinates [0, pi].
     """
-    if np.isscalar(healx) is True:
+    if utils.isscalar(healx) is True:
         if abs(healy) <= np.pi/4:
             z = 8*healy/(3*np.pi)
             theta = np.arccos(z)
@@ -73,7 +75,7 @@ def healpix_ang2xy(phi, theta):
     healy : array
         Healpix y coordinates.
     """
-    if np.isscalar(phi) is True:
+    if utils.isscalar(phi) is True:
         z = np.cos(theta)
         if abs(z) <= 2/3:
             healx = phi

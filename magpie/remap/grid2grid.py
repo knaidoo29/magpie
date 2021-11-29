@@ -1,6 +1,7 @@
 import numpy as np
 
 from .. import src
+from .. import utils
 
 
 def grid2grid1D(f, boxsize, ngridout, origin=0., originout=0.,
@@ -73,22 +74,22 @@ def grid2grid2D(f, boxsize, ngridout, origin=0., originout=0.,
     -------
     fout : 2darray
         The resampled pixel values for the output 2D cartesian grid."""
-    if np.isscalar(boxsize) is True:
+    if utils.isscalar(boxsize) is True:
         xboxsize, yboxsize = boxsize, boxsize
     else:
         xboxsize, yboxsize = boxsize[0], boxsize[1]
     if boxsizeout is None:
         xboxsizeout, yboxsizeout = xboxsize, yboxsize
     else:
-        if np.isscalar(boxsizeout) is True:
+        if utils.isscalar(boxsizeout) is True:
             xboxsizeout, yboxsizeout = boxsizeout, boxsizeout
         else:
             xboxsizeout, yboxsizeout = boxsizeout[0], boxsizeout[1]
-    if np.isscalar(origin) is True:
+    if utils.isscalar(origin) is True:
         xorigin, yorigin = origin, origin
     else:
         xorigin, yorigin = origin[0], origin[1]
-    if np.isscalar(originout) is True:
+    if utils.isscalar(originout) is True:
         xoriginout, yoriginout = originout, originout
     else:
         xoriginout, yoriginout = originout[0], originout[1]
@@ -102,7 +103,7 @@ def grid2grid2D(f, boxsize, ngridout, origin=0., originout=0.,
     y2max = yoriginout + yboxsizeout
     fshape = np.shape(f)
     x1grid, y1grid = fshape[0], fshape[1]
-    if np.isscalar(ngridout) is True:
+    if utils.isscalar(ngridout) is True:
         x2grid, y2grid = ngridout, ngridout
     else:
         x2grid, y2grid = ngridout[0], ngridout[1]
@@ -149,24 +150,24 @@ def grid2grid3D(f, boxsize, ngridout, origin=0., originout=0.,
     -------
     fout : 3darray
         The resampled pixel values for the output 3D cartesian grid."""
-    if np.isscalar(boxsize) is True:
+    if utils.isscalar(boxsize) is True:
         xboxsize, yboxsize, zboxsize = boxsize, boxsize, boxsize
     else:
         xboxsize, yboxsize, zboxsize = boxsize[0], boxsize[1], boxsize[2]
     if boxsizeout is None:
         xboxsizeout, yboxsizeout, zboxsizeout = xboxsize, yboxsize, zboxsize
     else:
-        if np.isscalar(boxsizeout) is True:
+        if utils.isscalar(boxsizeout) is True:
             xboxsizeout, yboxsizeout, zboxsizeout = \
                 boxsizeout, boxsizeout, boxsizeout
         else:
             xboxsizeout, yboxsizeout, zboxsizeout = \
                 boxsizeout[0], boxsizeout[1], boxsizeout[2]
-    if np.isscalar(origin) is True:
+    if utils.isscalar(origin) is True:
         xorigin, yorigin, zorigin = origin, origin, origin
     else:
         xorigin, yorigin, zorigin = origin[0], origin[1], origin[2]
-    if np.isscalar(originout) is True:
+    if utils.isscalar(originout) is True:
         xoriginout, yoriginout, zoriginout = originout, originout, originout
     else:
         xoriginout, yoriginout, zoriginout = \
@@ -185,7 +186,7 @@ def grid2grid3D(f, boxsize, ngridout, origin=0., originout=0.,
     z2max = zoriginout + zboxsizeout
     fshape = np.shape(f)
     x1grid, y1grid, z1grid = fshape[0], fshape[1], fshape[2]
-    if np.isscalar(ngridout) is True:
+    if utils.isscalar(ngridout) is True:
         x2grid, y2grid, z2grid = ngridout, ngridout, ngridout
     else:
         x2grid, y2grid, z2grid = ngridout[0], ngridout[1], ngridout[2]

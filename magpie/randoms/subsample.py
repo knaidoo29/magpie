@@ -1,5 +1,7 @@
 import numpy as np
 
+from .. import utils
+
 
 def shuffle(sample):
     """Shuffles the ordering of a sample.
@@ -90,7 +92,7 @@ def stochastic_integer_weights(weights):
     weights_SI : array
         Stochastic integer weights.
     """
-    if np.isscalar(weights) == True:
+    if utils.isscalar(weights) == True:
         u_r = np.random.random_sample(1)[0]
         weights_SI = np.ceil(weights)
         if u_r < weights_SI - weights:
@@ -120,7 +122,7 @@ def stochastic_binary_weights(weights):
     """
     weights_SI = stochastic_integer_weights(weights)
     weights_SB = np.copy(weights_SI)
-    if np.isscalar(weights) == True:
+    if utils.isscalar(weights) == True:
         if weights_SI > 1:
             weights_SB = 1
     else:

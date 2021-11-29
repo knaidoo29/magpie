@@ -1,6 +1,7 @@
 import numpy as np
 
 from .. import src
+from .. import utils
 
 
 def rotate2d(x, y, dphi, center=[0., 0.]):
@@ -21,7 +22,7 @@ def rotate2d(x, y, dphi, center=[0., 0.]):
     xrot, yrot : float or array
         Rotated x and y coordinates.
     """
-    if np.isscalar(x) is True:
+    if utils.isscalar(x) is True:
         xrot, yrot = src.rotate_2d_scalar(x=x-center[0], y=y-center[1], dphi=dphi)
     else:
         xrot, yrot = src.rotate_2d_array(x=x-center[0], y=y-center[1], dphi=dphi)
@@ -45,7 +46,7 @@ def _rotate3d(x, y, z, rot):
     xrot, yrot, zrot : float or array
         Rotated x, y and z coordinates.
     """
-    if np.isscalar(x) is True:
+    if utils.isscalar(x) is True:
         xrot, yrot, zrot = src.rotate_3d_scalar(x=x, y=y, z=z, rot=rot)
     else:
         xrot, yrot, zrot = src.rotate_3d_array(x=x, y=y, z=z, rot=rot)

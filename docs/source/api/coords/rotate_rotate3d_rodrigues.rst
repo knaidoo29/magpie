@@ -11,7 +11,7 @@ magpie.coords.rotate3d_Rodrigues
       x, y, z : float or array
           Cartesian coordinates.
       k : array
-          k is a unit vector k around which points will be rotated by an angle
+          k is a unit vector around which points will be rotated by an angle
           dphi.
       dphi : float
           Rodrigues rotation angle around the unit vector k.

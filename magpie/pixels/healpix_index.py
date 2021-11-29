@@ -1,5 +1,7 @@
 import numpy as np
 
+from .. import utils
+
 
 def healpix_pix2ij(p, nside):
     """Returns the healpix ring i and pixel along the ring j.
@@ -18,7 +20,7 @@ def healpix_pix2ij(p, nside):
     ringj : int
         Pixel index along each ring.
     """
-    if np.isscalar(p) == True:
+    if utils.isscalar(p) == True:
         if p <= 2*nside*(nside+1):
             # top polar cap
             ph = (p+1)/2
@@ -77,7 +79,7 @@ def healpix_ij2pix(ringi, ringj, nside):
     p : int
         Healpix pixel index.
     """
-    if np.isscalar(ringi) == True:
+    if utils.isscalar(ringi) == True:
         if ringi <= nside:
             # top polar cap
             p = 2*ringi*(ringi - 1) + ringj - 1
@@ -143,7 +145,7 @@ def healpix_j2jd(ringi, ringj, nside):
         Alternate pixel index along each ring. This is for pixel transformations
         as this maps exactly to healpix x without a factor.
     """
-    if np.isscalar(ringi) == True:
+    if utils.isscalar(ringi) == True:
         # North Polar Cap
         if ringi <= nside:
             jlen = 4*ringi
