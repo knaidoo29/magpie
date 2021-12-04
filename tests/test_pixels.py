@@ -120,7 +120,8 @@ def test_healpix_boundary():
     assert np.round(np.sum(y1-y2[::-1]), decimals=2) == 0., "Reversing should match."
 
 
-def test_healpix_pixels():
+
+def test_healpix_index():
     nside = 32
     p = np.arange(12*nside**2)
     for pix in p:

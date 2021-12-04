@@ -29,7 +29,7 @@ MAGPIE: Monte cArlo weiGhted PIxel rEmapping
 +---------------+-----------------------------------------+
 | Author        | Krishna Naidoo                          |
 +---------------+-----------------------------------------+
-| Version       | 0.3.1                                   |
+| Version       | 0.3.2                                   |
 +---------------+-----------------------------------------+
 | Repository    | https://github.com/knaidoo29/magpie     |
 +---------------+-----------------------------------------+
@@ -83,6 +83,7 @@ Tutorials and API
   coords_index
   grids_index
   pixels_index
+  plot_index
   randoms_index
   remap_index
   api

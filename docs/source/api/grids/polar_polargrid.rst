@@ -3,15 +3,15 @@ magpie.grids.polargrid
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 
-.. function:: magpie.grids.polargrid(nr, nphi[, rmin=0., rmax=1., phimin=0., phimax=2*np.pi, returns1d=False])
+.. function:: magpie.grids.polargrid(nphi, nr[, rmin=0., rmax=1., phimin=0., phimax=2*np.pi, return1d=False])
 
     Constructs a polar coordinate grid.
 
     :Parameters:
-      nr : int
-          Number of divisions along the r-axis.
       nphi : int
           Number of divisions along the p-axis.
+      nr : int
+          Number of divisions along the r-axis.
       rmin : float, optional
           Minimum radial value, default=0.
       rmax : float, optional
@@ -24,7 +24,7 @@ magpie.grids.polargrid
           Returns 1d mid-points.
 
     :Returns:
-      r2d, p2d : 2darray
-          Radial and phi grid points in 2darray.
-      rmid, pmid : array, optional
+      p2d, r2d : 2darray
+          Phi and radial grid points in 2darray.
+      pmid, rmid : array, optional
           The mid-point of the polar grid.

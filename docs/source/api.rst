@@ -23,6 +23,13 @@ Pixels
 
     pixels_func_list
 
+Plot
+====
+
+.. toctree::
+
+    plot_func_list
+
 Randoms
 =======
 

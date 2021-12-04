@@ -3,14 +3,15 @@ import os
 import sys
 sys.path.insert(0, os.path.abspath('../..'))
 
+import vinfo
+
 # -- Project information
 
 project = 'MAGPIE'
 copyright = '2021, Krishna Naidoo'
 author = 'Krishna Naidoo'
 
-release = '0.2'
-version = release+'.1'
+version = vinfo.vstr
 
 # -- General configuration
 
@@ -21,8 +22,10 @@ extensions = [
     'sphinx.ext.autosummary',
     'sphinx.ext.intersphinx',
     'sphinx.ext.napoleon',
-    'sphinx.ext.mathjax',
+    'sphinx.ext.mathjax'
 ]
+
+source_suffix = ['.rst', '.md']
 
 # Napoleon settings
 napoleon_numpy_docstring = True

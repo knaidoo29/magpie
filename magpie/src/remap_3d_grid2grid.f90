@@ -73,8 +73,8 @@ subroutine remap_3d_grid2grid(x1min, x1max, x1grid, y1min, y1max, y1grid &
   real(kind=dp), intent(in) :: f1(x1grid*y1grid*z1grid)
   real(kind=dp), intent(out) :: f2(x2grid*y2grid*z2grid)
   real(kind=dp) :: xweights(xpixlen), yweights(ypixlen), zweights(zpixlen)
-  integer :: xpix(xpixlen), ypix(ypixlen), zpix(zpixlen)
-  integer :: pix(xpixlen*ypixlen*zpixlen), i, j, k
+  integer :: xpix_id(xpixlen), ypix_id(ypixlen), zpix_id(zpixlen)
+  integer :: pix_id(xpixlen*ypixlen*zpixlen), i, j, k
   integer :: xwhich2pix, ywhich2pix, zwhich2pix, ii, jj, i1, j1, k1
 
   ! Main
@@ -83,22 +83,22 @@ subroutine remap_3d_grid2grid(x1min, x1max, x1grid, y1min, y1max, y1grid &
 
     xwhich2pix = i-1
     call remap_1d_grid2grid_pixel(x1min, x1max, x1grid, x2min, x2max, x2grid &
-      , xwhich2pix, xpixlen, xpix, xweights)
+      , xwhich2pix, xpixlen, xpix_id, xweights)
 
     do j = 1, y2grid
 
       ywhich2pix = j-1
       call remap_1d_grid2grid_pixel(y1min, y1max, y1grid, y2min, y2max, y2grid &
-        , ywhich2pix, ypixlen, ypix, yweights)
+        , ywhich2pix, ypixlen, ypix_id, yweights)
 
       do k = 1, z2grid
 
         zwhich2pix = k-1
         call remap_1d_grid2grid_pixel(z1min, z1max, z1grid, z2min, z2max &
-          , z2grid, zwhich2pix, zpixlen, zpix, zweights)
+          , z2grid, zwhich2pix, zpixlen, zpix_id, zweights)
 
-        call pix1dto3d(xpix, ypix, zpix, xpixlen, ypixlen, zpixlen, y1grid &
-          , z1grid, pix)
+        call pix_id_1dto3d_grid(xpix_id, ypix_id, zpix_id, xpixlen, ypixlen &
+          , zpixlen, y1grid, z1grid, pix_id)
 
         ii = zwhich2pix + z2grid*(ywhich2pix + y2grid*xwhich2pix) + 1
         f2(ii) = 0.
@@ -109,9 +109,9 @@ subroutine remap_3d_grid2grid(x1min, x1max, x1grid, y1min, y1max, y1grid &
           do j1 = 1, ypixlen
             do k1 = 1, zpixlen
 
-              if (pix(jj) .NE. -1) then
+              if (pix_id(jj) .NE. -1) then
                 f2(ii) = f2(ii) &
-                  + xweights(i1)*yweights(j1)*zweights(k1)*f1(pix(jj)+1)
+                  + xweights(i1)*yweights(j1)*zweights(k1)*f1(pix_id(jj)+1)
               end if
 
               jj = jj + 1

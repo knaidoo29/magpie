@@ -8,3 +8,5 @@
 *coverage.xml
 magpie/src/old/*
 src/*.so
+.tox/*
+tox.ini

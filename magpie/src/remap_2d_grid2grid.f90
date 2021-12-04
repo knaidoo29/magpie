@@ -56,7 +56,7 @@ subroutine remap_2d_grid2grid(x1min, x1max, x1grid, y1min, y1max, y1grid &
   real(kind=dp), intent(in) :: f1(x1grid*y1grid)
   real(kind=dp), intent(out) :: f2(x2grid*y2grid)
   real(kind=dp) :: xweights(xpixlen), yweights(ypixlen)
-  integer :: xpix(xpixlen), ypix(ypixlen), pix(xpixlen*ypixlen), i, j
+  integer :: xpix_id(xpixlen), ypix_id(ypixlen), pix_id(xpixlen*ypixlen), i, j
   integer :: xwhich2pix, ywhich2pix, ii, jj, i1, j1
 
   ! Main
@@ -65,15 +65,16 @@ subroutine remap_2d_grid2grid(x1min, x1max, x1grid, y1min, y1max, y1grid &
 
     xwhich2pix = i-1
     call remap_1d_grid2grid_pixel(x1min, x1max, x1grid, x2min, x2max, x2grid &
-      , xwhich2pix, xpixlen, xpix, xweights)
+      , xwhich2pix, xpixlen, xpix_id, xweights)
 
     do j = 1, y2grid
 
       ywhich2pix = j-1
-      call remap_1d_grid2grid_pixel(y1min, y1max, y1grid, y2min, y2max, y2grid &
-        , ywhich2pix, ypixlen, ypix, yweights)
+      call remap_1d_grid2grid_pixel(y1min, y1max, y1grid, y2min, y2max &
+        , y2grid, ywhich2pix, ypixlen, ypix_id, yweights)
 
-      call pix1dto2d(xpix, ypix, xpixlen, ypixlen, y1grid, pix)
+      call pix_id_1dto2d_grid(xpix_id, ypix_id, xpixlen, ypixlen, y1grid &
+        , pix_id)
 
       ii = ywhich2pix + y2grid*xwhich2pix + 1
       f2(ii) = 0.
@@ -83,8 +84,8 @@ subroutine remap_2d_grid2grid(x1min, x1max, x1grid, y1min, y1max, y1grid &
       do i1 = 1, xpixlen
         do j1 = 1, ypixlen
 
-          if (pix(jj) .NE. -1) then
-            f2(ii) = f2(ii) + xweights(i1)*yweights(j1)*f1(pix(jj)+1)
+          if (pix_id(jj) .NE. -1) then
+            f2(ii) = f2(ii) + xweights(i1)*yweights(j1)*f1(pix_id(jj)+1)
           end if
 
           jj = jj + 1

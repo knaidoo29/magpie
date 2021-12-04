@@ -108,15 +108,15 @@ def test_grid3d():
 # check polar
 
 def test_polargrid():
-    r2d, p2d = magpie.grids.polargrid(10, 20)
-    assert np.shape(r2d) == (10, 20), "shape is not as expected."
-    assert np.shape(p2d) == (10, 20), "shape is not as expected."
-    r2d, p2d, rmid, pmid = magpie.grids.polargrid(10, 20, return1d=True)
+    p2d, r2d = magpie.grids.polargrid(20, 10)
+    assert np.shape(r2d) == (20, 10), "shape is not as expected."
+    assert np.shape(p2d) == (20, 10), "shape is not as expected."
+    p2d, r2d, pmid, rmid = magpie.grids.polargrid(20, 10, return1d=True)
     assert np.round(rmid[0], decimals=4) == 0.05 and np.round(rmid[7], decimals=4) == 0.75, "polargrid unexpected results."
     assert np.round(np.sum(np.unique(r2d.flatten())-rmid), decimals=4) == 0., "rmid is inconsistent with r2d."
     assert np.round(pmid[0], decimals=4) == np.round(np.pi/20, decimals=4) and np.round(pmid[7], decimals=4) == np.round(15*np.pi/20, decimals=4), "polargrid unexpected results."
     assert np.round(np.sum(np.unique(p2d.flatten())-pmid), decimals=4) == 0., "pmid is inconsistent with p2d."
-    r2d, p2d, rmid, pmid = magpie.grids.polargrid(10, 10, rmin=10., rmax=20., phimin=np.pi/2., phimax=np.pi, return1d=True)
+    p2d, r2d, pmid, rmid = magpie.grids.polargrid(10, 10, rmin=10., rmax=20., phimin=np.pi/2., phimax=np.pi, return1d=True)
     assert np.round(rmid[0], decimals=4) == 10.5 and np.round(rmid[7], decimals=4) == 17.5, "polargrid unexpected results."
     assert np.round(np.sum(np.unique(r2d.flatten())-rmid), decimals=4) == 0., "rmid is inconsistent with r2d."
     assert np.round(pmid[0], decimals=4) == np.round((np.pi/2.)/20 + np.pi/2., decimals=4) \
@@ -125,15 +125,15 @@ def test_polargrid():
 
 
 def test_polargrid():
-    r2d, p2d = magpie.grids.polargrid(10, 20)
-    assert np.shape(r2d) == (10, 20), "shape is not as expected."
-    assert np.shape(p2d) == (10, 20), "shape is not as expected."
-    r2d, p2d, rmid, pmid = magpie.grids.polargrid(10, 20, return1d=True)
+    p2d, r2d = magpie.grids.polargrid(20, 10)
+    assert np.shape(r2d) == (20, 10), "shape is not as expected."
+    assert np.shape(p2d) == (20, 10), "shape is not as expected."
+    p2d, r2d, pmid, rmid = magpie.grids.polargrid(20, 10, return1d=True)
     assert np.round(rmid[0], decimals=4) == 0.05 and np.round(rmid[7], decimals=4) == 0.75, "polargrid unexpected results."
     assert np.round(np.sum(np.unique(r2d.flatten())-rmid), decimals=4) == 0., "rmid is inconsistent with r2d."
     assert np.round(pmid[0], decimals=4) == np.round(np.pi/20, decimals=4) and np.round(pmid[7], decimals=4) == np.round(15*np.pi/20, decimals=4), "polargrid unexpected results."
     assert np.round(np.sum(np.unique(p2d.flatten())-pmid), decimals=4) == 0., "pmid is inconsistent with p2d."
-    r2d, p2d, rmid, pmid = magpie.grids.polargrid(10, 10, rmin=10., rmax=20., phimin=np.pi/2., phimax=np.pi, return1d=True)
+    p2d, r2d, pmid, rmid = magpie.grids.polargrid(10, 10, rmin=10., rmax=20., phimin=np.pi/2., phimax=np.pi, return1d=True)
     assert np.round(rmid[0], decimals=4) == 10.5 and np.round(rmid[7], decimals=4) == 17.5, "polargrid unexpected results."
     assert np.round(np.sum(np.unique(r2d.flatten())-rmid), decimals=4) == 0., "rmid is inconsistent with r2d."
     assert np.round(pmid[0], decimals=4) == np.round((np.pi/2.)/20 + np.pi/2., decimals=4) \
@@ -141,15 +141,15 @@ def test_polargrid():
     assert np.round(np.sum(np.unique(p2d.flatten())-pmid), decimals=4) == 0., "pmid is inconsistent with p2d."
 
 def test_polarEA():
-    r, p = magpie.grids.polarEA_grid(10)
+    p, r = magpie.grids.polarEA_grid(10)
     npix = magpie.grids.polarEA_npix(10)
     assert len(r) == len(p), "PolarEA grid size for r and p are not the same."
     assert len(r) == npix, "Length of polarEA grid does not match expectations."
-    r, p = magpie.grids.polarEA_grid(6, base_nphi=3)
+    p, r = magpie.grids.polarEA_grid(6, base_nphi=3)
     npix = magpie.grids.polarEA_npix(6, base_nphi=3)
     assert len(r) == len(p), "PolarEA grid size for r and p are not the same."
     assert len(r) == npix, "Length of polarEA grid does not match expectations."
-    r, p = magpie.grids.polarEA_grid(10, base_nphi=3)
+    p, r = magpie.grids.polarEA_grid(10, base_nphi=3)
     npix = magpie.grids.polarEA_npix(10, base_nphi=3)
     assert len(r) == len(p), "PolarEA grid size for r and p are not the same."
     assert len(r) == npix, "Length of polarEA grid does not match expectations."

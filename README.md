@@ -5,14 +5,12 @@
 [![Documentation Status](https://readthedocs.org/projects/magpie-doc/badge/?version=latest)](https://magpie-doc.readthedocs.io/en/latest/?badge=latest)
 [![CircleCI](https://circleci.com/gh/knaidoo29/magpie/tree/master.svg?style=svg)](https://circleci.com/gh/knaidoo29/magpie/tree/master)
 [![codecov](https://codecov.io/gh/knaidoo29/magpie/branch/development/graph/badge.svg?token=P7H8FAJT43)](https://codecov.io/gh/knaidoo29/magpie)
-[comment]: # ([![codecov](https://codecov.io/gh/knaidoo29/magpie/branch/master/graph/badge.svg?token=P7H8FAJT43)](https://codecov.io/gh/knaidoo29/magpie))
-
 [![Anaconda-Server Badge](https://anaconda.org/knaidoo29/magpie-pkg/badges/license.svg)](https://anaconda.org/knaidoo29/magpie-pkg)
 
 |               |                                       |
 |---------------|---------------------------------------|
 | Author        | Krishna Naidoo                        |          
-| Version       | 0.3.1                                 |
+| Version       | 0.3.2                                 |
 | Repository    | https://github.com/knaidoo29/magpie   |
 | Documentation | https://magpie-doc.readthedocs.io/    |
 
@@ -42,15 +40,17 @@
   - [ ] 3D slices -> lines, planes, discs.
 * Pixels
   - [ ] Computing pixel length, area or volumes.
-  - [ ] Fast pixel ID finding based on position in space (consider linear interpolation for non-uniform grid).
+  - [x] Fast pixel ID finding based on position in space
+  - [ ] Fast pixel ID for non-uniform grid.
 * Remapping
-  - [ ] Cartesian grid remapping computed exactly.
+  - [X] Cartesian grid remapping computed exactly.
   - [ ] Generalised 2D and 3D remapping requiring only the end point grids and the methods for computation (i.e. MC or HR) with support for weights and uncertainties.
   - [ ] Storing and computing weights for generic environment.
   - [ ] Dynamic MC randoms dependent on pixel area and dynamic HR again depending on pixel area to prevent aliasing.
   - [ ] Mean and sum functions along an axis or a grid.
   - [ ] Masking and computation of a subset of weights.
 * Plotting
+  - [x] PolarEA plotting.
   - [ ] Routines for plotting grids in various coordinate systems and for specifying axes and grid lines.
 * Testing
   - [ ] Setup tox for different environments (perhaps even platforms) with CircleCI.
@@ -66,7 +66,7 @@ MAGPIE is a python module for remapping bins (in 1D), pixels (in 2D) and cells (
 
 ## Dependencies
 
-MAGPIE is being developed in Python 3.9 but should work on all versions >=3.4. MAGPIE is written mostly in python but with some heavy computation carried out in Fortran. Compiling the Fortran source code will require the availability of a fortran compiler such as gfortran or ifort.
+MAGPIE is being developed in Python 3.9 but should work on all versions >=3.4. MAGPIE is written mostly in python but with some heavy computation carried out in Fortran. Compiling the Fortran source code will require the availability of a Fortran compiler such as gfortran or ifort.
 
 The following Python modules are required:
 
@@ -121,7 +121,11 @@ If you have any issues with the code or want to suggest ways to improve it pleas
     * Pixel functions: basic shapes -> square, arc, disc and box, healpix pixel boundaries and healpix pixel index conversion functions.
     * Randoms functions: uniform randoms in cartesian 1D, 2D & 3D, polar, unit sphere, spherical polar, healpix pixels. Randoms from user defined PDF/CDF and random and probabilistic subsampling.
     * Limited remapping functions for uniform grids without rotations computed exactly for 1D, 2D & 3D.
-
+    * Position to pixel for cartesian 1D, 2D and 3D, and polar grid and polarEA.
+    * Pixel to position for cartesian 1D, 2D and 3D, and polar grid and polarEA.
+    * Pixel ID functions: unique ID and counts and binning.
+    * Plot PolarEA.
+    
 * **Version 0.2**:
     * Restructured layout and the incorporation of documentation and unit testing for eventual first release.
     * Randoms in a variety of coordinate systems: cartesian, polar, spherical and from an input PDF/CDF and subsampling and stochastic weights.
