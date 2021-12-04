@@ -1,4 +1,5 @@
 include "remap_1d_grid2grid.f90"
+include "pixel_1dto2d.f90"
 
 
 subroutine remap_2d_grid2grid(x1min, x1max, x1grid, y1min, y1max, y1grid &
