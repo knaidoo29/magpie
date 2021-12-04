@@ -2,7 +2,7 @@
 magpie.randoms.randoms_pdf
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. function:: magpie.randoms.randoms_pdf(x, pdf, size[, kind='cubic'])
+.. function:: magpie.randoms.randoms_pdf(x, pdf, size, kind='cubic')
 
     Generates randoms from a given probability distribution function by first
     calculating a CDF.

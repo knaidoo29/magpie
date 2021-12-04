@@ -2,7 +2,7 @@
 magpie.coords.ortho2cart
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. function:: magpie.coords.ortho2cart(x, y[, r= 1., fill_value=np.nan])
+.. function:: magpie.coords.ortho2cart(x, y, r= 1., fill_value=np.nan)
 
     Orthographic projection to cartesian coordinates.
 

@@ -45,12 +45,15 @@ def plot_polarEA(pix, nr=None, rmax=1., base_nphi=3, pixID=None, proj='cart',
             nr = int(np.sqrt(len(pix)/base_nphi))
         npix = grids.polarEA_npix(nr, base_nphi)
         pixID = np.arange(npix)
+    else:
+        assert nr is not None, "nr must be defined if pixID is given."
     if vmin is None:
         vmin = np.min(pix[np.isfinite(pix)])
     if vmax is None:
         vmax = np.max(pix[np.isfinite(pix)])
     cval = pix - vmin
-    cval /= vmax - vmin
+    if vmin != vmax:
+        cval /= vmax - vmin
     colors = cmap(cval)
     patches = [pixels.get_polarEA_shape(pixID[i], nr, rmax=rmax,
                                         base_nphi=base_nphi, proj=proj,

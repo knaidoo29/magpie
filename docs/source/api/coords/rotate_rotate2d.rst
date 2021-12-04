@@ -2,7 +2,7 @@
 magpie.coords.rotate2d
 ^^^^^^^^^^^^^^^^^^^^^^
 
-.. function:: magpie.coords.rotate2d(x, y, dphi[, center=[0., 0.]])
+.. function:: magpie.coords.rotate2d(x, y, dphi, center=[0., 0.])
 
     Rotates points in 2D cartesian coordinates counter clockwise by dphi in
     radians.

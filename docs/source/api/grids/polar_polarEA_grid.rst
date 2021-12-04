@@ -3,7 +3,7 @@ magpie.grids.polarEA_grid
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
-.. function:: magpie.grids.polarEA_grid(nr[, rmax=1., base_nphi=3])
+.. function:: magpie.grids.polarEA_grid(nr, rmax=1., base_nphi=3)
 
     Constructs an equal area polar grid.
 

@@ -2,9 +2,7 @@ import numpy as np
 from matplotlib.patches import Polygon
 
 from . import shape_basic
-from . import pix2pos_polar
-
-from .. import utils
+from . import pix2pos_pol
 
 
 def _polar_pixel_polygon(p, r, dr, dp, proj, center, steps, returnpoly):
@@ -33,12 +31,12 @@ def _polar_pixel_polygon(p, r, dr, dp, proj, center, steps, returnpoly):
     """
     if proj == 'cart':
         x, y = shape_basic.get_disc(rmin=r-0.5*dr, rmax=r+0.5*dr,
-                                     phimin=p-0.5*dp, phimax=p+0.5*dp,
-                                     center=center, steps=steps)
+                                    phimin=p-0.5*dp, phimax=p+0.5*dp,
+                                    center=center, steps=steps)
     elif proj == 'polar':
         x, y = shape_basic.get_square(xmin=p-0.5*dp, xmax=p+0.5*dp,
-                                       ymin=r-0.5*dr, ymax=r+0.5*dr,
-                                       steps=steps)
+                                      ymin=r-0.5*dr, ymax=r+0.5*dr,
+                                      steps=steps)
     if returnpoly is True:
         return Polygon(np.column_stack([x, y]))
     else:
@@ -80,9 +78,9 @@ def get_polar_shape(pixID, nphi, nr, rmin=0., rmax=1., phimin=0.,
     assert np.isscalar(pixID), "Must be a single pixel index."
     assert proj == 'cart' or proj == 'polar', \
         "proj must be equal to cart or polar."
-    p, r, dp, dr = pix2pos_polar.pix2pos_polar(pixID, nphi, nr, rmin=rmin,
-                                               rmax=rmax, phimin=phimin,
-                                               phimax=phimax)
+    p, r, dp, dr = pix2pos_pol.pix2pos_polar(pixID, nphi, nr, rmin=rmin,
+                                             rmax=rmax, phimin=phimin,
+                                             phimax=phimax)
     return _polar_pixel_polygon(p, r, dr, dp, proj, center, steps, returnpoly)
 
 
@@ -120,6 +118,6 @@ def get_polarEA_shape(pixID, nr, rmax=1., base_nphi=4, proj='cart',
     assert np.isscalar(pixID), "Must be a single pixel index."
     assert proj == 'cart' or proj == 'polar', \
         "proj must be equal to cart or polar."
-    p, r, dp, dr = pix2pos_polar.pix2pos_polarEA(pixID, nr, rmax=rmax,
-                                       base_nphi=base_nphi)
+    p, r, dp, dr = pix2pos_pol.pix2pos_polarEA(pixID, nr, rmax=rmax,
+                                               base_nphi=base_nphi)
     return _polar_pixel_polygon(p, r, dr, dp, proj, center, steps, returnpoly)

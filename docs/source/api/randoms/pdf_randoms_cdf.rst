@@ -2,7 +2,7 @@
 magpie.randoms.randoms_cdf
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. function:: magpie.randoms.randoms_cdf(x, cdf, size[, kind='cubic'])
+.. function:: magpie.randoms.randoms_cdf(x, cdf, size, kind='cubic')
 
     Generates randoms from a given cumulative distribution function.
 

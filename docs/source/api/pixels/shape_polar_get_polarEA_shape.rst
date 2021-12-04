@@ -2,7 +2,7 @@
 magpie.pixels.get_polarEA_shape
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. function:: magpie.pixels.get_polarEA_shape(pixID, nr[, rmax=1., base_nphi=4, proj='cart', center=[0., 0.], steps=12, returnpoly=False])
+.. function:: magpie.pixels.get_polarEA_shape(pixID, nr, rmax=1., base_nphi=3, proj='cart', center=[0., 0.], steps=12, returnpoly=False)
 
     Returns a polygon for the shape of a single polar coordinate pixel in
     polar or cartesian 2D coordinates.
@@ -15,7 +15,7 @@ magpie.pixels.get_polarEA_shape
       rmax : float, optional
           Maximum radial value, default=1.
       base_nphi : int, optional
-          Number of pixels around r=0, default=4.
+          Number of pixels around r=0, default=3.
       proj : str, optional
           Output coordinate projection. Either 'cart' for cartesian or 'polar'
           for polar projection.

@@ -2,7 +2,7 @@
 magpie.plot.plot_polarEA
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. function:: magpie.plot.plot_polarEA(pix[, nr=None, rmax=1., base_nphi=3, pixID=None, proj='cart', center=[0., 0.], steps=12, ax=None, vmin=None, vmax=None, cmap=plt.cm.viridis])
+.. function:: magpie.plot.plot_polarEA(pix, nr=None, rmax=1., base_nphi=3, pixID=None, proj='cart', center=[0., 0.], steps=12, ax=None, vmin=None, vmax=None, cmap=plt.cm.viridis)
 
     Plots pixels from a polar equal area grid.
 

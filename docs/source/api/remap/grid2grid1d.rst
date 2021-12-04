@@ -3,7 +3,7 @@ magpie.remap.grid2grid1D
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
-.. function:: magpie.remap.grid2grid1D(f, boxsize, ngridout[, origin=0., originout=0., boxsizeout=None])
+.. function:: magpie.remap.grid2grid1D(f, boxsize, ngridout, origin=0., originout=0., boxsizeout=None)
 
     Remaps a dataset defined on 1D a uniform cartesian grid onto a new 1D
     uniform cartesian grid.

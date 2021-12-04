@@ -2,7 +2,7 @@
 magpie.grids.grid2d
 ^^^^^^^^^^^^^^^^^^^
 
-.. function:: magpie.grids.grid2d(lengths, ngrids[, mins=[None, None], return1d=False])
+.. function:: magpie.grids.grid2d(lengths, ngrids, mins=[None, None], return1d=False)
 
     Returns the mid-point of a uniform grid.
 

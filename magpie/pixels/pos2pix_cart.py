@@ -58,8 +58,8 @@ def pos2pix_cart2d(x, y, lengths, ngrids, mins=[0., 0.]):
         _ngrids = [ngrids, ngrids]
     else:
         _ngrids = ngrids
-    xpixID = cart1d_pixID(x, _lengths[0], _ngrids[0], xmins=mins[0])
-    ypixID = cart1d_pixID(y, _lengths[1], _ngrids[1], xmins=mins[1])
+    xpixID = pos2pix_cart1d(x, _lengths[0], _ngrids[0], xmin=mins[0])
+    ypixID = pos2pix_cart1d(y, _lengths[1], _ngrids[1], xmin=mins[1])
     if utils.isscalar(x) is True:
         pixID = src.pix_id_1dto2d_scalar(xpix_id=xpixID, ypix_id=ypixID,
                                          ygrid=_ngrids[1])
@@ -96,9 +96,9 @@ def pos2pix_cart3d(x, y, z, lengths, ngrids, mins=[0., 0., 0.]):
         _ngrids = [ngrids, ngrids, ngrids]
     else:
         _ngrids = ngrids
-    xpixID = cart1d_pixID(x, _lengths[0], _ngrids[0], xmins=mins[0])
-    ypixID = cart1d_pixID(y, _lengths[1], _ngrids[1], xmins=mins[1])
-    zpixID = cart1d_pixID(z, _lengths[2], _ngrids[2], xmins=mins[2])
+    xpixID = pos2pix_cart1d(x, _lengths[0], _ngrids[0], xmin=mins[0])
+    ypixID = pos2pix_cart1d(y, _lengths[1], _ngrids[1], xmin=mins[1])
+    zpixID = pos2pix_cart1d(z, _lengths[2], _ngrids[2], xmin=mins[2])
     if utils.isscalar(x) is True:
         pixID = src.pix_id_1dto3d_scalar(xpix_id=xpixID, ypix_id=ypixID,
                                          zpix_id=zpixID, ygrid=_ngrids[1],

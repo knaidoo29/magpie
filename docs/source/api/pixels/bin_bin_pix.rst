@@ -3,7 +3,7 @@ magpie.pixels.bin_pix
 ^^^^^^^^^^^^^^^^^^^^^
 
 
-.. function:: magpie.pixels.bin_pix(pixID, pixlen[, weights=None])
+.. function:: magpie.pixels.bin_pix(pixID, pixlen, weights=None)
 
     Bin weights by pixel index.
 

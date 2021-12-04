@@ -2,7 +2,7 @@
 magpie.coords.sphere2cart
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. function:: magpie.coords.sphere2cart(r, phi, theta[, center=[0., 0., 0.]])
+.. function:: magpie.coords.sphere2cart(r, phi, theta, center=[0., 0., 0.])
 
     Converts spherical polar coordinates into cartesian coordinates.
 

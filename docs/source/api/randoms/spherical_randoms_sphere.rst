@@ -3,7 +3,7 @@ magpie.randoms.randoms_sphere
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
-.. function:: magpie.randoms.randoms_sphere(size[, r_min=0., r_max=1., phi_min=0., phi_max=2*np.pi, theta_min=0., theta_max=np.pi])
+.. function:: magpie.randoms.randoms_sphere(size, r_min=0., r_max=1., phi_min=0., phi_max=2*np.pi, theta_min=0., theta_max=np.pi)
 
     Random points inside a sphere (default will give randoms within a unit sphere).
     You can specify the inner and outer radii to get randoms in a shell and the region

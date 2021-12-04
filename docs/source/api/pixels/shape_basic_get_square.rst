@@ -3,7 +3,7 @@ magpie.pixels.get_square
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 
-.. function:: magpie.pixels.get_square(xmin, xmax, ymin, ymax[, steps=40])
+.. function:: magpie.pixels.get_square(xmin, xmax, ymin, ymax, steps=40)
 
     Returns the coordinates of the perimeter of a rectangle.
 

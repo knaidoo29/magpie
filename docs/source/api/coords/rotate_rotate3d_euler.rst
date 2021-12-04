@@ -2,7 +2,7 @@
 magpie.coords.rotate3d_Euler
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. function:: magpie.coords.rotate3d_Euler(x, y, z, angles[, axes='zyz', center=[0., 0., 0.]])
+.. function:: magpie.coords.rotate3d_Euler(x, y, z, angles, axes='zyz', center=[0., 0., 0.])
 
     Rotates points in 3D cartesian coordinates by Euler angle around
     specified axes.

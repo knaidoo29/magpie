@@ -3,7 +3,7 @@ magpie.randoms.pdf2cdf
 ^^^^^^^^^^^^^^^^^^^^^^
 
 
-.. function:: magpie.randoms.pdf2cdf(xmid, pdf[, return_normpdf=True])
+.. function:: magpie.randoms.pdf2cdf(xmid, pdf, return_normpdf=True)
 
     Calculates the CDF from a given PDF.
 

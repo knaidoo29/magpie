@@ -1,12 +1,13 @@
 import numpy as np
 
+from . import pix2pos_cart
+
 from .. import grids
-from .. import src
 from .. import utils
 
 
-def pix2pos_polar(pixID, nphi, nr, rmin=0., rmax=1., phimin=0., phimax=2.*np.pi,
-                  return1d_pixID=False):
+def pix2pos_polar(pixID, nphi, nr, rmin=0., rmax=1., phimin=0.,
+                  phimax=2.*np.pi, return1d_pixID=False):
     """Returns the 2D pixel coordinate from a pixel index.
 
     Parameters
@@ -37,8 +38,9 @@ def pix2pos_polar(pixID, nphi, nr, rmin=0., rmax=1., phimin=0., phimax=2.*np.pi,
     phipixID, rpixID : int or array
         1D pixel index.
     """
-    return pix2cart2d(pixID, [phimax-phimin, rmax-rmin], [nphi, nr],
-                      mins=[phimin, rmin], return1d_pixID=False)
+    return pix2pos_cart.pix2pos_cart2d(pixID, [phimax-phimin, rmax-rmin],
+                                       [nphi, nr], mins=[phimin, rmin],
+                                       return1d_pixID=False)
 
 
 def pix2pos_polarEA(pixID, nr, rmax=1., base_nphi=3):

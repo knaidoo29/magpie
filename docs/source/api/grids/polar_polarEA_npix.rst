@@ -3,7 +3,7 @@ magpie.grids.polarEA_npix
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
-.. function:: magpie.grids.polarEA_npix(nr[, base_nphi=3])
+.. function:: magpie.grids.polarEA_npix(nr, base_nphi=3)
 
     Returns the number of pixels in an equal area polar grid.
 

@@ -31,7 +31,8 @@ def pix2pos_cart1d(pixID, length, ngrid, xmin=0.):
     return x, dx
 
 
-def pix2pos_cart2d(pixID, lengths, ngrids, mins=[0., 0.], return1d_pixID=False):
+def pix2pos_cart2d(pixID, lengths, ngrids, mins=[0., 0.],
+                   return1d_pixID=False):
     """Returns the 2D pixel coordinate from a pixel index.
 
     Parameters
@@ -71,10 +72,8 @@ def pix2pos_cart2d(pixID, lengths, ngrids, mins=[0., 0.], return1d_pixID=False):
         xpixID, ypixID = \
             src.pix_id_2dto1d_array(pix_id=pixID, xlen=len(pixID),
                                     ygrid=_ngrids[1])
-    x = pixID_2_cart1D(xpixID, _ngrids[0], _lengths[0], xmin=mins[0])
-    y = pixID_2_cart1D(ypixID, _ngrids[1], _lengths[1], xmin=mins[1])
-    dx = _lengths[0]/_ngrids[0]
-    dy = _lengths[1]/_ngrids[1]
+    x, dx = pix2pos_cart1d(xpixID, _lengths[0], _ngrids[0], xmin=mins[0])
+    y, dy = pix2pos_cart1d(ypixID, _lengths[1], _ngrids[1], xmin=mins[1])
     if return1d_pixID is False:
         return x, y, dx, dy
     else:
@@ -123,12 +122,9 @@ def pix2pos_cart3d(pixID, lengths, ngrids, mins=[0., 0., 0.],
         xpixID, ypixID, zpixID = \
             src.pix_id_3dto1d_array(pix_id=pixID, xlen=len(pixID),
                                     ygrid=_ngrids[1], zgrid=_ngrids[2])
-    x = pixID_2_cart1D(xpixID, _ngrids[0], _lengths[0], xmin=mins[0])
-    y = pixID_2_cart1D(ypixID, _ngrids[1], _lengths[1], xmin=mins[1])
-    z = pixID_2_cart1D(zpixID, _ngrids[2], _lengths[2], xmin=mins[2])
-    dx = _lengths[0]/_ngrids[0]
-    dy = _lengths[1]/_ngrids[1]
-    dz = _lengths[2]/_ngrids[2]
+    x, dx = pix2pos_cart1d(xpixID, _lengths[0], _ngrids[0], xmin=mins[0])
+    y, dy = pix2pos_cart1d(ypixID, _lengths[1], _ngrids[1], xmin=mins[1])
+    z, dz = pix2pos_cart1d(zpixID, _lengths[2], _ngrids[2], xmin=mins[2])
     if return1d_pixID is False:
         return x, y, z, dx, dy, dz
     else:

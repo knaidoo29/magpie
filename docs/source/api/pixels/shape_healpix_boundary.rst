@@ -3,7 +3,7 @@ magpie.pixels.healpix_boundary
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
-.. function:: magpie.pixels.healpix_boundary(p, nside[, steps=40, reverse=False])
+.. function:: magpie.pixels.healpix_boundary(p, nside, steps=40, reverse=False)
 
     Returns the boundary of a healpix pixel in healpix x and y coordinates,
     default given in clockwise directions.

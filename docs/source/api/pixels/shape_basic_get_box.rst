@@ -3,7 +3,7 @@ magpie.pixels.get_box
 ^^^^^^^^^^^^^^^^^^^^^
 
 
-.. function:: magpie.pixels.get_box(xmin, xmax, ymin, ymax, zmin, zmax[, steps=120, return_nearest=False, center=[0., 0., 0.]])
+.. function:: magpie.pixels.get_box(xmin, xmax, ymin, ymax, zmin, zmax, steps=120, return_nearest=False, center=[0., 0., 0.])
 
     Returns 3D coordinates for a box.
 

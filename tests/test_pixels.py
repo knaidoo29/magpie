@@ -11,7 +11,6 @@ def check_assert(function, *args, **kwargs):
     except AssertionError:
         return True
 
-
 # Basic shapes
 
 def test_get_square():
@@ -120,6 +119,20 @@ def test_healpix_boundary():
     assert np.round(np.sum(y1-y2[::-1]), decimals=2) == 0., "Reversing should match."
 
 
+def test_polar_shape():
+    assert check_assert(magpie.pixels.get_polar_shape, *[np.array([0, 1, 2]), 10, 10])
+    assert check_assert(magpie.pixels.get_polarEA_shape, *[np.array([0, 1, 2]), 10])
+    assert check_assert(magpie.pixels.get_polar_shape, *[3, 10, 10], proj='test')
+    assert check_assert(magpie.pixels.get_polarEA_shape, *[3, 10], proj='test')
+    x, y = magpie.pixels.get_polar_shape(3, 10, 10, proj='cart')
+    x, y = magpie.pixels.get_polarEA_shape(3, 10, proj='cart')
+    x, y = magpie.pixels.get_polar_shape(3, 10, 10, proj='polar')
+    x, y = magpie.pixels.get_polarEA_shape(3, 10, proj='polar')
+    polygon = magpie.pixels.get_polar_shape(3, 10, 10, proj='cart', returnpoly=True)
+    polygon = magpie.pixels.get_polarEA_shape(3, 10, proj='cart', returnpoly=True)
+    polygon = magpie.pixels.get_polar_shape(3, 10, 10, proj='polar', returnpoly=True)
+    polygon = magpie.pixels.get_polarEA_shape(3, 10, proj='polar', returnpoly=True)
+
 
 def test_healpix_index():
     nside = 32
@@ -165,3 +178,109 @@ def test_healpix_index():
         istar_neigh, jstar_neigh = magpie.pixels.healpix_ijs_neighbours(istar[pix], jstar[pix], nside)
     # check pix2xy and ij2xy returns without errors
     healx, healy = magpie.pixels.healpix_pix2xy(p, nside)
+
+
+# pix2pos to pos2pix
+
+def test_cartpixtopos():
+    pixID = 10
+    x, dx = magpie.pixels.pix2pos_cart1d(pixID, 100, 1000)
+    pixID2 = magpie.pixels.pos2pix_cart1d(x, 100, 1000)
+    assert pixID == pixID2, "pix2pos <-> pos2pix for cartesian scalar incorrect."
+    pixID = np.arange(100)
+    x, dx = magpie.pixels.pix2pos_cart1d(pixID, 100, 1000)
+    pixID2 = magpie.pixels.pos2pix_cart1d(x, 100, 1000)
+    assert all(pixID == pixID2), "pix2pos <-> pos2pix for cartesian scalar incorrect."
+    # 2D
+    pixID = 10
+    x, y, dx, dy= magpie.pixels.pix2pos_cart2d(pixID, 100, 1000)
+    pixID2 = magpie.pixels.pos2pix_cart2d(x, y, 100, 1000)
+    assert pixID == pixID2, "pix2pos <-> pos2pix for cartesian scalar incorrect."
+    pixID = np.arange(100)
+    x, y, dx, dy = magpie.pixels.pix2pos_cart2d(pixID, 100, 1000)
+    pixID2 = magpie.pixels.pos2pix_cart2d(x, y, 100, 1000)
+    assert all(pixID == pixID2), "pix2pos <-> pos2pix for cartesian scalar incorrect."
+    pixID = np.arange(100)
+    x, y, dx, dy, xpixID, ypixID = magpie.pixels.pix2pos_cart2d(pixID, 100, 1000, return1d_pixID=True)
+    pixID2 = magpie.pixels.pos2pix_cart2d(x, y, 100, 1000)
+    assert all(pixID == pixID2), "pix2pos <-> pos2pix for cartesian scalar incorrect."
+    pixID = 10
+    x, y, dx, dy = magpie.pixels.pix2pos_cart2d(pixID, [100, 100], 1000)
+    pixID2 = magpie.pixels.pos2pix_cart2d(x, y, [100, 100], 1000)
+    assert pixID == pixID2, "pix2pos <-> pos2pix for cartesian scalar incorrect."
+    pixID = np.arange(100)
+    x, y, dx, dy = magpie.pixels.pix2pos_cart2d(pixID, [100, 100], 1000)
+    pixID2 = magpie.pixels.pos2pix_cart2d(x, y, [100, 100], 1000)
+    assert all(pixID == pixID2), "pix2pos <-> pos2pix for cartesian scalar incorrect."
+    pixID = 10
+    x, y, dx, dy = magpie.pixels.pix2pos_cart2d(pixID, 100, [1000, 1000])
+    pixID2 = magpie.pixels.pos2pix_cart2d(x, y, 100, [1000, 1000])
+    assert pixID == pixID2, "pix2pos <-> pos2pix for cartesian scalar incorrect."
+    pixID = np.arange(100)
+    x, y, dx, dy = magpie.pixels.pix2pos_cart2d(pixID, 100, [1000, 1000])
+    pixID2 = magpie.pixels.pos2pix_cart2d(x, y, 100, [1000, 1000])
+    assert all(pixID == pixID2), "pix2pos <-> pos2pix for cartesian scalar incorrect."
+    # 3D
+    pixID = 10
+    x, y, z, dx, dy, dz = magpie.pixels.pix2pos_cart3d(pixID, 100, 1000)
+    pixID2 = magpie.pixels.pos2pix_cart3d(x, y, z, 100, 1000)
+    assert pixID == pixID2, "pix2pos <-> pos2pix for cartesian scalar incorrect."
+    pixID = np.arange(100)
+    x, y, z, dx, dy, dz = magpie.pixels.pix2pos_cart3d(pixID, 100, 1000)
+    pixID2 = magpie.pixels.pos2pix_cart3d(x, y, z, 100, 1000)
+    assert all(pixID == pixID2), "pix2pos <-> pos2pix for cartesian array incorrect."
+    pixID = np.arange(100)
+    x, y, z, dx, dy, dz, xpixID, ypixID, zpixID = magpie.pixels.pix2pos_cart3d(pixID, 100, 1000, return1d_pixID=True)
+    pixID2 = magpie.pixels.pos2pix_cart3d(x, y, z, 100, 1000)
+    assert all(pixID == pixID2), "pix2pos <-> pos2pix for cartesian array incorrect."
+    pixID = 10
+    x, y, z, dx, dy, dz = magpie.pixels.pix2pos_cart3d(pixID, [100, 200, 300], 1000)
+    pixID2 = magpie.pixels.pos2pix_cart3d(x, y, z, [100, 200, 300], 1000)
+    assert pixID == pixID2, "pix2pos <-> pos2pix for cartesian scalar incorrect."
+    pixID = np.arange(100)
+    x, y, z, dx, dy, dz = magpie.pixels.pix2pos_cart3d(pixID, [100, 200, 300], 1000)
+    pixID2 = magpie.pixels.pos2pix_cart3d(x, y, z, [100, 200, 300], 1000)
+    assert all(pixID == pixID2), "pix2pos <-> pos2pix for cartesian array incorrect."
+    pixID = 10
+    x, y, z, dx, dy, dz = magpie.pixels.pix2pos_cart3d(pixID, 100, [1000, 2000, 300])
+    pixID2 = magpie.pixels.pos2pix_cart3d(x, y, z, 100, [1000, 2000, 300])
+    assert pixID == pixID2, "pix2pos <-> pos2pix for cartesian scalar incorrect."
+    pixID = np.arange(100)
+    x, y, z, dx, dy, dz = magpie.pixels.pix2pos_cart3d(pixID, 100, [1000, 2000, 300])
+    pixID2 = magpie.pixels.pos2pix_cart3d(x, y, z, 100, [1000, 2000, 300])
+    assert all(pixID == pixID2), "pix2pos <-> pos2pix for cartesian array incorrect."
+    # polar
+    pixID = 10
+    p, r, dp, dr = magpie.pixels.pix2pos_polar(pixID, 10, 20)
+    pixID2 = magpie.pixels.pos2pix_polar(p, r, 10, 20)
+    assert pixID == pixID2, "pix2pos <-> pos2pix for polar scalar incorrect."
+    pixID = np.arange(100)
+    p, r, dp, dr = magpie.pixels.pix2pos_polar(pixID, 10, 20)
+    pixID2 = magpie.pixels.pos2pix_polar(p, r, 10, 20)
+    assert all(pixID == pixID2), "pix2pos <-> pos2pix for polar array incorrect."
+    # polarEA
+    pixID = 10
+    p, r, dp, dr = magpie.pixels.pix2pos_polarEA(pixID, 10)
+    pixID2 = magpie.pixels.pos2pix_polarEA(p, r, 10)
+    assert pixID == pixID2, "pix2pos <-> pos2pix for polarEA scalar incorrect."
+    pixID = np.arange(100)
+    p, r, dp, dr = magpie.pixels.pix2pos_polarEA(pixID, 10)
+    pixID2 = magpie.pixels.pos2pix_polarEA(p, r, 10)
+    assert all(pixID == pixID2), "pix2pos <-> pos2pix for polarEA array incorrect."
+
+
+def test_bin_pix():
+    pixID = np.arange(10)
+    pix = magpie.pixels.bin_pix(pixID, 10)
+    assert all(pix == 1.), "Binning not working correctly."
+    weights = np.copy(pixID)
+    pix = magpie.pixels.bin_pix(pixID, 10, weights=weights)
+    assert np.sum(pix-weights.astype('float')) == 0., "Binning not working correctly."
+
+def test_unique_pix():
+    pixID = np.array([0, 0, 0, 2, 2, 5, 5, 5, 5])
+    upixID, cpixID = magpie.pixels.get_unique_pixID(pixID)
+    upixID2 = np.array([0, 2, 5])
+    cpixID2 = np.array([3, 2, 4])
+    assert np.sum(upixID-upixID2) == 0., "Unique pix not working correctly."
+    assert np.sum(cpixID-cpixID2) == 0., "Unique pix not working correctly."

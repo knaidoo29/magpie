@@ -3,7 +3,7 @@ magpie.pixels.get_arc
 ^^^^^^^^^^^^^^^^^^^^^
 
 
-.. function:: magpie.pixels.get_arc(radius[, phimin=0., phimax=2.*np.pi, center=[0., 0.], steps=10])
+.. function:: magpie.pixels.get_arc(radius, phimin=0., phimax=2.*np.pi, center=[0., 0.], steps=10)
 
     Returns the coordinates of the arc of a circle, default settings will
     return the coordinates along a complete circle.

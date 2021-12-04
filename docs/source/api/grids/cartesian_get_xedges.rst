@@ -3,7 +3,7 @@ magpie.grids.get_xedges
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 
-.. function:: magpie.grids.get_xedges(length, ngrid[, xmin=0.])
+.. function:: magpie.grids.get_xedges(length, ngrid, xmin=0.)
 
     Returns the edges of a uniform grid along one axis.
 

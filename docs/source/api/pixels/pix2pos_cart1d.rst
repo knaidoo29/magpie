@@ -3,7 +3,7 @@ magpie.pixels.pix2pos_cart1d
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
-.. function:: magpie.pixels.pix2pos_cart1d(pixID, length, ngrid[, xmin=0.])
+.. function:: magpie.pixels.pix2pos_cart1d(pixID, length, ngrid, xmin=0.)
 
     Returns the 1D pixel coordinate from a pixel index.
 

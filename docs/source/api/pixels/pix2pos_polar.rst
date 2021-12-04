@@ -2,7 +2,7 @@
 magpie.pixels.pix2pos_polar
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. function:: magpie.pixels.pix2pos_polar(pixID, nphi, nr[, rmin=0., rmax=1., phimin=0., phimax=2.*np.pi, return1d_pixID=False])
+.. function:: magpie.pixels.pix2pos_polar(pixID, nphi, nr, rmin=0., rmax=1., phimin=0., phimax=2.*np.pi, return1d_pixID=False)
 
     Returns the 2D pixel coordinate from a pixel index.
 

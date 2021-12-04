@@ -3,7 +3,7 @@ magpie.randoms.randoms_3d
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
-.. function:: magpie.randoms.randoms_3d(size[, mins=[0., 0., 0.], maxs=[1., 1., 1.]])
+.. function:: magpie.randoms.randoms_3d(size, mins=[0., 0., 0.], maxs=[1., 1., 1.])
 
     Returns uniform randoms in 3D.
 

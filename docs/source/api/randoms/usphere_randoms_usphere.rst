@@ -2,11 +2,11 @@
 magpie.randoms.randoms_usphere
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. function:: magpie.randoms.randoms_usphere(size[, phi_min=0., phi_max=2.*np.pi, theta_min=0., theta_max=np.pi])
+.. function:: magpie.randoms.randoms_usphere(size, phi_min=0., phi_max=2.*np.pi, theta_min=0., theta_max=np.pi)
 
     Random points on the unit sphere or more generally across the surface of a sphere. The
     default will give randoms on the full unit sphere.
-    
+
     Coordinate convention:
       * phi lies in the range [0, 2pi]
       * theta lies in the rang [0, pi].

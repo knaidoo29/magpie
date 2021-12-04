@@ -2,7 +2,7 @@
 magpie.coords.cart2polar
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. function:: magpie.coords.cart2polar(x, y[, center=[0., 0.]])
+.. function:: magpie.coords.cart2polar(x, y, center=[0., 0.])
 
     Returns the polar coordinates for a given set of cartesian coordinates.
 

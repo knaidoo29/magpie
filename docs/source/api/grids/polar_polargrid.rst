@@ -3,7 +3,7 @@ magpie.grids.polargrid
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 
-.. function:: magpie.grids.polargrid(nphi, nr[, rmin=0., rmax=1., phimin=0., phimax=2*np.pi, return1d=False])
+.. function:: magpie.grids.polargrid(nphi, nr, rmin=0., rmax=1., phimin=0., phimax=2*np.pi, return1d=False)
 
     Constructs a polar coordinate grid.
 

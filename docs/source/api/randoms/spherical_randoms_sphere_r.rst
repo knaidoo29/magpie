@@ -3,7 +3,7 @@ magpie.randoms.randoms_sphere_r
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
-.. function:: magpie.randoms.randoms_sphere_r(size[, r_min=0., r_max=1.])
+.. function:: magpie.randoms.randoms_sphere_r(size, r_min=0., r_max=1.)
 
     Random radial points for a segment of a sphere (default will give randoms within a unit sphere).
 

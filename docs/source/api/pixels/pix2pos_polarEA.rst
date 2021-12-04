@@ -2,7 +2,7 @@
 magpie.pixels.pix2pos_polarEA
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. function:: magpie.pixels.pix2pos_polarEA(pixID, nr[, rmax=1., base_nphi=4])
+.. function:: magpie.pixels.pix2pos_polarEA(pixID, nr, rmax=1., base_nphi=3)
 
     Returns the pixel coordinate on an equal area polar grid.
 

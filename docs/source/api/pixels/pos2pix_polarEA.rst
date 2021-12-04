@@ -2,7 +2,7 @@
 magpie.pixels.pos2pix_polarEA
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. function:: magpie.pixels.pos2pix_polarEA(phi, r, nphi, nr[, base_nphi=4, rmax=1.])
+.. function:: magpie.pixels.pos2pix_polarEA(phi, r, nphi, nr, base_nphi=3, rmax=1.)
 
     Angular and radial coordinates to polar equal area grid.
 

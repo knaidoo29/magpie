@@ -2,7 +2,7 @@
 magpie.pixels.pos2pix_polar
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. function:: magpie.pixels.pos2pix_polar(phi, r, nphi, nr[, phimin=0., phimax=2*np.pi, rmin=0., rmax=1.])
+.. function:: magpie.pixels.pos2pix_polar(phi, r, nphi, nr, phimin=0., phimax=2*np.pi, rmin=0., rmax=1.)
 
     Angular and radial coordinates to polar grid.
 

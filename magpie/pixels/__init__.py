@@ -22,16 +22,16 @@ from .index_unique import get_unique_pixID
 from .pos2pix_cart import pos2pix_cart1d
 from .pos2pix_cart import pos2pix_cart2d
 from .pos2pix_cart import pos2pix_cart3d
-from .pos2pix_polar import pos2pix_polar
-from .pos2pix_polar import pos2pix_polarEA
+from .pos2pix_pol import pos2pix_polar
+from .pos2pix_pol import pos2pix_polarEA
 
 # Pixel to position
 
 from .pix2pos_cart import pix2pos_cart1d
 from .pix2pos_cart import pix2pos_cart2d
 from .pix2pos_cart import pix2pos_cart3d
-from .pix2pos_polar import pix2pos_polar
-from .pix2pos_polar import pix2pos_polarEA
+from .pix2pos_pol import pix2pos_polar
+from .pix2pos_pol import pix2pos_polarEA
 
 # Pixel Shape functions
 
