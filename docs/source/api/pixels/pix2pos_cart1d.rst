@@ -3,7 +3,7 @@ magpie.pixels.pix2pos_cart1d
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
-.. function:: magpie.pixels.pix2pos_cart1d(pixID, length, ngrid, xmin=0.)
+.. function:: magpie.pixels.pix2pos_cart1d(pixID, length, ngrid, origin=0.)
 
     Returns the 1D pixel coordinate from a pixel index.
 
@@ -14,7 +14,7 @@ magpie.pixels.pix2pos_cart1d
           Length of the grid.
       ngrid : int
           Number of grid points.
-      xmin : float, optional
+      origin : float, optional
           Minimum value of the grid.
 
     :Returns:

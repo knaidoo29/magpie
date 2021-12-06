@@ -1,9 +1,9 @@
 
-magpie.remap.grid2grid3D
-^^^^^^^^^^^^^^^^^^^^^^^^^
+magpie.remap.grid2grid3d
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 
-.. function:: magpie.remap.grid2grid3D(f, boxsize, ngridout, origin=0., originout=0., boxsizeout=None)
+.. function:: magpie.remap.grid2grid3d(f, boxsize, ngridout, origin=0., originout=0., boxsizeout=None)
 
     Remaps a dataset defined on a uniform 3D cartesian grid onto a new uniform
     3D cartesian grid.

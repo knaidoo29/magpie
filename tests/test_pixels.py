@@ -200,6 +200,14 @@ def test_cartpixtopos():
     x, y, dx, dy = magpie.pixels.pix2pos_cart2d(pixID, 100, 1000)
     pixID2 = magpie.pixels.pos2pix_cart2d(x, y, 100, 1000)
     assert all(pixID == pixID2), "pix2pos <-> pos2pix for cartesian scalar incorrect."
+    pixID = 10
+    x, y, dx, dy= magpie.pixels.pix2pos_cart2d(pixID, 100, 1000, origin=-1.)
+    pixID2 = magpie.pixels.pos2pix_cart2d(x, y, 100, 1000, origin=-1.)
+    assert pixID == pixID2, "pix2pos <-> pos2pix for cartesian scalar incorrect."
+    pixID = np.arange(100)
+    x, y, dx, dy = magpie.pixels.pix2pos_cart2d(pixID, 100, 1000, origin=-1.)
+    pixID2 = magpie.pixels.pos2pix_cart2d(x, y, 100, 1000, origin=-1.)
+    assert all(pixID == pixID2), "pix2pos <-> pos2pix for cartesian scalar incorrect."
     pixID = np.arange(100)
     x, y, dx, dy, xpixID, ypixID = magpie.pixels.pix2pos_cart2d(pixID, 100, 1000, return1d_pixID=True)
     pixID2 = magpie.pixels.pos2pix_cart2d(x, y, 100, 1000)
@@ -229,6 +237,16 @@ def test_cartpixtopos():
     x, y, z, dx, dy, dz = magpie.pixels.pix2pos_cart3d(pixID, 100, 1000)
     pixID2 = magpie.pixels.pos2pix_cart3d(x, y, z, 100, 1000)
     assert all(pixID == pixID2), "pix2pos <-> pos2pix for cartesian array incorrect."
+
+    pixID = 10
+    x, y, z, dx, dy, dz = magpie.pixels.pix2pos_cart3d(pixID, 100, 1000, origin=-1.)
+    pixID2 = magpie.pixels.pos2pix_cart3d(x, y, z, 100, 1000, origin=-1.)
+    assert pixID == pixID2, "pix2pos <-> pos2pix for cartesian scalar incorrect."
+    pixID = np.arange(100)
+    x, y, z, dx, dy, dz = magpie.pixels.pix2pos_cart3d(pixID, 100, 1000, origin=-1.)
+    pixID2 = magpie.pixels.pos2pix_cart3d(x, y, z, 100, 1000, origin=-1.)
+    assert all(pixID == pixID2), "pix2pos <-> pos2pix for cartesian array incorrect."
+
     pixID = np.arange(100)
     x, y, z, dx, dy, dz, xpixID, ypixID, zpixID = magpie.pixels.pix2pos_cart3d(pixID, 100, 1000, return1d_pixID=True)
     pixID2 = magpie.pixels.pos2pix_cart3d(x, y, z, 100, 1000)

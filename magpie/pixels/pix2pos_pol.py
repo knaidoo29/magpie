@@ -39,7 +39,7 @@ def pix2pos_polar(pixID, nphi, nr, rmin=0., rmax=1., phimin=0.,
         1D pixel index.
     """
     return pix2pos_cart.pix2pos_cart2d(pixID, [phimax-phimin, rmax-rmin],
-                                       [nphi, nr], mins=[phimin, rmin],
+                                       [nphi, nr], origin=[phimin, rmin],
                                        return1d_pixID=False)
 
 

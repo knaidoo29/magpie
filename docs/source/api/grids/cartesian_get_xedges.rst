@@ -1,9 +1,9 @@
-
+origin
 magpie.grids.get_xedges
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 
-.. function:: magpie.grids.get_xedges(length, ngrid, xmin=0.)
+.. function:: magpie.grids.get_xedges(length, ngrid, origin=0.)
 
     Returns the edges of a uniform grid along one axis.
 
@@ -12,7 +12,7 @@ magpie.grids.get_xedges
           Length of the grid.
       ngrid : int
           Number of grid points.
-      xmin : float, optional
+      origin : float, optional
           Minimum value of the grid.
 
     :Returns:

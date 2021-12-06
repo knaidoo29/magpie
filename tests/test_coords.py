@@ -77,6 +77,48 @@ def test_ortho2cart():
     assert z[0] == 1., "Check ortho2cart (x, y) = (0., 0.)."
     assert np.isnan(z[1]), "Check ortho2cart (x, y) = (2., 0.)."
 
+# test distance.py
+
+def test_dist():
+
+    x1, x2 = 1., 4.
+    dist = magpie.coords.dist1d(x1, x2)
+    assert dist == 3., "dist1d working incorrectly."
+    x1, x2 = 1.*np.arange(10), 4.*np.arange(10)
+    dist = magpie.coords.dist1d(x1, x2)
+    assert np.sum(dist-abs(x2-x1)) == 0., "dist1d working incorrectly."
+
+    x1, y1, x2, y2 = 1., 1., 4., 1.
+    dist = magpie.coords.dist2d(x1, y1, x2, y2)
+    assert dist == 3., "dist2d working incorrectly."
+    x1, y1, x2, y2 = 1., 1., 1., 4.
+    dist = magpie.coords.dist2d(x1, y1, x2, y2)
+    assert dist == 3., "dist2d working incorrectly."
+    x1, y1, x2, y2 = 1.*np.arange(10), 4.*np.arange(10), 5.*np.arange(10), 6.*np.arange(10)
+    dist = magpie.coords.dist2d(x1, y1, x2, y2)
+    assert np.sum(dist-np.sqrt((x2-x1)**2 + (y2-y1)**2)) == 0., "dist2d working incorrectly."
+
+    x1, y1, z1, x2, y2, z2 = 1., 1., 1., 4., 1., 1.
+    dist = magpie.coords.dist3d(x1, y1, z1, x2, y2, z2)
+    assert dist == 3., "dist3d working incorrectly."
+    x1, y1, z1, x2, y2, z2 = 1., 1., 1., 1., 1., 4.
+    dist = magpie.coords.dist3d(x1, y1, z1, x2, y2, z2)
+    assert dist == 3., "dist3d working incorrectly."
+    x1, y1, z1, x2, y2, z2 = 1.*np.arange(10), 4.*np.arange(10), 5.*np.arange(10), 6.*np.arange(10), -5.*np.arange(10), -6.*np.arange(10)
+    dist = magpie.coords.dist3d(x1, y1, z1, x2, y2, z2)
+    assert np.sum(dist-np.sqrt((x2-x1)**2 + (y2-y1)**2 + (z2-z1)**2)) == 0., "dist3d working incorrectly."
+
+    p1, t1, p2, t2 = 0., 0., 0., np.pi/2.
+    dist = magpie.coords.distusphere(p1, t1, p2, t2)
+    assert dist == np.pi/2., "distusphere working incorrectly."
+    p1, t1, p2, t2 = np.pi/2., np.pi/2., 3.*np.pi/2., np.pi/2.
+    dist = magpie.coords.distusphere(p1, t1, p2, t2)
+    assert dist == np.pi, "distusphere working incorrectly."
+    p1, t1 = np.linspace(0., np.pi, 100), 0.2*np.pi*np.ones(100)
+    p2, t2 = np.zeros(100), np.zeros(100)
+    dist = magpie.coords.distusphere(p1, t1, p2, t2)
+    assert all(dist == 0.2*np.pi), "distusphere working incorrectly"
+
 # test usphere_util.py
 
 def test_usphere_area_assert_phi_min_less_zero():

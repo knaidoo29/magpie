@@ -33,12 +33,12 @@ def polargrid(nphi, nr, rmin=0., rmax=1., phimin=0., phimax=2*np.pi,
     """
     if return1d is False:
         p2d, r2d = cartesian.grid2d([phimax-phimin, rmax-rmin], [nphi, nr],
-                                    mins=[phimin, rmin], return1d=False)
+                                    origin=[phimin, rmin], return1d=False)
         return p2d, r2d
     else:
         p2d, r2d, pmid, rmid = \
             cartesian.grid2d([phimax-phimin, rmax-rmin], [nphi, nr],
-                             mins=[phimin, rmin], return1d=True)
+                             origin=[phimin, rmin], return1d=True)
         return p2d, r2d, pmid, rmid
 
 

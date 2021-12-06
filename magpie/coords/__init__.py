@@ -5,6 +5,11 @@ from .conversions import cart2sphere
 from .conversions import sphere2cart
 from .conversions import ortho2cart
 
+from .distance import dist1d
+from .distance import dist2d
+from .distance import dist3d
+from .distance import distusphere
+
 from .healpix import healpix_xy2ang
 from .healpix import healpix_ang2xy
 

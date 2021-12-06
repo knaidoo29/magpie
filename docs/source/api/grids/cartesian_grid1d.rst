@@ -2,7 +2,7 @@
 magpie.grids.grid1d
 ^^^^^^^^^^^^^^^^^^^
 
-.. function:: magpie.grids.grid1d(length, ngrid, xmin=0., return_edges=False)
+.. function:: magpie.grids.grid1d(length, ngrid, origin=0., return_edges=False)
 
     Returns the edges of a uniform grid along one axis.
 
@@ -11,7 +11,7 @@ magpie.grids.grid1d
           Length of the grid.
       ngrid : int
           Minimum value of the grid.
-      xmin : float, optional
+      origin : float, optional
           Minimum value of the grid.
       return_edges : bool, optional
           If True then the edges of the uniform grid are also supplied.

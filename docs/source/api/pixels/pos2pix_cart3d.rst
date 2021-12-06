@@ -3,7 +3,7 @@ magpie.pixels.pos2pix_cart3d
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
-.. function:: magpie.pixels.pos2pix_cart3d(x, y, z, lengths, ngrids, mins=[0., 0., 0.])
+.. function:: magpie.pixels.pos2pix_cart3d(x, y, z, lengths, ngrids, origin=[0., 0., 0.])
 
     X, Y and Z-coordinate to 3D pixel.
 
@@ -14,7 +14,7 @@ magpie.pixels.pos2pix_cart3d
           Lengths of the 3D grids.
       ngrids : int or list[int]
           The grid dimension.
-      mins : list[float], optional
+      origin : list[float], optional
           Minimum value along the grids.
 
     :Returns:

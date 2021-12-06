@@ -2,7 +2,7 @@
 magpie.grids.grid3d
 ^^^^^^^^^^^^^^^^^^^
 
-.. function:: magpie.grids.grid3d(lengths, ngrids, mins=[None, None, None], return1d=False)
+.. function:: magpie.grids.grid3d(lengths, ngrids, origin=[None, None, None], return1d=False)
 
     Returns the mid-point of a uniform grid.
 
@@ -11,7 +11,7 @@ magpie.grids.grid3d
           Length of the grid.
       ngrids : int or list[int]
           Number of grid points.
-      mins : list[float], optional
+      origin : list[float], optional
           Minimum values of the grid along each axis.
       return1d : bool, optional
           Returns 1d mid-points.

@@ -26,7 +26,7 @@ def pos2pix_polar(phi, r, nphi, nr, phimin=0., phimax=2*np.pi, rmin=0., rmax=1.)
         The pixel the points are located in the polar coordinate grid.
     """
     pixID = pos2pix_cart.pos2pix_cart2d(phi, r, [phimax-phimin, rmax-rmin],
-                                        [nphi, nr], mins=[phimin, rmin])
+                                        [nphi, nr], origin=[phimin, rmin])
     return pixID
 
 

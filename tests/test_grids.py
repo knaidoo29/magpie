@@ -9,9 +9,9 @@ def test_get_xedges():
     xedges = np.round(xedges, decimals=2)
     assert len(xedges) == 3, "Length of xedges is incorrect."
     assert xedges[-1] - xedges[0] == 1., "xedges range is incorrect."
-    xedges = magpie.grids.get_xedges(1., 2, xmin=-1.)
+    xedges = magpie.grids.get_xedges(1., 2, origin=-1.)
     xedges = np.round(xedges, decimals=2)
-    assert xedges[0]==-1. and xedges[1]==-0.5 and xedges[-1]==0., "xedges with xmin are not as expected."
+    assert xedges[0]==-1. and xedges[1]==-0.5 and xedges[-1]==0., "xedges with origin are not as expected."
     assert xedges[-1] - xedges[0] == 1., "xedges range is incorrect."
 
 def test_xedges2mid():
@@ -30,7 +30,7 @@ def test_xmid2edges():
 def test_grid1d():
     xmid = magpie.grids.grid1d(10., 10)
     assert np.round(xmid[0], decimals=4) == 0.5 and np.round(xmid[7], decimals=4) == 7.5, "grid1d unexpected results."
-    xmid = magpie.grids.grid1d(10., 10, xmin=10)
+    xmid = magpie.grids.grid1d(10., 10, origin=10)
     assert np.round(xmid[0], decimals=4) == 10.5 and np.round(xmid[7], decimals=4) == 17.5, "grid1d unexpected results."
     xmid, xedges = magpie.grids.grid1d(10., 10, return_edges=True)
     assert len(xmid)+1 == len(xedges), "Length of xmid and xedges is not as expected."
@@ -46,7 +46,12 @@ def test_grid2d():
     assert np.round(np.sum(np.unique(x2d.flatten())-xmid), decimals=4) == 0., "xmid is inconsistent with x2d."
     assert np.round(ymid[0], decimals=4) == 0.5 and np.round(ymid[7], decimals=4) == 7.5, "grid2d unexpected results."
     assert np.round(np.sum(np.unique(y2d.flatten())-ymid), decimals=4) == 0., "ymid is inconsistent with y2d."
-    x2d, y2d, xmid, ymid = magpie.grids.grid2d(10, 10, mins=[10., 20.], return1d=True)
+    x2d, y2d, xmid, ymid = magpie.grids.grid2d(10, 10, origin=10., return1d=True)
+    assert np.round(xmid[0], decimals=4) == 10.5 and np.round(xmid[7], decimals=4) == 17.5, "grid2d unexpected results."
+    assert np.round(np.sum(np.unique(x2d.flatten())-xmid), decimals=4) == 0., "xmid is inconsistent with x2d."
+    assert np.round(ymid[0], decimals=4) == 10.5 and np.round(ymid[7], decimals=4) == 17.5, "grid2d unexpected results."
+    assert np.round(np.sum(np.unique(y2d.flatten())-ymid), decimals=4) == 0., "ymid is inconsistent with y2d."
+    x2d, y2d, xmid, ymid = magpie.grids.grid2d(10, 10, origin=[10., 20.], return1d=True)
     assert np.round(xmid[0], decimals=4) == 10.5 and np.round(xmid[7], decimals=4) == 17.5, "grid2d unexpected results."
     assert np.round(np.sum(np.unique(x2d.flatten())-xmid), decimals=4) == 0., "xmid is inconsistent with x2d."
     assert np.round(ymid[0], decimals=4) == 20.5 and np.round(ymid[7], decimals=4) == 27.5, "grid2d unexpected results."
@@ -59,7 +64,12 @@ def test_grid2d():
     assert np.round(np.sum(np.unique(x2d.flatten())-xmid), decimals=4) == 0., "xmid is inconsistent with x2d."
     assert np.round(ymid[0], decimals=4) == 0.5 and np.round(ymid[7], decimals=4) == 7.5, "grid2d unexpected results."
     assert np.round(np.sum(np.unique(y2d.flatten())-ymid), decimals=4) == 0., "ymid is inconsistent with y2d."
-    x2d, y2d, xmid, ymid = magpie.grids.grid2d([10, 20], [10, 20], mins=[10., 20.], return1d=True)
+    x2d, y2d, xmid, ymid = magpie.grids.grid2d([10, 20], [10, 20], origin=10., return1d=True)
+    assert np.round(xmid[0], decimals=4) == 10.5 and np.round(xmid[7], decimals=4) == 17.5, "grid2d unexpected results."
+    assert np.round(np.sum(np.unique(x2d.flatten())-xmid), decimals=4) == 0., "xmid is inconsistent with x2d."
+    assert np.round(ymid[0], decimals=4) == 10.5 and np.round(ymid[7], decimals=4) == 17.5, "grid2d unexpected results."
+    assert np.round(np.sum(np.unique(y2d.flatten())-ymid), decimals=4) == 0., "ymid is inconsistent with y2d."
+    x2d, y2d, xmid, ymid = magpie.grids.grid2d([10, 20], [10, 20], origin=[10., 20.], return1d=True)
     assert np.round(xmid[0], decimals=4) == 10.5 and np.round(xmid[7], decimals=4) == 17.5, "grid2d unexpected results."
     assert np.round(np.sum(np.unique(x2d.flatten())-xmid), decimals=4) == 0., "xmid is inconsistent with x2d."
     assert np.round(ymid[0], decimals=4) == 20.5 and np.round(ymid[7], decimals=4) == 27.5, "grid2d unexpected results."
@@ -78,7 +88,14 @@ def test_grid3d():
     assert np.round(np.sum(np.unique(y3d.flatten())-ymid), decimals=4) == 0., "ymid is inconsistent with y3d."
     assert np.round(zmid[0], decimals=4) == 0.5 and np.round(zmid[7], decimals=4) == 7.5, "grid3d unexpected results."
     assert np.round(np.sum(np.unique(z3d.flatten())-zmid), decimals=4) == 0., "zmid is inconsistent with z3d."
-    x3d, y3d, z3d, xmid, ymid, zmid = magpie.grids.grid3d(10, 10, mins=[10., 20., 30.], return1d=True)
+    x3d, y3d, z3d, xmid, ymid, zmid = magpie.grids.grid3d(10, 10, origin=10., return1d=True)
+    assert np.round(xmid[0], decimals=4) == 10.5 and np.round(xmid[7], decimals=4) == 17.5, "grid3d unexpected results."
+    assert np.round(np.sum(np.unique(x3d.flatten())-xmid), decimals=4) == 0., "xmid is inconsistent with x3d."
+    assert np.round(ymid[0], decimals=4) == 10.5 and np.round(ymid[7], decimals=4) == 17.5, "grid3d unexpected results."
+    assert np.round(np.sum(np.unique(y3d.flatten())-ymid), decimals=4) == 0., "ymid is inconsistent with y3d."
+    assert np.round(zmid[0], decimals=4) == 10.5 and np.round(zmid[7], decimals=4) == 17.5, "grid3d unexpected results."
+    assert np.round(np.sum(np.unique(z3d.flatten())-zmid), decimals=4) == 0., "zmid is inconsistent with z3d."
+    x3d, y3d, z3d, xmid, ymid, zmid = magpie.grids.grid3d(10, 10, origin=[10., 20., 30.], return1d=True)
     assert np.round(xmid[0], decimals=4) == 10.5 and np.round(xmid[7], decimals=4) == 17.5, "grid3d unexpected results."
     assert np.round(np.sum(np.unique(x3d.flatten())-xmid), decimals=4) == 0., "xmid is inconsistent with x3d."
     assert np.round(ymid[0], decimals=4) == 20.5 and np.round(ymid[7], decimals=4) == 27.5, "grid3d unexpected results."
@@ -96,7 +113,14 @@ def test_grid3d():
     assert np.round(np.sum(np.unique(y3d.flatten())-ymid), decimals=4) == 0., "ymid is inconsistent with y3d."
     assert np.round(zmid[0], decimals=4) == 0.5 and np.round(zmid[7], decimals=4) == 7.5, "grid3d unexpected results."
     assert np.round(np.sum(np.unique(z3d.flatten())-zmid), decimals=4) == 0., "zmid is inconsistent with z3d."
-    x3d, y3d, z3d, xmid, ymid, zmid = magpie.grids.grid3d([10, 20, 30], [10, 20, 30], mins=[10., 20., 30], return1d=True)
+    x3d, y3d, z3d, xmid, ymid, zmid = magpie.grids.grid3d([10, 20, 30], [10, 20, 30], origin=10., return1d=True)
+    assert np.round(xmid[0], decimals=4) == 10.5 and np.round(xmid[7], decimals=4) == 17.5, "grid3d unexpected results."
+    assert np.round(np.sum(np.unique(x3d.flatten())-xmid), decimals=4) == 0., "xmid is inconsistent with x3d."
+    assert np.round(ymid[0], decimals=4) == 10.5 and np.round(ymid[7], decimals=4) == 17.5, "grid3d unexpected results."
+    assert np.round(np.sum(np.unique(y3d.flatten())-ymid), decimals=4) == 0., "ymid is inconsistent with y3d."
+    assert np.round(zmid[0], decimals=4) == 10.5 and np.round(zmid[7], decimals=4) == 17.5, "grid3d unexpected results."
+    assert np.round(np.sum(np.unique(z3d.flatten())-zmid), decimals=4) == 0., "zmid is inconsistent with z3d."
+    x3d, y3d, z3d, xmid, ymid, zmid = magpie.grids.grid3d([10, 20, 30], [10, 20, 30], origin=[10., 20., 30], return1d=True)
     assert np.round(xmid[0], decimals=4) == 10.5 and np.round(xmid[7], decimals=4) == 17.5, "grid3d unexpected results."
     assert np.round(np.sum(np.unique(x3d.flatten())-xmid), decimals=4) == 0., "xmid is inconsistent with x3d."
     assert np.round(ymid[0], decimals=4) == 20.5 and np.round(ymid[7], decimals=4) == 27.5, "grid3d unexpected results."

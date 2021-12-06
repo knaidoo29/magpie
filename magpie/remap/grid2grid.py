@@ -4,7 +4,7 @@ from .. import src
 from .. import utils
 
 
-def grid2grid1D(f, boxsize, ngridout, origin=0., originout=0.,
+def grid2grid1d(f, boxsize, ngridout, origin=0., originout=0.,
                 boxsizeout=None):
     """Remaps a dataset defined on 1D a uniform cartesian grid onto a new 1D
     uniform cartesian grid.
@@ -45,7 +45,7 @@ def grid2grid1D(f, boxsize, ngridout, origin=0., originout=0.,
     return fout
 
 
-def grid2grid2D(f, boxsize, ngridout, origin=0., originout=0.,
+def grid2grid2d(f, boxsize, ngridout, origin=0., originout=0.,
                 boxsizeout=None):
     """Remaps a dataset defined on a uniform 2D cartesian grid onto a new
     uniform 2D cartesian grid.
@@ -121,7 +121,7 @@ def grid2grid2D(f, boxsize, ngridout, origin=0., originout=0.,
     return fout
 
 
-def grid2grid3D(f, boxsize, ngridout, origin=0., originout=0.,
+def grid2grid3d(f, boxsize, ngridout, origin=0., originout=0.,
                 boxsizeout=None):
     """Remaps a dataset defined on 3D cartesian grid onto a new 3D cartesian
     grid.

@@ -10,6 +10,16 @@ Conversion
   api/coords/conversions_polar2cart
   api/coords/conversions_sphere2cart
 
+Distance
+--------
+
+.. toctree::
+
+  api/coords/distance_dist1d
+  api/coords/distance_dist2d
+  api/coords/distance_dist3d
+  api/coords/distance_distusphere
+
 Rotations
 ---------
 
