@@ -3,7 +3,8 @@ include "pixel_1dto2d.f90"
 
 
 subroutine remap_2d_grid2grid(x1min, x1max, x1grid, y1min, y1max, y1grid &
-  , x2min, x2max, x2grid, y2min, y2max, y2grid, xpixlen, ypixlen, f1, f2)
+  , x2min, x2max, x2grid, y2min, y2max, y2grid, xy1grid, xy2grid, xpixlen &
+  , ypixlen, xypixlen, f1, f2)
 
   ! Remaps field 1 onto field 2 using exact weights.
   !
@@ -33,10 +34,16 @@ subroutine remap_2d_grid2grid(x1min, x1max, x1grid, y1min, y1max, y1grid &
   !   Maximum y in grid 2.
   ! y2grid : int
   !   Number of grid points in grid 2 along y.
+  ! xy1grid : int
+  !   Flattened number of grid points in grid 1.
+  ! xy2grid : int
+  !   Flattened number of grid points in grid 2.
   ! xpixlen : int
   !   Length of pixel mapping indices and weights along x.
   ! ypixlen : int
   !   Length of pixel mapping indices and weights along y.
+  ! xypixlen : int
+  !   Length of pixel mapping indices flattened for xy.
   ! f1 : array
   !   Values on grid 1.
   !
@@ -51,13 +58,14 @@ subroutine remap_2d_grid2grid(x1min, x1max, x1grid, y1min, y1max, y1grid &
 
   integer, parameter :: dp = kind(1.d0)
 
-  integer, intent(in) :: x1grid, y1grid, x2grid, y2grid, xpixlen, ypixlen
+  integer, intent(in) :: x1grid, y1grid, x2grid, y2grid, xy1grid, xy2grid
+  integer, intent(in) :: xpixlen, ypixlen, xypixlen
   real(kind=dp), intent(in) :: x1min, x1max, x2min, x2max
   real(kind=dp), intent(in) :: y1min, y1max, y2min, y2max
-  real(kind=dp), intent(in) :: f1(x1grid*y1grid)
-  real(kind=dp), intent(out) :: f2(x2grid*y2grid)
+  real(kind=dp), intent(in) :: f1(xy1grid)
+  real(kind=dp), intent(out) :: f2(xy2grid)
   real(kind=dp) :: xweights(xpixlen), yweights(ypixlen)
-  integer :: xpix_id(xpixlen), ypix_id(ypixlen), pix_id(xpixlen*ypixlen), i, j
+  integer :: xpix_id(xpixlen), ypix_id(ypixlen), pix_id(xypixlen), i, j
   integer :: xwhich2pix, ywhich2pix, ii, jj, i1, j1
 
   ! Main

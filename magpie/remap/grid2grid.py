@@ -107,16 +107,21 @@ def grid2grid2d(f, boxsize, ngridout, origin=0., originout=0.,
         x2grid, y2grid = ngridout, ngridout
     else:
         x2grid, y2grid = ngridout[0], ngridout[1]
+    xy1grid = x1grid * y1grid
+    xy2grid = x2grid * y2grid
     xpixlen = src.get_remap_pix_len(x1min=x1min, x1max=x1max, grid1=x1grid,
                                     x2min=x2min, x2max=x2max, grid2=x2grid)
     ypixlen = src.get_remap_pix_len(x1min=y1min, x1max=y1max, grid1=y1grid,
                                     x2min=y2min, x2max=y2max, grid2=y2grid)
+    xypixlen = xpixlen * ypixlen
     f = f.flatten()
     fout = src.remap_2d_grid2grid(x1min=x1min, x1max=x1max, x1grid=x1grid,
                                   y1min=y1min, y1max=y1max, y1grid=y1grid,
                                   x2min=x2min, x2max=x2max, x2grid=x2grid,
                                   y2min=y2min, y2max=y2max, y2grid=y2grid,
-                                  xpixlen=xpixlen, ypixlen=ypixlen, f1=f)
+                                  xy1grid=xy1grid, xy2grid=xy2grid,
+                                  xpixlen=xpixlen, ypixlen=ypixlen,
+                                  xypixlen=xypixlen, f1=f)
     fout = fout.reshape(x2grid, y2grid)
     return fout
 
@@ -190,12 +195,15 @@ def grid2grid3d(f, boxsize, ngridout, origin=0., originout=0.,
         x2grid, y2grid, z2grid = ngridout, ngridout, ngridout
     else:
         x2grid, y2grid, z2grid = ngridout[0], ngridout[1], ngridout[2]
+    xyz1grid = x1grid * y1grid * z1grid
+    xyz2grid = x2grid * y2grid * z2grid
     xpixlen = src.get_remap_pix_len(x1min=x1min, x1max=x1max, grid1=x1grid,
                                     x2min=x2min, x2max=x2max, grid2=x2grid)
     ypixlen = src.get_remap_pix_len(x1min=y1min, x1max=y1max, grid1=y1grid,
                                     x2min=y2min, x2max=y2max, grid2=y2grid)
     zpixlen = src.get_remap_pix_len(x1min=z1min, x1max=z1max, grid1=z1grid,
                                     x2min=z2min, x2max=z2max, grid2=z2grid)
+    xyzpixlen = xpixlen * ypixlen * zpixlen
     f = f.flatten()
     fout = src.remap_3d_grid2grid(x1min=x1min, x1max=x1max, x1grid=x1grid,
                                   y1min=y1min, y1max=y1max, y1grid=y1grid,
@@ -203,7 +211,8 @@ def grid2grid3d(f, boxsize, ngridout, origin=0., originout=0.,
                                   x2min=x2min, x2max=x2max, x2grid=x2grid,
                                   y2min=y2min, y2max=y2max, y2grid=y2grid,
                                   z2min=z2min, z2max=z2max, z2grid=z2grid,
+                                  xyz1grid=xyz1grid, xyz2grid=xyz2grid,
                                   xpixlen=xpixlen, ypixlen=ypixlen,
-                                  zpixlen=zpixlen, f1=f)
+                                  zpixlen=zpixlen, xyzpixlen=xyzpixlen, f1=f)
     fout = fout.reshape(x2grid, y2grid, z2grid)
     return fout

@@ -4,7 +4,8 @@ include "pixel_1dto3d.f90"
 
 subroutine remap_3d_grid2grid(x1min, x1max, x1grid, y1min, y1max, y1grid &
   , z1min, z1max, z1grid, x2min, x2max, x2grid, y2min, y2max, y2grid, z2min &
-  , z2max, z2grid, xpixlen, ypixlen, zpixlen, f1, f2)
+  , z2max, z2grid, xyz1grid, xyz2grid, xpixlen, ypixlen, zpixlen, xyzpixlen &
+  , f1, f2)
 
   ! Remaps field 1 onto field 2 using exact weights.
   !
@@ -46,12 +47,18 @@ subroutine remap_3d_grid2grid(x1min, x1max, x1grid, y1min, y1max, y1grid &
   !   Maximum z in grid 2.
   ! z2grid : int
   !   Number of grid points in grid 2 along z.
+  ! xyz1grid : int
+  !   Flattened number of grid points in grid 1.
+  ! xyz2grid : int
+  !   Flattened number of grid points in grid 2.
   ! xpixlen : int
   !   Length of pixel mapping indices and weights along x.
   ! ypixlen : int
   !   Length of pixel mapping indices and weights along y.
   ! zpixlen : int
   !   Length of pixel mapping indices and weights along z.
+  ! xyzpixlen : int
+  !   Length of pixel mapping indices flattened for xyz.
   ! f1 : array
   !   Values on grid 1.
   !
@@ -67,15 +74,16 @@ subroutine remap_3d_grid2grid(x1min, x1max, x1grid, y1min, y1max, y1grid &
   integer, parameter :: dp = kind(1.d0)
 
   integer, intent(in) :: x1grid, y1grid, z1grid, x2grid, y2grid, z2grid
-  integer, intent(in) :: xpixlen, ypixlen, zpixlen
+  integer, intent(in) :: xyz1grid, xyz2grid
+  integer, intent(in) :: xpixlen, ypixlen, zpixlen, xyzpixlen
   real(kind=dp), intent(in) :: x1min, x1max, x2min, x2max
   real(kind=dp), intent(in) :: y1min, y1max, y2min, y2max
   real(kind=dp), intent(in) :: z1min, z1max, z2min, z2max
-  real(kind=dp), intent(in) :: f1(x1grid*y1grid*z1grid)
-  real(kind=dp), intent(out) :: f2(x2grid*y2grid*z2grid)
+  real(kind=dp), intent(in) :: f1(xyz1grid)
+  real(kind=dp), intent(out) :: f2(xyz2grid)
   real(kind=dp) :: xweights(xpixlen), yweights(ypixlen), zweights(zpixlen)
   integer :: xpix_id(xpixlen), ypix_id(ypixlen), zpix_id(zpixlen)
-  integer :: pix_id(xpixlen*ypixlen*zpixlen), i, j, k
+  integer :: pix_id(xyzpixlen), i, j, k
   integer :: xwhich2pix, ywhich2pix, zwhich2pix, ii, jj, i1, j1, k1
 
   ! Main
