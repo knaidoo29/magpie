@@ -117,7 +117,7 @@ def test_dist():
     p1, t1 = np.linspace(0., np.pi, 100), 0.2*np.pi*np.ones(100)
     p2, t2 = np.zeros(100), np.zeros(100)
     dist = magpie.coords.distusphere(p1, t1, p2, t2)
-    assert all(dist == 0.2*np.pi), "distusphere working incorrectly"
+    assert all(dist - 0.2*np.pi < 1e-8), "distusphere working incorrectly"
 
 # test usphere_util.py
 
