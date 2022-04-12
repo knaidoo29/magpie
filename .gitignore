@@ -7,6 +7,6 @@
 *.pytest_cache
 *coverage.xml
 magpie/src/old/*
-src/*.so
+magpie/src/*.so
 .tox/*
 tox.ini
