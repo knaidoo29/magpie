@@ -39,7 +39,7 @@ subroutine bin_by_index(pix_id, id_weights, id_len, pix_len, pix_val)
   end do
 
   do i = 1, id_len
-    if (pix_id(i) .NE. -1) then
+    if ((pix_id(i) .NE. -1) .AND. (pix_id(i) .GE. 0) .AND. (pix_id(i) .LT. pix_len)) then
       pix_val(pix_id(i)+1) = pix_val(pix_id(i)+1) + id_weights(i)
     end if
   end do

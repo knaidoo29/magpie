@@ -57,7 +57,7 @@ def plot_polarEA(pix, nr=None, rmax=1., base_nphi=3, pixID=None, proj='cart',
     colors = cmap(cval)
     patches = [pixels.get_polarEA_shape(pixID[i], nr, rmax=rmax,
                                         base_nphi=base_nphi, proj=proj,
-                                        center=[0., 0.], steps=12,
+                                        center=[0., 0.], steps=steps,
                                         returnpoly=True)
                for i in range(0, len(pixID))]
     patch_coll = PatchCollection(patches, facecolors=colors, edgecolor="none")
