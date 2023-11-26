@@ -13,6 +13,9 @@ from .distance import distusphere
 from .healpix import healpix_xy2ang
 from .healpix import healpix_ang2xy
 
+from .pov import cart2pov
+from .pov import get_pov_lims
+
 from .rotate import rotate2d
 from .rotate import rotate3d_Euler
 from .rotate import rotate3d_Rodrigues

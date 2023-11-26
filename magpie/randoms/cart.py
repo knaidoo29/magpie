@@ -39,7 +39,7 @@ def randoms_2d(size, mins=[0., 0.], maxs=[1., 1.]):
     xrands, yrands : array
         Uniform randoms in 2D.
     """
-    xrands = randoms_1d(size, xmin=mins[0], xmax=mins[0])
+    xrands = randoms_1d(size, xmin=mins[0], xmax=maxs[0])
     yrands = randoms_1d(size, xmin=mins[1], xmax=maxs[1])
     return xrands, yrands
 
@@ -61,7 +61,7 @@ def randoms_3d(size, mins=[0., 0., 0], maxs=[1., 1., 1.]):
     xrands, yrands, zrands : array
         Uniform randoms in 3D.
     """
-    xrands = randoms_1d(size, xmin=mins[0], xmax=mins[0])
+    xrands = randoms_1d(size, xmin=mins[0], xmax=maxs[0])
     yrands = randoms_1d(size, xmin=mins[1], xmax=maxs[1])
     zrands = randoms_1d(size, xmin=mins[2], xmax=maxs[2])
     return xrands, yrands, zrands
