@@ -1,6 +1,5 @@
 import numpy as np
 
-from .. import grids
 from .. import src
 from .. import utils
 
