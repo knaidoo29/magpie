@@ -2,7 +2,8 @@ import numpy as np
 
 from . import pos2pix_cart
 
-from .. import src
+# from .. import src
+from .. import srcpy
 from .. import utils
 
 
@@ -50,10 +51,10 @@ def pos2pix_polarEA(phi, r, nr, base_nphi=3, rmax=1.):
         The pixel index the points are located in the polar coordinate grid.
     """
     dr = rmax/nr
-    if utils.isscalar(phi) is True:
-        pixID = src.which_pix_id_polar_ea_scalar(r=r, phi=phi, dr=dr,
-                                                 base_nphi=base_nphi)
+    if utils.isscalar(phi) == True:
+        # pixID = src.which_pix_id_polar_ea_scalar(r=r, phi=phi, dr=dr, base_nphi=base_nphi)
+        pixID = srcpy.which_pix_id_polar_ea_scalar(r, phi, dr, base_nphi)
     else:
-        pixID = src.which_pix_id_polar_ea_array(r=r, phi=phi, dr=dr,
-                                                base_nphi=base_nphi)
+        # pixID = src.which_pix_id_polar_ea_array(r=r, phi=phi, dr=dr, base_nphi=base_nphi)
+        pixID = srcpy.which_pix_id_polar_ea_array(r, phi, dr, base_nphi)
     return pixID

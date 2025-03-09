@@ -1,6 +1,7 @@
 import numpy as np
 
-from .. import src
+# from .. import src 
+from .. import srcpy
 from .. import utils
 
 
@@ -23,9 +24,11 @@ def rotate2d(x, y, dphi, center=[0., 0.]):
         Rotated x and y coordinates.
     """
     if utils.isscalar(x) is True:
-        xrot, yrot = src.rotate_2d_scalar(x=x-center[0], y=y-center[1], dphi=dphi)
+        # xrot, yrot = src.rotate_2d_scalar(x=x-center[0], y=y-center[1], dphi=dphi)
+        xrot, yrot = srcpy.rotate_2d_scalar(x-center[0], y-center[1], dphi)
     else:
-        xrot, yrot = src.rotate_2d_array(x=x-center[0], y=y-center[1], dphi=dphi)
+        # xrot, yrot = src.rotate_2d_array(x=x-center[0], y=y-center[1], dphi=dphi)
+        xrot, yrot = srcpy.rotate_2d_array(x-center[0], y-center[1], dphi)
     xrot += center[0]
     yrot += center[1]
     return xrot, yrot
@@ -47,9 +50,11 @@ def _rotate3d(x, y, z, rot):
         Rotated x, y and z coordinates.
     """
     if utils.isscalar(x) is True:
-        xrot, yrot, zrot = src.rotate_3d_scalar(x=x, y=y, z=z, rot=rot)
+        # xrot, yrot, zrot = src.rotate_3d_scalar(x=x, y=y, z=z, rot=rot)
+        xrot, yrot, zrot = srcpy.rotate_3d_scalar(x, y, z, rot)
     else:
-        xrot, yrot, zrot = src.rotate_3d_array(x=x, y=y, z=z, rot=rot)
+        # xrot, yrot, zrot = src.rotate_3d_array(x=x, y=y, z=z, rot=rot)
+        xrot, yrot, zrot = srcpy.rotate_3d_array(x, y, z, rot)
     return xrot, yrot, zrot
 
 
@@ -86,7 +91,8 @@ def rotate3d_Euler(x, y, z, angles, axes='zyz', center=[0., 0., 0.]):
         elif axes[i] == 'z':
             axes_int.append(2)
     _x, _y, _z = x-center[0], y-center[1], z-center[2]
-    rot = src.rotmat_euler(angles=angles, axes=axes_int)
+    # rot = src.rotmat_euler(angles=angles, axes=axes_int)
+    rot = srcpy.rotmat_euler(angles, axes_int)
     _x, _y, _z = _rotate3d(_x, _y, _z, rot)
     xrot = _x + center[0]
     yrot = _y + center[1]
@@ -115,6 +121,7 @@ def rotate3d_Rodrigues(x, y, z, k, dphi):
     """
     if np.sqrt(np.sum(k**2.)) != 1.:
         k /= np.sqrt(np.sum(k**2.))
-    rot = src.rotmat_rodrigues(k=k, dphi=dphi)
+    # rot = src.rotmat_rodrigues(k=k, dphi=dphi)
+    rot = srcpy.rotmat_rodrigues(k, dphi)
     xrot, yrot, zrot = _rotate3d(x, y, z, rot)
     return xrot, yrot, zrot

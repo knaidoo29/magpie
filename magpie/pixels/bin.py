@@ -1,6 +1,7 @@
 import numpy as np
 
-from .. import src
+# from .. import src
+from .. import srcpy
 
 
 def bin_pix(pixID, pixlen, weights=None):
@@ -22,6 +23,6 @@ def bin_pix(pixID, pixlen, weights=None):
     """
     if weights is None:
         weights = np.ones(len(pixID))
-    pix = src.bin_by_index(pix_id=pixID, id_weights=weights,
-                           id_len=len(pixID), pix_len=pixlen)
+    # pix = src.bin_by_index(pix_id=pixID, id_weights=weights, id_len=len(pixID), pix_len=pixlen)
+    pix = srcpy.bin_by_index(pixID, weights, pixlen)
     return pix
