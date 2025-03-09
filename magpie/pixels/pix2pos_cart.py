@@ -1,7 +1,6 @@
 import numpy as np
 
-# from .. import src
-from .. import srcpy
+from .. import src
 from .. import utils
 
 
@@ -71,10 +70,10 @@ def pix2pos_cart2d(pixID, lengths, ngrids, origin=[0., 0.],
         _origin = origin
     if utils.isscalar(pixID) is True:
         # xpixID, ypixID = src.pix_id_2dto1d_scalar(pix_id=pixID, ygrid=_ngrids[1])
-        xpixID, ypixID = srcpy.pix_id_2dto1d_scalar(pixID, _ngrids[1])
+        xpixID, ypixID = src.pix_id_2dto1d_scalar(pixID, _ngrids[1])
     else:
         # xpixID, ypixID = src.pix_id_2dto1d_array(pix_id=pixID, xlen=len(pixID), ygrid=_ngrids[1])
-        xpixID, ypixID = srcpy.pix_id_2dto1d_array(pixID, _ngrids[1])
+        xpixID, ypixID = src.pix_id_2dto1d_array(pixID, _ngrids[1])
     x, dx = pix2pos_cart1d(xpixID, _lengths[0], _ngrids[0], origin=_origin[0])
     y, dy = pix2pos_cart1d(ypixID, _lengths[1], _ngrids[1], origin=_origin[1])
     if return1d_pixID is False:
@@ -123,10 +122,10 @@ def pix2pos_cart3d(pixID, lengths, ngrids, origin=[0., 0., 0.],
         _origin = origin
     if utils.isscalar(pixID) is True:
         # xpixID, ypixID, zpixID = src.pix_id_3dto1d_scalar(pix_id=pixID, ygrid=_ngrids[1], zgrid=_ngrids[2])
-        xpixID, ypixID, zpixID = srcpy.pix_id_3dto1d_scalar(pixID, _ngrids[1], _ngrids[2])
+        xpixID, ypixID, zpixID = src.pix_id_3dto1d_scalar(pixID, _ngrids[1], _ngrids[2])
     else:
         # xpixID, ypixID, zpixID = src.pix_id_3dto1d_array(pix_id=pixID, xlen=len(pixID), ygrid=_ngrids[1], zgrid=_ngrids[2])
-        xpixID, ypixID, zpixID = srcpy.pix_id_3dto1d_array(pixID, _ngrids[1], _ngrids[2])
+        xpixID, ypixID, zpixID = src.pix_id_3dto1d_array(pixID, _ngrids[1], _ngrids[2])
     x, dx = pix2pos_cart1d(xpixID, _lengths[0], _ngrids[0], origin=_origin[0])
     y, dy = pix2pos_cart1d(ypixID, _lengths[1], _ngrids[1], origin=_origin[1])
     z, dz = pix2pos_cart1d(zpixID, _lengths[2], _ngrids[2], origin=_origin[2])

@@ -26,9 +26,9 @@ from .pixel_binbyindex import bin_by_index
 from .remap_utils import get_remap_pix_len
 from .remap_utils import remap_1d_grid2grid_pixel
 
-from .remap_1d_grid2grid import remap_1d_grid2grid
-from .remap_2d_grid2grid import remap_2d_grid2grid
-from .remap_3d_grid2grid import remap_3d_grid2grid
+from .remap_grid1d import remap_1d_grid2grid
+from .remap_grid2d import remap_2d_grid2grid
+from .remap_grid3d import remap_3d_grid2grid
 
 # Rotation functions
 

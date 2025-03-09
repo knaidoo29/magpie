@@ -5,5 +5,5 @@ from . import plot
 from . import randoms
 from . import remap
 from . import src
-from . import srcpy
+from . import src
 from . import utils

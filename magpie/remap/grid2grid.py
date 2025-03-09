@@ -1,7 +1,6 @@
 import numpy as np
 
-# from .. import src
-from .. import srcpy
+from .. import src
 from .. import utils
 
 
@@ -41,8 +40,8 @@ def grid2grid1d(f, boxsize, ngridout, origin=0., originout=0.,
     grid2 = ngridout
     # pixlen = src.get_remap_pix_len(x1min=x1min, x1max=x1max, grid1=grid1, x2min=x2min, x2max=x2max, grid2=grid2)
     # fout = src.remap_1d_grid2grid(x1min=x1min, x1max=x1max, grid1=grid1,  x2min=x2min, x2max=x2max, grid2=grid2, pixlen=pixlen, f1=f)
-    pixlen = srcpy.get_remap_pix_len(x1min, x1max, grid1, x2min, x2max, grid2)
-    fout = srcpy.remap_1d_grid2grid(x1min, x1max, grid1, x2min, x2max, grid2, pixlen, f)
+    pixlen = src.get_remap_pix_len(x1min, x1max, grid1, x2min, x2max, grid2)
+    fout = src.remap_1d_grid2grid(x1min, x1max, grid1, x2min, x2max, grid2, pixlen, f)
     return fout
 
 
@@ -112,8 +111,8 @@ def grid2grid2d(f, boxsize, ngridout, origin=0., originout=0., boxsizeout=None):
     xy2grid = x2grid * y2grid
     # xpixlen = src.get_remap_pix_len(x1min=x1min, x1max=x1max, grid1=x1grid, x2min=x2min, x2max=x2max, grid2=x2grid)
     # ypixlen = src.get_remap_pix_len(x1min=y1min, x1max=y1max, grid1=y1grid, x2min=y2min, x2max=y2max, grid2=y2grid)
-    xpixlen = srcpy.get_remap_pix_len(x1min, x1max, x1grid, x2min, x2max, x2grid)
-    ypixlen = srcpy.get_remap_pix_len(y1min, y1max, y1grid, y2min, y2max, y2grid)
+    xpixlen = src.get_remap_pix_len(x1min, x1max, x1grid, x2min, x2max, x2grid)
+    ypixlen = src.get_remap_pix_len(y1min, y1max, y1grid, y2min, y2max, y2grid)
     xypixlen = xpixlen * ypixlen
     f = f.flatten()
     # fout = src.remap_2d_grid2grid(x1min=x1min, x1max=x1max, x1grid=x1grid,
@@ -123,7 +122,7 @@ def grid2grid2d(f, boxsize, ngridout, origin=0., originout=0., boxsizeout=None):
     #                               xy1grid=xy1grid, xy2grid=xy2grid,
     #                               xpixlen=xpixlen, ypixlen=ypixlen,
     #                               xypixlen=xypixlen, f1=f)
-    fout = srcpy.remap_2d_grid2grid(
+    fout = src.remap_2d_grid2grid(
         x1min, x1max, x1grid, y1min, y1max, y1grid,
         x2min, x2max, x2grid, y2min, y2max, y2grid,
         xy1grid, xy2grid, xpixlen, ypixlen, xypixlen, f)
@@ -208,9 +207,9 @@ def grid2grid3d(f, boxsize, ngridout, origin=0., originout=0.,
     #                                 x2min=y2min, x2max=y2max, grid2=y2grid)
     # zpixlen = src.get_remap_pix_len(x1min=z1min, x1max=z1max, grid1=z1grid,
     #                                 x2min=z2min, x2max=z2max, grid2=z2grid)
-    xpixlen = srcpy.get_remap_pix_len(x1min, x1max, x1grid, x2min, x2max, x2grid)
-    ypixlen = srcpy.get_remap_pix_len(y1min, y1max, y1grid, y2min, y2max, y2grid)
-    zpixlen = srcpy.get_remap_pix_len(z1min, z1max, z1grid, z2min, z2max, z2grid)
+    xpixlen = src.get_remap_pix_len(x1min, x1max, x1grid, x2min, x2max, x2grid)
+    ypixlen = src.get_remap_pix_len(y1min, y1max, y1grid, y2min, y2max, y2grid)
+    zpixlen = src.get_remap_pix_len(z1min, z1max, z1grid, z2min, z2max, z2grid)
     xyzpixlen = xpixlen * ypixlen * zpixlen
     f = f.flatten()
     # fout = src.remap_3d_grid2grid(x1min=x1min, x1max=x1max, x1grid=x1grid,
@@ -222,7 +221,7 @@ def grid2grid3d(f, boxsize, ngridout, origin=0., originout=0.,
     #                               xyz1grid=xyz1grid, xyz2grid=xyz2grid,
     #                               xpixlen=xpixlen, ypixlen=ypixlen,
     #                               zpixlen=zpixlen, xyzpixlen=xyzpixlen, f1=f)
-    fout = srcpy.remap_3d_grid2grid(
+    fout = src.remap_3d_grid2grid(
         x1min, x1max, x1grid, y1min, y1max, y1grid, z1min, z1max, z1grid,
         x2min, x2max, x2grid, y2min, y2max, y2grid, z2min, z2max, z2grid,
         xyz1grid, xyz2grid, xpixlen, ypixlen, zpixlen, xyzpixlen, f)
