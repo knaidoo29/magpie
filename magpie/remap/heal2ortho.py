@@ -22,7 +22,7 @@ class Heal2Ortho:
         self.z2d = None
         self.onsphere = None
         self.center = None
-        #self.end_center = [3.*np.pi/2., 0.]
+        self.end_center = [3.*np.pi/2., 0.]
         self.angles = None
         self.radius = None
         self.rebin_x = None
@@ -53,7 +53,8 @@ class Heal2Ortho:
 
 
     def setup_box(self, x_length, x_grid, center=[0., 0.], y_length=None, y_grid=None,
-                  rebin_x=2, rebin_y=2, radius=1., angles=None):
+                  rebin_x=2, rebin_y=2, radius=1., angles=[0., 0., 0.],
+                  end_center=[3.*np.pi/2., 0.]):
         """Setups the polar grid.
 
         Parameters
@@ -98,7 +99,8 @@ class Heal2Ortho:
         self.z2d[condition] = 0.
 
         self.center = center
-        self.angle = angle
+        self.end_center = end_center
+        self.angles = angles
         self.rebin_x = rebin_x
         self.rebin_y = rebin_y
         self.rebin_xedges = np.linspace(self.xedges[0], self.xedges[-1], self.rebin_x*len(self.xmid) + 1)
@@ -120,7 +122,7 @@ class Heal2Ortho:
         xx = self.rebin_x2d.flatten()
         yy = self.rebin_y2d.flatten()
         zz = self.rebin_z2d.flatten()
-        xx, yy, zz = coords.rotate3d_Euler(xx, yy, zz, -angles, axes='zyz', center=[0., 0., 0.])
+        xx, yy, zz = coords.rotate3d_Euler(xx, yy, zz, -self.angles[::-1], axes='zyz', center=[0., 0., 0.])
         rr, phi, theta = coords.cart2sphere(xx, yy, zz)
         #phi, theta = coords.usphere_shift(phi, theta, self.end_center[0], self.end_center[1], self.center[0], self.center[1])
         self.rebin_pix = hp.ang2pix(self.nside, theta, phi)
@@ -187,7 +189,7 @@ class Heal2Ortho:
             r = np.ones(len(phi))
         #phi, theta = coords.usphere_shift(phi, theta, self.center[0], self.center[1], self.end_center[0], self.end_center[1])
         x, y, z = coords.sphere2cart(r, phi, theta)
-        x, y, z = coords.rotate3d_Euler(x, y, z, angles, axes='zyz', center=[0., 0., 0.])
+        x, y, z = coords.rotate3d_Euler(x, y, z, self.angles, axes='zyz', center=[0., 0., 0.])
         if np.isscalar(phi) == True:
             if z < 0.:
                 x = np.nan
