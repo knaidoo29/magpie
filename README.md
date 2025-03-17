@@ -1,3 +1,5 @@
+![biglogo](docs/source/_static/MAGPIE_logo_large_github.jpg)
+
 # MAGPIE: Monte cArlo weiGhted PIxel rEmapping
 
 [![PyPI version](https://badge.fury.io/py/magpie-pkg.svg)](https://badge.fury.io/py/magpie-pkg)

@@ -8,7 +8,7 @@ import vinfo
 # -- Project information
 
 project = 'MAGPIE'
-copyright = '2021, Krishna Naidoo'
+copyright = '2021-2025, Krishna Naidoo'
 author = 'Krishna Naidoo'
 
 version = vinfo.vstr
@@ -22,7 +22,8 @@ extensions = [
     'sphinx.ext.autosummary',
     'sphinx.ext.intersphinx',
     'sphinx.ext.napoleon',
-    'sphinx.ext.mathjax'
+    'sphinx.ext.mathjax',
+    'sphinx_simplepdf'
 ]
 
 source_suffix = ['.rst', '.md']
@@ -40,7 +41,15 @@ templates_path = ['_templates']
 
 # -- Options for HTML output
 
-html_theme = 'sphinx_rtd_theme'
+#html_theme = 'sphinx_rtd_theme'
+html_theme = 'furo'
+
+html_static_path = ["_static"]
+html_theme_options = {
+    "light_logo": "MAGPIE_logo_small_white.jpg",
+    "dark_logo": "MAGPIE_logo_small_black.jpg",
+}
+
 
 # -- Options for EPUB output
 epub_show_urls = 'footnote'

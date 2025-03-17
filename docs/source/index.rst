@@ -1,3 +1,12 @@
+
+.. image:: _static/MAGPIE_logo_large_white.jpg
+   :align: center
+   :class: only-light
+
+.. image:: _static/MAGPIE_logo_large_black.jpg
+   :align: center
+   :class: only-dark
+
 ============================================
 MAGPIE: Monte cArlo weiGhted PIxel rEmapping
 ============================================
