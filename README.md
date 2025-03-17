@@ -1,4 +1,4 @@
-![biglogo](docs/source/_static/MAGPIE_logo_large_github.jpg)
+![biglogo](docs/source/_static/Magpie_logo_large_github.jpg)
 
 # MAGPIE: Monte cArlo weiGhted PIxel rEmapping
 

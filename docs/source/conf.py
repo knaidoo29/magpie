@@ -46,8 +46,8 @@ html_theme = 'furo'
 
 html_static_path = ["_static"]
 html_theme_options = {
-    "light_logo": "MAGPIE_logo_small_white.jpg",
-    "dark_logo": "MAGPIE_logo_small_black.jpg",
+    "light_logo": "Magpie_logo_small_white.jpg",
+    "dark_logo": "Magpie_logo_small_black.jpg",
 }
 
 
