@@ -149,7 +149,7 @@ class Heal2Ortho:
         f_box = np.sum(f_box_highres.reshape(len(self.x2d), self.rebin_x, len(self.rebin_x2d[0])), axis=1)
         f_box = np.sum(f_box.reshape(len(self.x2d), len(self.x2d[0]), self.rebin_y), axis=2)
         weights_2d = np.sum(weights.reshape(len(self.x2d), self.rebin_x, len(self.rebin_y2d[0])), axis=1)
-        weights_2d = np.mean(weights_2d.reshape(len(self.x2d), len(self.x2d[0]), self.rebin_y), axis=2)
+        weights_2d = np.sum(weights_2d.reshape(len(self.x2d), len(self.x2d[0]), self.rebin_y), axis=2)
         condition = np.where(weights_2d != 0.)
         f_box[condition] /= weights_2d[condition]
         f_box *= self.onsphere
